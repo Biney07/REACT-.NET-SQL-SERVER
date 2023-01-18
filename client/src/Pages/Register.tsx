@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react';
+
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-
-import { MDBBtn, MDBCheckbox, MDBCol, MDBIcon, MDBInput, MDBRow } from 'mdb-react-ui-kit';
+import { MDBBtn, MDBCheckbox, MDBCol, MDBIcon, MDBInput, MDBListGroupItem, MDBRow } from 'mdb-react-ui-kit';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function LogIn() {
-    const [values, setValue] = useState({
+
+export default function Register() {
+
+    const [vlerat, setValue] = useState({
         username: "",
+        email: "",
         password: "",
 
     })
     useEffect(() => {
-        console.log("values changed:", values);
-    }, [values]);
+        console.log("vlerat changed:", vlerat);
+    }, [vlerat]);
 
     function handleChange(event: any) {
         const { name, value } = event.target;
@@ -27,17 +30,13 @@ export default function LogIn() {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        try {
-            const res = await axios.post('/api/login', values);
-            console.log(res.data);
-            // handle successful login
-        } catch (error) {
 
-        }
+        const res = await axios.post('https://localhost:7226/register', { Email: "as@gmail.com", UserName: "BINEEEY", Password: "Albin2002@" });
+        console.log(res.data);
+        // handle successful login
+
         // handle login error
     }
-
-
 
 
     return (
@@ -49,11 +48,11 @@ export default function LogIn() {
                         <li key={product.id}>{product.name}</li>
                     ))} */}
 
-                    <h1 className='mb-3'>LOG IN</h1>
+                    <h1 className='mb-3'>Sign Up</h1>
                     <form onSubmit={handleSubmit}>
-
-                        <MDBInput className='mb-4' name="username" onChange={handleChange} value={values.username} label='UserName' />
-                        <MDBInput className='mb-4' name="password" onChange={handleChange} value={values.password} type='password' label='Password' />
+                        <MDBInput className='mb-4' name="email" onChange={handleChange} value={vlerat.email} id='form1Example2' label='Email' />
+                        <MDBInput className='mb-4' name="username" onChange={handleChange} value={vlerat.username} id='form1Example2' label='UserName' />
+                        <MDBInput className='mb-4' name="password" onChange={handleChange} value={vlerat.password} type='password' id='form1Example2' label='Password' />
 
                         <MDBRow className='mb-4'>
                             <MDBCol className='d-flex justify-content-center'>
@@ -64,8 +63,8 @@ export default function LogIn() {
                             </MDBCol>
                         </MDBRow>
 
-                        <MDBBtn type='submit' className='bg-success' block>
-                            Sign in
+                        <MDBBtn type='submit' className='bg-primary' block>
+                            Register
                         </MDBBtn>
                         <div className='text-center m-2'>
                             <p>
@@ -94,5 +93,6 @@ export default function LogIn() {
             </div></>
     );
 }
+
 
 

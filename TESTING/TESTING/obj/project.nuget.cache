@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zZ2FKoby4xt7p6s/H0kFz6QpxP+XRq/f2Bf30l3cKtPhjlEd6FhpHWsCx57nBKZqOqMs+2qvBuYEEaK0DOoEHg==",
+  "dgSpecHash": "X8AEFPfUaMFrziDl7k50yIDrB+eZNEBNpzzD5jetjat+hbLBZJRouZGCA1qhgoel+WZwbkb1/8ahKeAsKgq/lQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Lenovo\\Desktop\\TESTING WEB API\\REACT-.NET-SQL-SERVER\\TESTING\\TESTING\\TESTING.csproj",
   "expectedPackageFiles": [
@@ -40,6 +40,7 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.configuration.binder\\6.0.0\\microsoft.extensions.configuration.binder.6.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.dependencymodel\\7.0.0\\microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",

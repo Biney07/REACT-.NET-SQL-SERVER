@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using TESTING.Model;
 
 namespace TESTING.Data
@@ -25,6 +26,7 @@ namespace TESTING.Data
                 new IdentityRole { Name="Member", NormalizedName="MEMBER"},
                 new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" }
                 );
+          
         }
 
 

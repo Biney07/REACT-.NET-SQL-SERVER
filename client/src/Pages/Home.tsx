@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import Card from "../Components/Card";
 import Post from "./post";
-
+import Counter from "./Counter";
 interface Item {
     id: number;
     img: string;
@@ -27,6 +27,7 @@ const Home: React.FC = () => {
     return (
         <>
         <div>
+            <Counter/>
             <div style={{ margin: '51px', display: 'flex', flexDirection: 'row', flexWrap: "wrap", alignItems: "flex-start" }}>
              {data.map(item => (
                <Card name="Protein Bar" url={item.img} description="Proteins are large, complex molecules that perform a vast array of functions in the body" />

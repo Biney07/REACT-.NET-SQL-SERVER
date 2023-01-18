@@ -5,12 +5,12 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Redirect, Route, Switch } from 'react-router-dom'
 
 import { MDBBtn, MDBCheckbox, MDBCol, MDBIcon, MDBInput, MDBListGroupItem, MDBRow } from 'mdb-react-ui-kit';
-import { User } from './User';
+
 import Navbar from './Components/Navbar';
 import LogIn from './Pages/LogIn';
 import Home from './Pages/Home';
 import FileUpload from './Pages/FileUpload';
-
+import Register from './Pages/Register';
 
 function App() {
   return (
@@ -26,6 +26,10 @@ function App() {
 
         <Route path={"/Login"}>
           <LogIn />
+        </Route>
+        
+        <Route path={"/Register"}>
+          <Register />
         </Route>
         <Route path={"/FileUpload"}>
           <FileUpload />

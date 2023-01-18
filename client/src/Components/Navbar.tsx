@@ -52,6 +52,9 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to={"/FileUpload"}>File Upload</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to={"/Register"}>Register</NavLink>
+                            </li>
                         </ul>
 
                     </div>
