@@ -14,9 +14,11 @@ namespace TESTING.Data
 
         public AppDbContext(DbContextOptions options) : base(options)
         {
+     
         }
         public DbSet<Useri> Users { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Product> Products { get; set; }    
 
         //to get the seed data
         protected override void OnModelCreating(ModelBuilder builder)

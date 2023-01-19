@@ -79,10 +79,18 @@ builder.Services.AddCors(options =>
                       });
 });
 
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Powerfood"));
 });
+
+var connectionString = builder.Configuration.GetConnectionString("Powerfood");
+builder.Services.AddTransient<DbInitializer>();
+
+
+
+
 builder.Services.AddIdentityCore<User>(opt =>
 {
     opt.User.RequireUniqueEmail = true;
@@ -111,6 +119,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<TokenService>();
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -125,5 +134,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+DbInitializer.Seed(app);
 app.Run();
-// This method gets called by the runtime. Use this method to add services to the container.  
+// This method gets called by the runtime. Use this method to add services to the container.  if (args.Length == 1 && args[0].ToLower() == "seeddata")

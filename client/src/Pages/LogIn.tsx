@@ -5,6 +5,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import { MDBBtn, MDBCheckbox, MDBCol, MDBIcon, MDBInput, MDBRow } from 'mdb-react-ui-kit';
 import axios from 'axios';
+import Biney from './Biney';
 
 export default function LogIn() {
     const [values, setValue] = useState({
@@ -42,7 +43,7 @@ export default function LogIn() {
 
     return (
         <>
-
+            <Biney/>
             <div className="App d-flex justify-content-center m-5 ">
                 <div className="home w-25 p-3 m-5">
                     {/* {users.map(product => (
