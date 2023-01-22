@@ -18,7 +18,8 @@ const Card: React.FunctionComponent<Props> = ({ name, description, url }) => {
                 <div className="card-body">
                     <h5 className="card-title">{name}</h5>
                     <p className="card-text">{description}</p>
-                    <a href="#!" onClick={clickHandler} className="btn btn-primary">Buy</a>
+                    <a href="#!" onClick={clickHandler} className="btn btn-primary">Add to card</a>
+                    <a href="#!" onClick={clickHandler} className="btn btn-primary">Details</a>
                 </div>
             </div>
      

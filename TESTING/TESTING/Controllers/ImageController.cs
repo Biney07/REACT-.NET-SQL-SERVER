@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Buffers.Text;
 using TESTING.Data;
 using TESTING.Model;
 
-namespace TESTING.Controllers
-{
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ImagesController : ControllerBase
+namespace TESTING.Controllers;
+
+    public class ImagesController : BaseApiController
     {
         
         public readonly AppDbContext _context;
@@ -60,4 +59,4 @@ namespace TESTING.Controllers
         }
 
     }
-}
+

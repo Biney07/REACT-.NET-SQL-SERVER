@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using TESTING.DTO;
 using TESTING.Model;
 using TESTING.Services;
 
 namespace TESTING.Controllers
 {
-    public class AccountController : ControllerBase
+
+    public class AccountController : BaseApiController
     {
         private readonly UserManager<User> _userManager;
         private readonly TokenService _tokenService;
@@ -18,14 +20,15 @@ namespace TESTING.Controllers
             _tokenService = tokenService;
         }
 
+       
         [HttpPost("login")]
-        public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
+        public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDto)
         {
-            var user = await _userManager.FindByNameAsync(loginDTO.UserName);
-            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDTO.Password))
-            {
-                return Unauthorized();
-            }
+            var user = await _userManager.FindByNameAsync(loginDto.Username);
+
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
+            return Unauthorized();
+
             return new UserDTO
             {
                 Email = user.Email,
@@ -36,7 +39,7 @@ namespace TESTING.Controllers
     [HttpPost("register")]
     public async Task<ActionResult> Register(RegisterDTO registerDTO)
     {
-        var user = new User { UserName = registerDTO.UserName, Email = registerDTO.Email };
+        var user = new User { UserName = registerDTO.Username, Email = registerDTO.Email };
         var result = await _userManager.CreateAsync(user, registerDTO.Password);
         //if there are error validate and repeat until the succesful credintentials are created
         if (!result.Succeeded)
