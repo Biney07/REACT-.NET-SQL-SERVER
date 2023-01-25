@@ -51,15 +51,15 @@ namespace TESTING.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5734bf5c-70c8-4111-b752-cbdc4ee3b8ce",
-                            ConcurrencyStamp = "4b84c71a-2121-4f2e-9e36-363754054648",
+                            Id = "beaef7cc-6a59-4335-9821-dc5452801aa5",
+                            ConcurrencyStamp = "c0333f6b-5b26-47fe-8f07-70cbe57d36a5",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = "fbb5fca2-9cae-47c6-babc-1893678f8f04",
-                            ConcurrencyStamp = "19646bd5-5c45-4c1d-99e2-dfae63a10675",
+                            Id = "9577c378-ca00-469a-be3b-c56b19afdcc8",
+                            ConcurrencyStamp = "560cf3f1-cd2d-4e84-b851-8fe7c3d91361",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -202,6 +202,31 @@ namespace TESTING.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("TESTING.Model.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customer");
+                });
+
             modelBuilder.Entity("TESTING.Model.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -217,6 +242,34 @@ namespace TESTING.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("TESTING.Model.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("TESTING.Model.Product", b =>
@@ -376,6 +429,22 @@ namespace TESTING.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TESTING.Model.Order", b =>
+                {
+                    b.HasOne("TESTING.Model.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("TESTING.Model.Customer", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

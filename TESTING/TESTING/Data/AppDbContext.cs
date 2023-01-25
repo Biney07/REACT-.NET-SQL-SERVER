@@ -18,8 +18,9 @@ namespace TESTING.Data
         }
         public DbSet<Useri> Users { get; set; }
         public DbSet<Image> Images { get; set; }
-        public DbSet<Product> Products { get; set; }    
-
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
         //to get the seed data
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -30,6 +31,9 @@ namespace TESTING.Data
                 );
           
         }
+
+        //to get the seed data
+        public DbSet<TESTING.Model.Customer> Customer { get; set; }
 
 
 

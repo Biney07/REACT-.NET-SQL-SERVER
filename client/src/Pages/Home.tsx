@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Card from "../Components/Card";
 import Post from "./post";
 import Counter from "./Counter";
+import Order from "../TEST/Orders";
 interface Item {
     id: number;
     img: string;
@@ -27,6 +28,7 @@ const Home: React.FC = () => {
     return (
         <>
         <div>
+            <Order/>
             <Counter/>
             <div style={{ margin: '51px', display: 'flex', flexDirection: 'row', flexWrap: "wrap", alignItems: "flex-start" }}>
              {data.map(item => (
