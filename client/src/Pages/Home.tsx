@@ -28,7 +28,7 @@ const Home: React.FC = () => {
     return (
         <>
         <div>
-            <Order/>
+            
             <Counter/>
             <div style={{ margin: '51px', display: 'flex', flexDirection: 'row', flexWrap: "wrap", alignItems: "flex-start" }}>
              {data.map(item => (

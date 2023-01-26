@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import CreateOrder from "./CreateOrder";
 
 interface Customer {
     id: number;
@@ -38,41 +40,96 @@ const Order: React.FC<Props> = () => {
     }, []);
     const fetchOrders = (customerId: number) => {
         // Make a GET request to the server to get the orders for the selected customer
-        axios.get(`https://localhost:7226/api/Order/${customerId}`)
+        console.log(customerId);
+        axios.get(`https://localhost:7226/api/Order/getbyid?customerId=${customerId}`)
             .then(response => {
                 setOrders(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
             });
     };
+
+    function handleChange(event: any) {
+        event.preventDefault();
+        console.log(event.target.value);
+        setSelectedCustomer(event.target.value)
+        fetchOrders(event.target.value);
+
+    }
+    function DeleteOrder(orderId: number){
+        axios.delete(`https://localhost:7226/api/Order/${orderId}`).then(response => {
+            setOrders(prevOrders => prevOrders.filter(order => order.id !== orderId));
+            console.log("success");
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    }
+
+
+
     return (<>
-        <FormControl sx={{ width: 300 }}>
-            <InputLabel id="demo-simple-select-label">Customers</InputLabel>
-            <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={selectedCustomer || ""}
-                label="Customers"
-                onChange={(e) => setSelectedCustomer(e.target.value === "" ? null : parseInt(e.target.value.toString()))}
+        <div className="bodymargin">
 
-            >
-                {customers.map((customer) => (
-                    <MenuItem key={customer.id} value={customer.id}>
-                        {customer.name}
-                    </MenuItem>
-                ))}
-            </Select>
-        </FormControl>
+            <FormControl sx={{ marginBottom: 5, width: 300, alignItems: "center", display: 'flex', flexDirection: 'row' }}>
+                <InputLabel id="demo-simple-select-label">Customers</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={selectedCustomer || ''}
+                    label="Customers"
+                    onChange={handleChange}
+                    sx={{ minWidth: 200, height: 50 }}
+                >
+                    {customers.map((customer) => (
+                        <MenuItem key={customer.id} value={customer.id}>
+                            {customer.name}
+                        </MenuItem>
+                    ))}
+                </Select>
+                <Button variant="contained" size="medium" sx={{ fontColor: 'white', marginLeft: "20px" }}><Link style={{ color: "white" }} to={"./create-order"}> CREATE</Link></Button>
 
-        <div>{orders.map((order) => (
-            <div key={order.id}>
-                <p>Order Number: {order.number}</p>
-                <p>Order Date: {order.date}</p>
-                <p>Order Amount: {order.amount}</p>
-            </div>
-        ))}</div>
+            </FormControl>
 
+
+            <TableContainer component={Paper}>
+                <Table sx={{ maxWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+
+                            <TableCell>Order Id</TableCell>
+                            <TableCell align="right">Client ID </TableCell>
+                            <TableCell align="right">Date</TableCell>
+                            <TableCell align="right">Amount</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {orders.map((order) => (
+
+                            <TableRow
+                                key={order.id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+
+                                <TableCell component="th" scope="row">
+                                    {order.id}
+                                </TableCell>
+                                <TableCell align="right">{order.customerId}</TableCell>
+                                <TableCell align="right">{order.date}</TableCell>
+                                <TableCell align="right">{order.amount}</TableCell>
+                                <TableCell align="right"><Button onClick={() => DeleteOrder(order.id)}>Delete</Button></TableCell>
+
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
+
+        </div>
     </>
     );
 }

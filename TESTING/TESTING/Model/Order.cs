@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace TESTING.Model
 {
     public class Order
@@ -9,6 +10,7 @@ namespace TESTING.Model
         public string Number { get; set; }
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
-        public Customer Customer { get; set; }
+        
+        public Customer? Customer { get; set; }
     }
 }

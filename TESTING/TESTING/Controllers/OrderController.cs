@@ -10,9 +10,8 @@ using TESTING.Model;
 
 namespace TESTING.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OrderController : ControllerBase
+    
+    public class OrderController : BaseApiController
     {
         private readonly AppDbContext _context;
 
@@ -29,19 +28,21 @@ namespace TESTING.Controllers
         }
 
         // GET: api/Order/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+     
+       
+        [HttpGet]
+        [Route("getbyid")]
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByCustomerId(int customerId)
         {
-            var order = await _context.Orders.FindAsync(id);
+            var orders = await _context.Orders.Where(o => o.CustomerId == customerId).ToListAsync();
 
-            if (order == null)
+            if (orders == null)
             {
                 return NotFound();
             }
 
-            return order;
+            return orders;
         }
-
         // PUT: api/Order/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -78,10 +79,10 @@ namespace TESTING.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
+            
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetOrder", new { id = order.Id }, order);
+            return Created($"/getbyid?id={order.Id}", order);
         }
 
         // DELETE: api/Order/5

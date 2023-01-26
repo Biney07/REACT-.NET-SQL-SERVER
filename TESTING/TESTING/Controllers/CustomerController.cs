@@ -10,9 +10,7 @@ using TESTING.Model;
 
 namespace TESTING.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CustomerController : ControllerBase
+    public class CustomerController : BaseApiController
     {
         private readonly AppDbContext _context;
 
@@ -29,7 +27,8 @@ namespace TESTING.Controllers
         }
 
         // GET: api/Customer/5
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("getbyid")]
         public async Task<ActionResult<Customer>> GetCustomer(int id)
         {
             var customer = await _context.Customer.FindAsync(id);
@@ -80,8 +79,8 @@ namespace TESTING.Controllers
         {
             _context.Customer.Add(customer);
             await _context.SaveChangesAsync();
+           return Created($"/getbyid?id={customer.Id}", customer);
 
-            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }
 
         // DELETE: api/Customer/5

@@ -55,6 +55,9 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to={"/Register"}>Register</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to={"/Order"}>Orders</NavLink>
+                            </li>
                         </ul>
 
                     </div>

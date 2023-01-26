@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TESTING.Data;
 
@@ -11,9 +12,11 @@ using TESTING.Data;
 namespace TESTING.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230125184632_ch1")]
+    partial class ch1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,15 +54,15 @@ namespace TESTING.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fcdb16a6-5e27-448a-9e14-7e63f1f5dce8",
-                            ConcurrencyStamp = "e2d85b36-b2fe-4ee5-aed2-f3c4b6887602",
+                            Id = "085d0e39-dd75-4a40-b2b4-c2c86b6454f1",
+                            ConcurrencyStamp = "a5a154d4-3122-44b4-8695-9b506f008579",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = "23ca1068-20f4-4b30-a146-66404f1478c7",
-                            ConcurrencyStamp = "4831ae2c-7aec-42dd-a432-2ae23a6e5d2b",
+                            Id = "8798c6d6-6d8c-417c-a2b4-dd44f1d942cd",
+                            ConcurrencyStamp = "f042daba-e0e0-4e86-a561-165f56370b38",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
