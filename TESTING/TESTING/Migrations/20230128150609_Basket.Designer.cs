@@ -12,8 +12,8 @@ using TESTING.Data;
 namespace TESTING.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230125184004_small")]
-    partial class small
+    [Migration("20230128150609_Basket")]
+    partial class Basket
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,15 +54,15 @@ namespace TESTING.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "573725d7-8d74-4522-a71b-560ca01af396",
-                            ConcurrencyStamp = "f1dd33f4-1f99-41ba-9f39-f70b355bdfaf",
+                            Id = "fbea22b5-2c09-4702-9920-665290856fc2",
+                            ConcurrencyStamp = "b5afc7bb-9786-4714-a6c4-032d4d5536e7",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = "42a1a670-ca95-4353-a711-8cf7b667dd03",
-                            ConcurrencyStamp = "d27e84db-dd8f-4b44-98d8-2ff39323eec8",
+                            Id = "18e1b266-1588-4b0f-9147-728c6dde1284",
+                            ConcurrencyStamp = "ead6fa73-71bf-458b-9294-6f38850c4c5c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -203,6 +203,49 @@ namespace TESTING.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TESTING.Model.Basket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BuyerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Baskets");
+                });
+
+            modelBuilder.Entity("TESTING.Model.BasketItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BasketId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("BasketItems");
                 });
 
             modelBuilder.Entity("TESTING.Model.Customer", b =>
@@ -434,6 +477,25 @@ namespace TESTING.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TESTING.Model.BasketItem", b =>
+                {
+                    b.HasOne("TESTING.Model.Basket", "Basket")
+                        .WithMany("Items")
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TESTING.Model.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("TESTING.Model.Order", b =>
                 {
                     b.HasOne("TESTING.Model.Customer", "Customer")
@@ -443,6 +505,11 @@ namespace TESTING.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("TESTING.Model.Basket", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("TESTING.Model.Customer", b =>

@@ -13,15 +13,6 @@ namespace TESTING.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "5734bf5c-70c8-4111-b752-cbdc4ee3b8ce");
-
-            migrationBuilder.DeleteData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "fbb5fca2-9cae-47c6-babc-1893678f8f04");
 
             migrationBuilder.CreateTable(
                 name: "Customer",
@@ -60,19 +51,6 @@ namespace TESTING.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "9577c378-ca00-469a-be3b-c56b19afdcc8", "560cf3f1-cd2d-4e84-b851-8fe7c3d91361", "Admin", "ADMIN" },
-                    { "beaef7cc-6a59-4335-9821-dc5452801aa5", "c0333f6b-5b26-47fe-8f07-70cbe57d36a5", "Member", "MEMBER" }
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_CustomerId",
-                table: "Orders",
-                column: "CustomerId");
         }
 
         /// <inheritdoc />
@@ -84,24 +62,6 @@ namespace TESTING.Migrations
             migrationBuilder.DropTable(
                 name: "Customer");
 
-            migrationBuilder.DeleteData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "9577c378-ca00-469a-be3b-c56b19afdcc8");
-
-            migrationBuilder.DeleteData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "beaef7cc-6a59-4335-9821-dc5452801aa5");
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "5734bf5c-70c8-4111-b752-cbdc4ee3b8ce", "4b84c71a-2121-4f2e-9e36-363754054648", "Member", "MEMBER" },
-                    { "fbb5fca2-9cae-47c6-babc-1893678f8f04", "19646bd5-5c45-4c1d-99e2-dfae63a10675", "Admin", "ADMIN" }
-                });
         }
     }
 }

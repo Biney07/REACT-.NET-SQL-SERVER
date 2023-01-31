@@ -51,15 +51,15 @@ namespace TESTING.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fcdb16a6-5e27-448a-9e14-7e63f1f5dce8",
-                            ConcurrencyStamp = "e2d85b36-b2fe-4ee5-aed2-f3c4b6887602",
+                            Id = "fbea22b5-2c09-4702-9920-665290856fc2",
+                            ConcurrencyStamp = "b5afc7bb-9786-4714-a6c4-032d4d5536e7",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = "23ca1068-20f4-4b30-a146-66404f1478c7",
-                            ConcurrencyStamp = "4831ae2c-7aec-42dd-a432-2ae23a6e5d2b",
+                            Id = "18e1b266-1588-4b0f-9147-728c6dde1284",
+                            ConcurrencyStamp = "ead6fa73-71bf-458b-9294-6f38850c4c5c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -200,6 +200,49 @@ namespace TESTING.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TESTING.Model.Basket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BuyerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Baskets");
+                });
+
+            modelBuilder.Entity("TESTING.Model.BasketItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BasketId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("BasketItems");
                 });
 
             modelBuilder.Entity("TESTING.Model.Customer", b =>
@@ -431,6 +474,25 @@ namespace TESTING.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TESTING.Model.BasketItem", b =>
+                {
+                    b.HasOne("TESTING.Model.Basket", "Basket")
+                        .WithMany("Items")
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TESTING.Model.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("TESTING.Model.Order", b =>
                 {
                     b.HasOne("TESTING.Model.Customer", "Customer")
@@ -440,6 +502,11 @@ namespace TESTING.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("TESTING.Model.Basket", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("TESTING.Model.Customer", b =>
