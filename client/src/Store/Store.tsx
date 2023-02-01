@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { accountSlice } from '../Pages/Account/accountSlice'
 import {counterSlice} from '../Pages/CounterSlice'
 //Reducers are pure functions that receive the current state and incoming action as arguments, and return a new state.
 const store = configureStore({
   reducer: {
     counter: counterSlice.reducer,
+    account: accountSlice.reducer,
 
   }
 })

@@ -1,10 +1,52 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { useAppSelector } from "../Store/hook";
+import store from "../Store/Store";
+
+const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
 
 axios.defaults.baseURL = 'https://localhost:7226/api/';
-
+const defaultOptions = {
+    baseURL: 'https://localhost:7226/api/',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+};
+let instance = axios.create(defaultOptions);
 axios.defaults.withCredentials = true;
 
 const responseBody = (response: AxiosResponse) => response.data;
+
+axios.interceptors.request.use(config => {
+    console.log("albin");
+    let userData = localStorage.getItem("user");
+    if (userData) {
+      console.log("hini");
+      let data = JSON.parse(userData);
+      let token = data.token;
+      if (config && config.headers) {
+        config.headers.Authorization = token ? `Bearer ${token}` : '';
+        return config;
+      }
+    }
+    return config;
+  });
+  
+// instance.interceptors.request.use((config: AxiosRequestConfig) => {
+//     let userData = localStorage.getItem("user");
+//     console.log("nuk hini ");
+//     if (userData) {
+//         console.log("hini");
+//         let data = JSON.parse(userData);
+//         let token = data.token;
+//         if (config.headers) {
+//             config.headers.Authorization = token ? `Bearer ${token}` : '';
+//         }
+//     } else {
+//         console.error("No data found in local storage under key 'user'");
+//     }
+//     return config;
+// })
+
 
 const requests = {
     get: (url: string) => axios.get(url).then(responseBody),

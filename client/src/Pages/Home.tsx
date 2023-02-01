@@ -12,7 +12,7 @@ interface Item {
 
 const Home: React.FC = () => {
     const [data, setData] = useState<Item[]>([]);
-
+   
     useEffect(() => {
         async function fetchData() {
             try {

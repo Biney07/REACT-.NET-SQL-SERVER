@@ -18,35 +18,35 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
     async (data, thunkAPI) => {
         try {
             const user = await agent.Account.login(data);
-            localStorage.setItem('user', JSON.stringify(user));
+            console.log(user);
+            localStorage.setItem("user", JSON.stringify(user));
+            console.log(localStorage.getItem("user"));
             return user;
         } catch (error: any) {
-            return thunkAPI.rejectWithValue({error: error.data});
+            return thunkAPI.rejectWithValue({ error: error.data });
         }
     }
 );
 export const fetchCurrentUser = createAsyncThunk<User>(
     'account/fetchCurrentUser',
     async (_, thunkAPI) => {
-        console.log('localstorage');
         thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)));
         try {
-            console.log('localstorage');
+            console.log("fetch");
             const userDto = await agent.Account.currentUser();
-            const { ...user } = userDto;
+            const user = userDto;
             localStorage.setItem('user', JSON.stringify(user));
             return user;
-        } catch (error: any) {
+        } catch (error:any) {
             return thunkAPI.rejectWithValue({ error: error.data });
-
         }
     },
     {
         condition: () => {
             if (!localStorage.getItem('user')) return false;
-        }
+        },
     }
-)
+);
 
 export const accountSlice = createSlice({
     name: 'account',
