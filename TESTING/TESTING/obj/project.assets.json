@@ -11617,20 +11617,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lenovo\\.nuget\\packages\\": {}
+    "C:\\Users\\Granit Zeka\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\TESTING WEB API\\REACT-.NET-SQL-SERVER\\TESTING\\TESTING\\TESTING.csproj",
+      "projectUniqueName": "C:\\Users\\Granit Zeka\\Desktop\\ubt\\ubt_sem_4\\lab1.2\\REACT-.NET-SQL-SERVER\\TESTING\\TESTING\\TESTING.csproj",
       "projectName": "TESTING",
-      "projectPath": "C:\\Users\\Lenovo\\Desktop\\TESTING WEB API\\REACT-.NET-SQL-SERVER\\TESTING\\TESTING\\TESTING.csproj",
-      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lenovo\\Desktop\\TESTING WEB API\\REACT-.NET-SQL-SERVER\\TESTING\\TESTING\\obj\\",
+      "projectPath": "C:\\Users\\Granit Zeka\\Desktop\\ubt\\ubt_sem_4\\lab1.2\\REACT-.NET-SQL-SERVER\\TESTING\\TESTING\\TESTING.csproj",
+      "packagesPath": "C:\\Users\\Granit Zeka\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Granit Zeka\\Desktop\\ubt\\ubt_sem_4\\lab1.2\\REACT-.NET-SQL-SERVER\\TESTING\\TESTING\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Granit Zeka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"

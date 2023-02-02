@@ -19,10 +19,10 @@ import Catalog from './Pages/Catalog/Catalog';
 import ProductDetails from './Components/ProductComponets/ProductDetails';
 import BasketPage from "./Components/BasketComponets/BasketPage";
 import { setBasket } from "./Components/BasketComponets/basketSlice";
-import { getCookie } from "./util/util";
 
 import CheckoutPage from "./Pages/CheckoutPage";
 import agent from './API/agent';
+import { getCookie } from './util/util';
 
 function App() {
 

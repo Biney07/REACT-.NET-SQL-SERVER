@@ -20,3 +20,14 @@ TESTING/TESTING/obj/TESTING.csproj.nuget.dgspec.json
 TESTING/TESTING/obj/TESTING.csproj.nuget.g.props
 TESTING/TESTING/obj/TESTING.csproj.nuget.g.targets
 client/package-lock.json
+
+bin/
+obj/
+
+# Ignore Visual Studio specific folders
+vs/
+*.suo
+*.user
+*.sln.docstates
+
+TESTING/TESTING/appsettings.json
