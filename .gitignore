@@ -31,3 +31,4 @@ vs/
 *.sln.docstates
 
 TESTING/TESTING/appsettings.json
+*.dll

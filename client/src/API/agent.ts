@@ -1,7 +1,7 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 
-const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
+// const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
 
 axios.defaults.baseURL = 'https://localhost:7226/api/';
 axios.defaults.withCredentials = true;

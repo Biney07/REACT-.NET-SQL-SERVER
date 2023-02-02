@@ -1,9 +1,8 @@
 import { storage } from '../firebaseConfig';
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import { Imazhi } from '../models/Imazhi';
-import { useEffect } from 'react';
+import axios from 'axios';
+
 
 
 

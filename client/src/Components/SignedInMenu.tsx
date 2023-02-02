@@ -1,7 +1,6 @@
 import {  Menu, MenuItem, Button, Fade } from "@mui/material";
 import { signOut } from "../Pages/Account/accountSlice";
 import { useAppDispatch, useAppSelector } from "../Store/hook";
-import { useHistory } from 'react-router-dom';
 import React from "react";
 
 export default function SignedInMenu(props: any) {

@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import { signInUser } from './accountSlice';
-import { useAppDispatch, useAppSelector } from '../../Store/hook';
-import { MDBBtn, MDBCheckbox, MDBCol, MDBIcon, MDBInput, MDBRow } from 'mdb-react-ui-kit';
-import axios from 'axios';
+import { useAppDispatch} from '../../Store/hook';
+import { MDBBtn, MDBCheckbox, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import { useForm } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types';
-import { Box, Button, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Box, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
 

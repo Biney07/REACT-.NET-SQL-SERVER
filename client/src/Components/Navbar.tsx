@@ -1,6 +1,5 @@
-import { AppBar, Container, Toolbar, Typography, Box, IconButton, Menu, MenuItem, Button, Tooltip, Avatar, Badge } from "@mui/material";
+import { AppBar, Container, Toolbar, Typography, Box, IconButton, Menu, MenuItem, Button, Badge } from "@mui/material";
 import React from "react";
-import { ReactDOM } from "react";
 import {Link, NavLink } from "react-router-dom";
 import { useAppSelector } from "../Store/hook";
 import MenuIcon from '@mui/icons-material/Menu';
@@ -20,23 +19,23 @@ const pages = [
 export default function Navbar() {
     const { user } = useAppSelector(state => state.account);
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const {basket} = useAppSelector(state => state.basket);
     const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0)
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
+    // const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    //     setAnchorElUser(event.currentTarget);
+    // };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+    // const handleCloseUserMenu = () => {
+    //     setAnchorElUser(null);
+    // };
 
     return (
 

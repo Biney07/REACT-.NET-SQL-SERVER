@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ProductList from "../../Components/ProductComponets/ProductList";
 import { useAppDispatch, useAppSelector } from "../../Store/hook";
 import { fetchProductsAsync, productSelectors } from "./CatalogSlice";

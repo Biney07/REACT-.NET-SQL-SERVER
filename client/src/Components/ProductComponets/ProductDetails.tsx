@@ -2,12 +2,10 @@ import { LoadingButton } from "@mui/lab";
 import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import agent from "../../API/agent";
-import { Product } from "../../models/product";
 import LoadingComponent from "../LoadingComponent";
 import NotFound from "./NotFound";
 import { useAppDispatch, useAppSelector } from "../../Store/hook";
-import { addBasketItemAsync, removeBasketItemAsync  } from "../BasketComponets/basketSlice";
+import { addBasketItemAsync } from "../BasketComponets/basketSlice";
 import { fetchProductAsync, productSelectors } from "../../Pages/Catalog/CatalogSlice";
 
 export default function ProductDetails() {

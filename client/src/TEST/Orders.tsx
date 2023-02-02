@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { FormControl, InputLabel, Select, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import CreateOrder from "./CreateOrder";
 
 interface Customer {
     id: number;

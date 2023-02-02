@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './App.css';
@@ -10,7 +10,6 @@ import LogIn from './Pages/Account/LogIn';
 import Home from './Pages/Home';
 import FileUpload from './Pages/FileUpload';
 import Register from './Pages/Account/Register';
-import { fetchCurrentUser } from './Pages/Account/accountSlice';
 import Orders from './TEST/Orders';
 import CreateOrder from './TEST/CreateOrder';
 import LoggedInCanSee from './Components/OnlyLoggedInCanSee';
