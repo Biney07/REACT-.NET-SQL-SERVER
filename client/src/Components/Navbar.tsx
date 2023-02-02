@@ -6,6 +6,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import SignedInMenu from "./SignedInMenu";
 import { ShoppingCart } from "@mui/icons-material";
+// import { ReactDOM } from "react";
+// import { NavLink } from "react-router-dom";
+import { useStoreContext } from "../context/StoreContext";
 
 
 const pages = [
@@ -20,7 +23,8 @@ export default function Navbar() {
     const { user } = useAppSelector(state => state.account);
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-    const {basket} = useAppSelector(state => state.basket);
+    const {basket} = useStoreContext();
+    // const {basket} = useAppSelector(state => state.basket);
     const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0)
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -37,6 +41,8 @@ export default function Navbar() {
     //     setAnchorElUser(null);
     // };
 
+
+    
     return (
 
         <AppBar position="static">

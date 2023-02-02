@@ -5,6 +5,9 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom'
 import LoadingComponent from './Components/LoadingComponent';
 import { useAppDispatch } from './Store/hook';
+
+// import { MDBBtn, MDBCheckbox, MDBCol, MDBIcon, MDBInput, MDBListGroupItem, MDBRow } from 'mdb-react-ui-kit';
+
 import Navbar from './Components/Navbar';
 import LogIn from './Pages/Account/LogIn';
 import Home from './Pages/Home';
@@ -12,40 +15,32 @@ import FileUpload from './Pages/FileUpload';
 import Register from './Pages/Account/Register';
 import Orders from './TEST/Orders';
 import CreateOrder from './TEST/CreateOrder';
-import { useStoreContext } from './context/StoreContext';
+import { useStoreContext } from './context/AppDbContext';
 import agent from './API/agent';
 import { getCookie } from './util/util';
+import BasketPage from './Pages/basket/BasketPage';
+import Catalog from './Pages/Catalog/Catalog';
+import LoggedInCanSee from './Components/OnlyLoggedInCanSee';
+import CheckoutPage from './Pages/CheckoutPage';
+import ProductDetails from './Components/ProductComponets/ProductDetails';
 
 function App() {
 
+  const {setBasket} = useStoreContext();
   const [loading, setLoading] = useState(true);
-  // const dispatch = useAppDispatch();
-  // const initApp = useCallback(async () => {
-  //   try {
-  //     await dispatch(fetchCurrentUser());
-
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [dispatch])
-  // useEffect(() => {
-  //   initApp().then(() => setLoading(false));
-  // }, [initApp])
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const buyerId = getCookie('buyerId');
     if (buyerId) {
       agent.Basket.get()
-        .then(basket => dispatch(setBasket(basket)))
+        .then(basket => setBasket(basket))
         .catch(error => console.log(error))
         .finally(() => setLoading(false))
     } else {
       setLoading(false);
     }
-  }, [dispatch])
+  }, [setBasket])
 
-  if (loading) { return <LoadingComponent message='Initialising app...' /> }
   return (
     <>
       <Navbar></Navbar>
@@ -70,11 +65,13 @@ function App() {
         </Route>
         <Route exact path='/catalog' component={Catalog} />
         <Route path='/catalog/:id' component={ProductDetails} />
-        <PrivateRoute path='/onlyloggedin' component={LoggedInCanSee} />
+        {/* <PrivateRoute path='/onlyloggedin' component={LoggedInCanSee} /> */}
         <Route path={"/Order"}>
           <Orders />
         </Route>
         <Route path="/create-order" component={CreateOrder} />
+        <Route path='/basket' component={BasketPage} />
+
       </Switch>
 
 
