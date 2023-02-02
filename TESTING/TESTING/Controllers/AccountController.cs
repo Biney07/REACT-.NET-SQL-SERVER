@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using TESTING.DTO;
 using TESTING.Model;
@@ -20,7 +21,22 @@ namespace TESTING.Controllers
             _tokenService = tokenService;
         }
 
-       
+        [HttpGet("getAllUsers")]
+        public async Task<ActionResult<List<UserDTO>>> GetAllUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var userDtos = new List<UserDTO>();
+            foreach (var user in users)
+            {
+                userDtos.Add(new UserDTO
+                {
+                    Email = user.Email,
+                    Username = user.UserName,
+                    Token = await _tokenService.GenerateToken(user)
+                });
+            }
+            return userDtos;
+        }
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDto)
         {
@@ -31,6 +47,7 @@ namespace TESTING.Controllers
 
             return new UserDTO
             {
+                Username = user.UserName,
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user)
             };
@@ -60,6 +77,7 @@ namespace TESTING.Controllers
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             return new UserDTO
             {
+                Username = user.UserName,
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user)
             };

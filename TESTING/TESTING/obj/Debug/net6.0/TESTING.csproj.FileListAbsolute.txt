@@ -684,3 +684,4 @@ C:\Users\Granit Zeka\Desktop\ubt\ubt_sem_4\lab1.2\REACT-.NET-SQL-SERVER\TESTING\
 C:\Users\Granit Zeka\Desktop\ubt\ubt_sem_4\lab1.2\REACT-.NET-SQL-SERVER\TESTING\TESTING\obj\Debug\net6.0\TESTING.pdb
 C:\Users\Granit Zeka\Desktop\ubt\ubt_sem_4\lab1.2\REACT-.NET-SQL-SERVER\TESTING\TESTING\obj\Debug\net6.0\TESTING.genruntimeconfig.cache
 C:\Users\Granit Zeka\Desktop\ubt\ubt_sem_4\lab1.2\REACT-.NET-SQL-SERVER\TESTING\TESTING\obj\Debug\net6.0\ref\TESTING.dll
+C:\Users\Lenovo\Desktop\TESTING WEB API\REACT-.NET-SQL-SERVER\TESTING\TESTING\bin\Debug\net6.0\PagedList.dll

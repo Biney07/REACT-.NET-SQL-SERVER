@@ -1,16 +1,18 @@
-import { AppBar, Container, Toolbar, Typography, Box, IconButton, Menu, MenuItem, Button, Tooltip, Avatar } from "@mui/material";
+import { AppBar, Container, Toolbar, Typography, Box, IconButton, Menu, MenuItem, Button, Tooltip, Avatar, Badge } from "@mui/material";
 import React from "react";
 import { ReactDOM } from "react";
-import { NavLink } from "react-router-dom";
-
+import {Link, NavLink } from "react-router-dom";
+import { useAppSelector } from "../Store/hook";
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
-import { useAppSelector } from "../Store/hook";
-import SignedInMenu from "./SignedInMenu";  
+import SignedInMenu from "./SignedInMenu";
+import { ShoppingCart } from "@mui/icons-material";
+
 
 const pages = [
     { name: 'Home', route: '/' },
-    { name: 'Orders', route: '/Order' }
+    { name: 'Orders', route: '/Order' },
+    { name: 'Catalog', route: '/Catalog' }
 ];
 
 
@@ -19,7 +21,8 @@ export default function Navbar() {
     const { user } = useAppSelector(state => state.account);
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
+    const {basket} = useAppSelector(state => state.basket);
+    const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0)
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -116,6 +119,7 @@ export default function Navbar() {
                         Dasma jone
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
                         {pages.map((page) => (
                             <Button
                                 key={page.name}
@@ -125,13 +129,18 @@ export default function Navbar() {
                         ))}
                     </Box>
 
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box sx={{ display: 'flex', flexGrow: 0, alignItems: 'center' }}>
+                    <IconButton component={Link} to='/basket' size='large' sx={{ color: 'inherit' }}>
+                        <Badge badgeContent={itemCount} color='secondary'>
+                            <ShoppingCart />
+                        </Badge>
+                    </IconButton>
                         {
                             user ? (
-                                <SignedInMenu/>) : (
+                                <SignedInMenu />) : (
                                 <div>
                                     <NavLink style={{ color: 'white', marginLeft: "10px" }} to='/Login'>Login</NavLink>
-                                    <NavLink style={{ color: 'white', marginLeft: "10px" }} to='/Login'>Register</NavLink>
+                                    <NavLink style={{ color: 'white', marginLeft: "10px" }} to='/Register'>Register</NavLink>
                                 </div>
                             )}
                     </Box>

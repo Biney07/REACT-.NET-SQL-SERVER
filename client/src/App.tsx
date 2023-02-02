@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-
-
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './App.css';
@@ -15,23 +13,46 @@ import Register from './Pages/Account/Register';
 import { fetchCurrentUser } from './Pages/Account/accountSlice';
 import Orders from './TEST/Orders';
 import CreateOrder from './TEST/CreateOrder';
+import LoggedInCanSee from './Components/OnlyLoggedInCanSee';
+import PrivateRoute from './Components/PrivateRoute';
+import Catalog from './Pages/Catalog/Catalog';
+import ProductDetails from './Components/ProductComponets/ProductDetails';
+import BasketPage from "./Components/BasketComponets/BasketPage";
+import { setBasket } from "./Components/BasketComponets/basketSlice";
+import { getCookie } from "./util/util";
 
+import CheckoutPage from "./Pages/CheckoutPage";
+import agent from './API/agent';
 
 function App() {
-  const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(true);
-  const initApp = useCallback(async () => {
-    try {
-      await dispatch(fetchCurrentUser());
 
-    } catch (error) {
-      console.log(error);
+  const [loading, setLoading] = useState(true);
+  // const dispatch = useAppDispatch();
+  // const initApp = useCallback(async () => {
+  //   try {
+  //     await dispatch(fetchCurrentUser());
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [dispatch])
+  // useEffect(() => {
+  //   initApp().then(() => setLoading(false));
+  // }, [initApp])
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const buyerId = getCookie('buyerId');
+    if (buyerId) {
+      agent.Basket.get()
+        .then(basket => dispatch(setBasket(basket)))
+        .catch(error => console.log(error))
+        .finally(() => setLoading(false))
+    } else {
+      setLoading(false);
     }
   }, [dispatch])
 
-  useEffect(() => {
-    initApp().then(() => setLoading(false));
-  }, [initApp])
   if (loading) { return <LoadingComponent message='Initialising app...' /> }
   return (
     <>
@@ -47,13 +68,17 @@ function App() {
         <Route path={"/Login"}>
           <LogIn />
         </Route>
-
+        <Route path='/basket' component={BasketPage} />
+        <Route path='/checkout' component={CheckoutPage} />
         <Route path={"/Register"}>
           <Register />
         </Route>
         <Route path={"/FileUpload"}>
           <FileUpload />
         </Route>
+        <Route exact path='/catalog' component={Catalog} />
+        <Route path='/catalog/:id' component={ProductDetails} />
+        <PrivateRoute path='/onlyloggedin' component={LoggedInCanSee} />
         <Route path={"/Order"}>
           <Orders />
         </Route>

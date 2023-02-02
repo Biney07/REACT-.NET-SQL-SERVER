@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types';
 import { Box, Button, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
 
@@ -19,16 +19,16 @@ export default function LogIn() {
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
     const dispatch = useAppDispatch();
-  
+
 
     interface MyInputTypes {
         username: string;
         password: string;
-    }  
+    }
     async function submitForm(data: FieldValues) {
         try {
             await dispatch(signInUser(data));
-            history.push('/Home');
+            history.push('/onlyloggedin');
         } catch (error) {
             console.log(error);
         }
@@ -62,9 +62,15 @@ export default function LogIn() {
                                 fullWidth
                                 label="Password"
                                 type={showPassword ? 'text' : 'password'}
-                                {...register('password', { pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).*$/ })}
+                                {...register('password', {
+                                    required: 'Password is required',
+                                    pattern: {
+                                        value: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).*$/,
+                                        message: 'Password should be more complex'
+                                    }
+                                })}
                                 error={!!errors.password}
-                                helperText={errors?.password ? 'Password must contain a uppercase letter, number and special character' : ''}
+                                helperText={errors?.password?.message?.toString()}
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">
@@ -96,7 +102,7 @@ export default function LogIn() {
                             </MDBBtn>
                             <div className='text-center m-2'>
                                 <p>
-                                    Not a member? <a href='#!'>Register</a>
+                                    Not a member? <Link to={'/Register'}>Register</Link>
                                 </p>
                                 <p>or sign up with:</p>
 

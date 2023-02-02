@@ -51,15 +51,15 @@ namespace TESTING.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fbea22b5-2c09-4702-9920-665290856fc2",
-                            ConcurrencyStamp = "b5afc7bb-9786-4714-a6c4-032d4d5536e7",
+                            Id = "1d2b51b8-5584-4886-921b-e1fcd933d557",
+                            ConcurrencyStamp = "c49ec85c-2505-47b3-9ebf-4c251fdce747",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = "18e1b266-1588-4b0f-9147-728c6dde1284",
-                            ConcurrencyStamp = "ead6fa73-71bf-458b-9294-6f38850c4c5c",
+                            Id = "af841aa9-9852-49aa-834e-114498ae56ad",
+                            ConcurrencyStamp = "07790c2e-af18-4dad-aa0a-3d347704510e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -341,10 +341,6 @@ namespace TESTING.Migrations
 
                     b.Property<long>("Price")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("PublicId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QuantityInStock")
                         .HasColumnType("int");

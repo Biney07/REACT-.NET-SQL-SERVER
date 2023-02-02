@@ -5,59 +5,28 @@ using TESTING.Model;
 
 namespace TESTING.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    public class ProductsController : BaseApiController
     {
-
-        public readonly AppDbContext _context;
-        public ProductController(AppDbContext context)
+        private readonly AppDbContext _context;
+        public ProductsController(AppDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<List<Product>>> GetAll()
         {
-            var products = await _context.Products.ToListAsync();
-            return Ok(products);
+
+            return await _context.Products.ToListAsync();
+            
         }
+
         [HttpGet]
         [Route("getbyid")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var Products = await _context.Products.FindAsync(id);
-            return Ok(Products);
+            var products = await _context.Products.FindAsync(id);
+            return Ok(products);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(Product product)
-        {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
-            return Created($"/getbyid?id={product.Id}", product);
-        }
-
-
-        [HttpPut]
-        public async Task<IActionResult> Update(Product product)
-        {
-            _context.Products.Update(product);
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-        [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-
     }
 }

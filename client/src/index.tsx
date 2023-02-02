@@ -4,11 +4,11 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import store from './Store/Store'
 import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux'
+
 
 
 
@@ -21,7 +21,7 @@ root.render(
 
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+        <App />
     </Provider>
   </BrowserRouter>
 );

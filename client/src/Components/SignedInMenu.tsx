@@ -24,7 +24,7 @@ export default function SignedInMenu(props: any) {
                 onClick={handleClick}
                 sx={{ typography: 'h6' }}
             >
-                {user?.email}
+                {user?.username}
             </Button>
             <Menu
                 anchorEl={anchorEl}
