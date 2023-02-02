@@ -1,5 +1,7 @@
 import { url } from "inspector";
-import React from "react"
+import React, { useState } from "react"
+import agent from "../API/agent";
+import { useStoreContext } from "../context/AppDbContext";
 
 interface Props {
     name: string;
@@ -10,6 +12,18 @@ const Card: React.FunctionComponent<Props> = ({ name, description, url }) => {
     const clickHandler = () => {
         console.log("clicked");
     }
+
+    const [loading, setLoading] = useState(false);
+    const {setBasket} = useStoreContext();
+
+    function handleAddItem(productId: number) {
+        setLoading(true);
+        agent.Basket.addItem(productId)
+            .then(basket => setBasket(basket))
+            .catch(error => console.log(error))
+            .finally(() => setLoading(false));
+    }
+    
     return (
 
     

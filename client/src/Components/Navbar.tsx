@@ -1,10 +1,15 @@
 import { ReactDOM } from "react";
 import { NavLink } from "react-router-dom";
+import { useStoreContext } from "../context/AppDbContext";
 
 
 
 
 export default function Navbar() {
+
+    const {basket} = useStoreContext();
+    const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0)
+    
     return (
         <>
 
