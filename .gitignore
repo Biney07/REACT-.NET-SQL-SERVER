@@ -35,3 +35,6 @@ vs/
 TESTING/TESTING/appsettings.json
 *.dll
 TESTING/.vs/TESTING/FileContentIndex/0072d5c1-7465-4b18-abdb-60e90e79efd9.vsidx
+*.dll
+TESTING/TESTING/bin/Debug/net6.0/TESTING.pdb
+TESTING/TESTING/bin/Debug/net6.0/TESTING.dll
