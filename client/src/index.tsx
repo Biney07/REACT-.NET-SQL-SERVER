@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './Store/Store'
 import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux'
+import { StoreProvider } from './context/StoreContext';
 
 
 
@@ -21,7 +22,9 @@ root.render(
 
   <BrowserRouter>
     <Provider store={store}>
-        <App />
+    <StoreProvider>
+      <App />
+    </StoreProvider>
     </Provider>
   </BrowserRouter>
 );

@@ -1,6 +1,6 @@
 
 import { TableContainer, Paper, Table, TableBody, TableRow, TableCell } from "@mui/material";
-import { useAppSelector } from "../../Store/hook";
+import { useStoreContext } from "../../context/StoreContext";
 import { currencyFormat } from "../../util/util";
 
 export default function BasketSummary() {

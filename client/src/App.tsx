@@ -12,14 +12,7 @@ import FileUpload from './Pages/FileUpload';
 import Register from './Pages/Account/Register';
 import Orders from './TEST/Orders';
 import CreateOrder from './TEST/CreateOrder';
-import LoggedInCanSee from './Components/OnlyLoggedInCanSee';
-import PrivateRoute from './Components/PrivateRoute';
-import Catalog from './Pages/Catalog/Catalog';
-import ProductDetails from './Components/ProductComponets/ProductDetails';
-import BasketPage from "./Components/BasketComponets/BasketPage";
-import { setBasket } from "./Components/BasketComponets/basketSlice";
-
-import CheckoutPage from "./Pages/CheckoutPage";
+import { useStoreContext } from './context/StoreContext';
 import agent from './API/agent';
 import { getCookie } from './util/util';
 
