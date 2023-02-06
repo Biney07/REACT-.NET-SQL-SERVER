@@ -4,9 +4,7 @@ TESTING/.vs/TESTING/FileContentIndex/7ced1d89-c05e-428c-bba3-c32bfbb00359.vsidx
 TESTING/.vs/TESTING/FileContentIndex/c7ba496f-50c9-49ac-9645-0848c7244ed3.vsidx
 TESTING/.vs/TESTING/DesignTimeBuild/.dtbcache.v2
 TESTING/.vs/ProjectEvaluation/testing.projects.v5.2
-TESTING/.vs/TESTING/v17/.suo
-TESTING/TESTING/bin/Debug/net6.0/TESTING.dll
-TESTING/TESTING/bin/Debug/net6.0/TESTING.pdb
+
 TESTING/TESTING/obj/Debug/net6.0/ref/TESTING.dll
 TESTING/TESTING/obj/Debug/net6.0/refint/TESTING.dll
 TESTING/TESTING/obj/Debug/net6.0/TESTING.assets.cache
@@ -21,6 +19,10 @@ TESTING/TESTING/obj/TESTING.csproj.nuget.g.props
 TESTING/TESTING/obj/TESTING.csproj.nuget.g.targets
 client/package-lock.json
 
+
+TESTING/.vs
+TESTING/TESTING/bin
+TESTING/TESTING/bin
 bin/
 obj/
 
@@ -32,3 +34,4 @@ vs/
 
 TESTING/TESTING/appsettings.json
 *.dll
+TESTING/.vs/TESTING/FileContentIndex/0072d5c1-7465-4b18-abdb-60e90e79efd9.vsidx
