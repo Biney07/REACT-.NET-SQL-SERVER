@@ -1,7 +1,7 @@
 import { url } from "inspector";
 import React, { useState } from "react"
 import agent from "../API/agent";
-import { useStoreContext } from "../context/AppDbContext";
+import { useStoreContext } from "../context/StoreContext";
 
 interface Props {
     name: string;

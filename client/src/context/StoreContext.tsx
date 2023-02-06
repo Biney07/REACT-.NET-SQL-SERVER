@@ -1,17 +1,16 @@
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 import { Basket } from "../models/basket";
 
-
-interface AppDbContextValue {
+interface StoreContextValue {
     basket: Basket | null;
     setBasket: (basket: Basket) => void;
     removeItem: (productId: number, quantity: number) => void;
 }
 
-export const AppDbContext = createContext<AppDbContextValue | undefined>(undefined);
+export const StoreContext = createContext<StoreContextValue | undefined>(undefined);
 
 export function useStoreContext() {
-    const context = useContext(AppDbContext);
+    const context = useContext(StoreContext);
 
     if (context === undefined) {
         throw Error('Oops - we do not seem to be inside the provider');
@@ -30,15 +29,15 @@ export function StoreProvider({children}: PropsWithChildren<any>) {
         if (itemIndex >= 0) {
             items[itemIndex].quantity -= quantity;
             if (items[itemIndex].quantity === 0) items.splice(itemIndex, 1);
-            setBasket((prevState: any) => {
+            setBasket(prevState => {
                 return {...prevState!, items}
             })
         }
     }
 
     return (
-        <AppDbContext.Provider value={{basket, setBasket, removeItem}}>
+        <StoreContext.Provider value={{basket, setBasket, removeItem}}>
             {children}
-        </AppDbContext.Provider>
+        </StoreContext.Provider>
     )
 }

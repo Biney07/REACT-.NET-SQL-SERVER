@@ -13,7 +13,7 @@ import FileUpload from './Pages/FileUpload';
 import Register from './Pages/Register';
 import Orders from './TEST/Orders';
 import CreateOrder from './TEST/CreateOrder';
-import { useStoreContext } from './context/AppDbContext';
+import { useStoreContext } from './context/StoreContext';
 import agent from './API/agent';
 import { getCookie } from './util/util';
 import BasketPage from './Pages/basket/BasketPage';
