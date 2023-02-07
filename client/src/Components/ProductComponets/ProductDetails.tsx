@@ -2,24 +2,29 @@ import { LoadingButton } from "@mui/lab";
 import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import agent from "../../API/agent";
+import { useStoreContext } from "../../context/StoreContext";
+import { Product } from "../../models/product";
 import LoadingComponent from "../LoadingComponent";
 import NotFound from "./NotFound";
-import { useAppDispatch, useAppSelector } from "../../Store/hook";
-import { addBasketItemAsync } from "../BasketComponets/basketSlice";
-import { fetchProductAsync, productSelectors } from "../../Pages/Catalog/CatalogSlice";
+
 
 export default function ProductDetails() {
-    const {basket, status} = useAppSelector(state => state.basket);
-    const dispatch = useAppDispatch();  
-    const { id } = useParams<{ id: string }>();
-    const product = useAppSelector(state => productSelectors.selectById(state, id));
-    const {status: productStatus} = useAppSelector(state => state.catalog);
+    const {basket, setBasket, removeItem} = useStoreContext();
+    const {id} = useParams<{id: string}>();
+    const [product, setProduct] = useState<Product | null>(null);
+    const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(0);
+    const [submitting, setSubmitting] = useState(false);
     const item = basket?.items.find(i => i.productId === product?.id);
+
     useEffect(() => {
         if (item) setQuantity(item.quantity);
-        if (!product) dispatch(fetchProductAsync(parseInt(id)))
-    }, [id, item, dispatch, product]);
+        agent.Catalog.details(parseInt(id))
+            .then(response => setProduct(response))
+            .catch(error => console.log(error))
+            .finally(() => setLoading(false))
+    }, [id, item]);
 
     function handleInputChange(event: any) {
         if (event.target.value > 0) {
@@ -28,28 +33,34 @@ export default function ProductDetails() {
     }
 
     function handleUpdateCart() {
-
+        setSubmitting(true);
         if (!item || quantity > item.quantity) {
             const updatedQuantity = item ? quantity - item.quantity : quantity;
-            dispatch(addBasketItemAsync({productId: product?.id!, quantity: updatedQuantity}))
+            agent.Basket.addItem(product?.id!, updatedQuantity)
+                .then(basket => setBasket(basket))
+                .catch(error => console.log(error))
+                .finally(() => setSubmitting(false));
         } else {
             const updatedQuantity = item.quantity - quantity;
-            dispatch(addBasketItemAsync({productId: product?.id!, quantity: updatedQuantity}))
+            agent.Basket.removeItem(product?.id!, updatedQuantity)
+                .then(() => removeItem(product?.id!, updatedQuantity))
+                .catch(error => console.log(error))
+                .finally(() => setSubmitting(false));
         }
     }
 
-    if (productStatus.includes('pending')) return <LoadingComponent message='Loading product...' />
+    if (loading) return <LoadingComponent message='Loading product...' />
 
     if (!product) return <NotFound />
 
     return (
-        <Grid container spacing={6} sx={{ justifyContent: 'center', paddingTop: '60px' }}>
-            <Grid item xs={5}>
-                <img src={product.pictureUrl} alt={product.name} style={{ width: '80%' }} />
+        <Grid container spacing={6}>
+            <Grid item xs={6}>
+                <img src={product.pictureUrl} alt={product.name} style={{width: '100%'}} />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6}>
                 <Typography variant='h3'>{product.name}</Typography>
-                <Divider />
+                <Divider sx={{mb: 2}} />
                 <Typography variant='h4' color='secondary'>${(product.price / 100).toFixed(2)}</Typography>
                 <TableContainer>
                     <Table>
@@ -57,23 +68,23 @@ export default function ProductDetails() {
                             <TableRow>
                                 <TableCell>Name</TableCell>
                                 <TableCell>{product.name}</TableCell>
-                            </TableRow>
+                            </TableRow>    
                             <TableRow>
                                 <TableCell>Description</TableCell>
                                 <TableCell>{product.description}</TableCell>
-                            </TableRow>
+                            </TableRow>  
                             <TableRow>
                                 <TableCell>Type</TableCell>
                                 <TableCell>{product.type}</TableCell>
-                            </TableRow>
+                            </TableRow>  
                             <TableRow>
                                 <TableCell>Brand</TableCell>
                                 <TableCell>{product.brand}</TableCell>
-                            </TableRow>
+                            </TableRow>  
                             <TableRow>
                                 <TableCell>Quantity in stock</TableCell>
                                 <TableCell>{product.quantityInStock}</TableCell>
-                            </TableRow>
+                            </TableRow>  
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -91,7 +102,7 @@ export default function ProductDetails() {
                     <Grid item xs={6}>
                         <LoadingButton
                             disabled={item?.quantity === quantity}
-                            loading={status.includes('pending')}
+                            loading={submitting}
                             onClick={handleUpdateCart}
                             sx={{height: '55px'}}
                             color='primary'

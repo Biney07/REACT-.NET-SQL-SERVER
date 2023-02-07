@@ -5,8 +5,7 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import agent from "../../API/agent";
-import { useStoreContext } from "../../context/AppDbContext";
-
+import { useStoreContext } from "../../context/StoreContext";
 import BasketSummary from "./BasketSummary";
 
 export default function BasketPage() {

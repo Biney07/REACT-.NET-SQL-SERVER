@@ -1,4 +1,7 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
+// const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
+// import { toast } from "react-toastify";
+// import { history } from "..";
 
 
 // const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
@@ -23,6 +26,40 @@ axios.interceptors.request.use(config => {
     return config;
 });
 
+// axios.interceptors.response.use(async response => {
+//     await sleep();
+//     return response;
+// }, (error: AxiosError) => {
+//     const { data , status } = error.response!;
+//     switch (status) {
+//         case 400:
+//             if (data.errors) {
+//                 const modelStateErrors: string[] = [];
+//                 for (const key in data.errors) {
+//                     if (data.errors[key]) {
+//                         modelStateErrors.push(data.errors[key])
+//                     }
+//                 }
+//                 throw modelStateErrors.flat();
+//             }
+//             toast.error(data.title);
+//             break;
+//         case 401:
+//             toast.error(data.title);
+//             break;
+//         case 500:
+//             history.push({
+//                 pathname: '/server-error',
+//                 state: {error: data}
+//             });
+//             break;
+//         default:
+//             break;
+//     }
+//     return Promise.reject(error.response);
+// })
+
+
 const requests = {
     get: (url: string) => axios.get(url).then(responseBody),
     post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
@@ -35,7 +72,7 @@ const Catalog = {
     details: (id: number) => requests.get(`Products/getbyid?id=2`)
 }
 const Basket = {
-    get: () => requests.get('basket'),
+    get: () => requests.get('https://localhost:7226/api/Basket'),
     addItem: (productId: number, quantity = 1) => requests.post(`basket?productId=${productId}&quantity=${quantity}`, {}),
     removeItem: (productId: number, quantity = 1) => requests.delete(`basket?productId=${productId}&quantity=${quantity}`)
 }
@@ -47,11 +84,6 @@ const Account = {
     getAll: () => requests.get('Account/getAllUsers'),
 }
 
-const Basket = {
-    get: () => requests.get('basket'),
-    addItem: (productId: number, quantity = 1) => requests.post(`basket?productId=${productId}&quantity=${quantity}`, {}),
-    removeItem: (productId: number, quantity = 1) => requests.delete(`basket?productId=${productId}&quantity=${quantity}`)
-}
 
 const agent = {
     Catalog,

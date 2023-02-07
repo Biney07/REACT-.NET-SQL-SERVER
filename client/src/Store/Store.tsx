@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { basketSlice } from '../Components/BasketComponets/basketSlice';
+// import { basketSlice } from '../Components/BasketComponets/basketSlice';
 import { accountSlice } from '../Pages/Account/accountSlice'
 import { catalogSlice } from '../Pages/Catalog/CatalogSlice';
 
@@ -8,7 +8,7 @@ const store = configureStore({
   reducer: {
         catalog: catalogSlice.reducer,
         account: accountSlice.reducer,
-        basket: basketSlice.reducer
+        // basket: basketSlice.reducer
 
    
 
