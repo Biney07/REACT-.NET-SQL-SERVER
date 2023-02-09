@@ -50,25 +50,7 @@ builder.Services.AddSwaggerGen(config =>
 
 });
 
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-// .AddJwtBearer(options =>
-// {
-//     options.TokenValidationParameters = new TokenValidationParameters
-//     {
-//         ValidateIssuer = true,
-//         ValidateAudience = true,
-//         ValidateLifetime = true,
-//         ValidateIssuerSigningKey = true,
-//         ValidIssuer = Configuration["Jwt:Issuer"],
-//         ValidAudience = Configuration["Jwt:Issuer"],
-//         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-//     };
-// });
-//builder.Services.AddControllers();
-//builder.Services.AddSwaggerGen(c =>
-//{
-//    c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIApplication", Version = "v1" });
-//});
+
 
 builder.Services.AddCors(options =>
 {

@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 
-// const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
+const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
 
 axios.defaults.baseURL = 'https://localhost:7226/api/';
 axios.defaults.withCredentials = true;
@@ -9,10 +9,10 @@ axios.defaults.withCredentials = true;
 const responseBody = (response: AxiosResponse) => response.data;
 
 axios.interceptors.request.use(config => {
-    console.log("albin");
+
     let userData = localStorage.getItem("user");
     if (userData) {
-        console.log("hini");
+     
         let data = JSON.parse(userData);
         let token = data.token;
         if (config && config.headers) {
