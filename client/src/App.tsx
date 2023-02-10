@@ -19,7 +19,7 @@ import Catalog from './Pages/Catalog/Catalog';
 import ProductDetails from './Components/ProductComponets/ProductDetails';
 import BasketPage from "./Components/BasketComponets/BasketPage";
 import { fetchBasketAsync, setBasket } from "./Components/BasketComponets/basketSlice";
-import CheckoutPage from "./Pages/CheckoutPage";
+import CheckoutPage from "./Pages/Checkout/CheckoutPage";
 import agent from './API/agent';
 
 
@@ -36,10 +36,10 @@ export default function App() {
       console.log(error);
     }
   }, [dispatch])
-  
+
   useEffect(() => {
     initApp().then(() => setLoading(false));
-    
+
   }, [initApp])
 
 
@@ -59,7 +59,6 @@ export default function App() {
           <LogIn />
         </Route>
         <Route path='/basket' component={BasketPage} />
-        <Route path='/checkout' component={CheckoutPage} />
         <Route path={"/Register"}>
           <Register />
         </Route>
@@ -69,6 +68,8 @@ export default function App() {
         <Route exact path='/catalog' component={Catalog} />
         <Route path='/catalog/:id' component={ProductDetails} />
         <PrivateRoute path='/onlyloggedin' component={LoggedInCanSee} />
+        <PrivateRoute path='/checkout' component={CheckoutPage} />
+        <PrivateRoute path='/orders' component={Orders} />
         <Route path={"/Order"}>
           <Orders />
         </Route>

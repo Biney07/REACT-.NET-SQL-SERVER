@@ -10,7 +10,7 @@ using TESTING.Model;
 
 namespace TESTING.Controllers
 {
-    
+
     public class OrderController : BaseApiController
     {
         private readonly AppDbContext _context;
@@ -28,13 +28,13 @@ namespace TESTING.Controllers
         }
 
         // GET: api/Order/5
-     
-       
+
+
         [HttpGet]
         [Route("getbyid")]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByCustomerId(int customerId)
         {
-            var orders = await _context.Orders.Where(o => o.CustomerId == customerId).ToListAsync();
+            var orders = await _context.Orders.Where(o => o.BuyerId == customerId).ToListAsync();
 
             if (orders == null)
             {
@@ -79,7 +79,7 @@ namespace TESTING.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
-            
+
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
             return Created($"/getbyid?id={order.Id}", order);

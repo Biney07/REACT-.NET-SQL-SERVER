@@ -4,17 +4,18 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection.Emit;
 using TESTING.Model;
 
 namespace TESTING.Data
 {
-    public class AppDbContext : IdentityDbContext<User>
+    public class AppDbContext : IdentityDbContext<User,Role,int>
     {
 
         public AppDbContext(DbContextOptions options) : base(options)
         {
-     
+
         }
         public DbSet<Useri> Users { get; set; }
         public DbSet<Image> Images { get; set; }
@@ -22,18 +23,23 @@ namespace TESTING.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Basket> Baskets { get; set; }
-        //to get the seed data
+
+      //to get the seed data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<IdentityRole>().HasData(
-                new IdentityRole { Name="Member", NormalizedName="MEMBER"},
-                new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" }
-                );
-          
-        }
+            builder.Entity<User>()
+                  .HasOne(a => a.Address)
+                  .WithOne()
+                  .HasForeignKey<UserAddress>(a => a.Id)
+                  .OnDelete(DeleteBehavior.Cascade);
 
-        //to get the seed data
+            builder.Entity<Role>()
+                .HasData(
+                    new Role { Id = 1, Name = "Member", NormalizedName = "MEMBER" },
+                    new Role { Id = 2, Name = "Admin", NormalizedName = "ADMIN" });
+        }
+       
         public DbSet<TESTING.Model.Customer> Customer { get; set; }
 
 

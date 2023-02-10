@@ -78,7 +78,7 @@ builder.Services.AddIdentityCore<User>(opt =>
     opt.User.RequireUniqueEmail = true;
     opt.Password.RequireNonAlphanumeric = true;
     opt.Password.RequireDigit = true;
-}).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+}).AddRoles<Role>().AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
     opt.TokenValidationParameters = new TokenValidationParameters

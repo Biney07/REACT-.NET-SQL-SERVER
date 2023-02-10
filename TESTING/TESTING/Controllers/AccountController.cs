@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using API.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using TESTING.Data;
 using TESTING.DTO;
 using TESTING.Model;
 using TESTING.Services;
@@ -14,11 +16,13 @@ namespace TESTING.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly TokenService _tokenService;
+        private readonly AppDbContext _context;
 
-        public AccountController(UserManager<User> userManager, TokenService tokenService)
+        public AccountController(UserManager<User> userManager, TokenService tokenService,AppDbContext context)
         {
             _userManager = userManager;
             _tokenService = tokenService;
+            _context = context;
         }
 
         [HttpGet("getAllUsers")]
@@ -43,44 +47,87 @@ namespace TESTING.Controllers
             var user = await _userManager.FindByNameAsync(loginDto.Username);
 
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
-            return Unauthorized();
+                return Unauthorized();
 
-            return new UserDTO
+            var userBasket = await RetrieveBasket(loginDto.Username);
+            var anonBasket = await RetrieveBasket(Request.Cookies["buyerId"]);
+
+            if (anonBasket != null)
             {
-                Username = user.UserName,
-                Email = user.Email,
-                Token = await _tokenService.GenerateToken(user)
-            };
-         }
-    
-    [HttpPost("register")]
-    public async Task<ActionResult> Register(RegisterDTO registerDTO)
-    {
-        var user = new User { UserName = registerDTO.Username, Email = registerDTO.Email };
-        var result = await _userManager.CreateAsync(user, registerDTO.Password);
-        //if there are error validate and repeat until the succesful credintentials are created
-        if (!result.Succeeded)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(error.Code, error.Description);
+                if (userBasket != null) _context.Baskets.Remove(userBasket);
+                anonBasket.BuyerId = user.UserName;
+                Response.Cookies.Delete("buyerId");
+                await _context.SaveChangesAsync();
             }
-            return ValidationProblem();
-        }
-        await _userManager.AddToRoleAsync(user, "Member");
 
-        return StatusCode(201);// cheating consider is working fine
-    }
-        [Authorize]// if he didnt write the right credidentials than he will not have the rights to use this 
-        [HttpGet("getUser")]
-        public async Task<ActionResult<UserDTO>> GetUser() {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
             return new UserDTO
             {
-                Username = user.UserName,
                 Email = user.Email,
-                Token = await _tokenService.GenerateToken(user)
+                Token = await _tokenService.GenerateToken(user),
+                Basket = anonBasket != null ? anonBasket.MapBasketToDto() : userBasket?.MapBasketToDto()
             };
         }
-}
+
+        [HttpPost("register")]
+        public async Task<ActionResult> Register(RegisterDTO registerDto)
+        {
+            var user = new User { UserName = registerDto.Username, Email = registerDto.Email };
+
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.Code, error.Description);
+                }
+
+                return ValidationProblem();
+            }
+
+            await _userManager.AddToRoleAsync(user, "Member");
+
+            return StatusCode(201);
+        }
+
+        [Authorize]
+        [HttpGet("currentUser")]
+        public async Task<ActionResult<UserDTO>> GetCurrentUser()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            var userBasket = await RetrieveBasket(User.Identity.Name);
+
+            return new UserDTO
+            {
+                Email = user.Email,
+                Token = await _tokenService.GenerateToken(user),
+                Basket = userBasket?.MapBasketToDto(),
+                Username = user.UserName,
+            };
+        }
+
+        private async Task<Basket> RetrieveBasket(string buyerId)
+        {
+            if (string.IsNullOrEmpty(buyerId))
+            {
+                Response.Cookies.Delete("buyerId");
+                return null;
+            }
+
+            return await _context.Baskets
+                .Include(i => i.Items)
+                .ThenInclude(p => p.Product)
+                .FirstOrDefaultAsync(x => x.BuyerId == buyerId);
+        }
+        [Authorize]
+        [HttpGet("savedAddress")]
+        public async Task<ActionResult<UserAddress>> GetSavedAddress()
+        {
+            return await _userManager.Users
+                .Where(x => x.UserName == User.Identity.Name)
+                .Select(user => user.Address)
+                .FirstOrDefaultAsync();
+        }
+    }
 }

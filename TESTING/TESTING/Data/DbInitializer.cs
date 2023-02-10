@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using TESTING.Migrations;
+
 using TESTING.Model;
 
 namespace TESTING.Data
