@@ -12,5 +12,7 @@ namespace TESTING.Model
         public decimal Amount { get; set; }
         
         public Customer? Customer { get; set; }
+
+
     }
 }

@@ -46,10 +46,16 @@ const Account = {
     currentUser: () => requests.get('Account/getUser'),
     getAll: () => requests.get('Account/getAllUsers'),
 }
+
+const Payments = {
+    createPaymentIntent: () => requests.post('payments', {})
+}
+
 const agent = {
     Catalog,
     Account,
-    Basket
+    Basket,
+    Payments
 }
 
 export default agent

@@ -13,9 +13,9 @@ namespace TESTING.Controllers
     public class AccountController : BaseApiController
     {
         private readonly UserManager<User> _userManager;
-        private readonly TokenService _tokenService;
+        private readonly TokenServices _tokenService;
 
-        public AccountController(UserManager<User> userManager, TokenService tokenService)
+        public AccountController(UserManager<User> userManager, TokenServices tokenService)
         {
             _userManager = userManager;
             _tokenService = tokenService;

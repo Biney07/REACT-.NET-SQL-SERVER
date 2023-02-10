@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using TESTING.Services;
 using Microsoft.OpenApi.Models;
+using API.Services;
+using Stripe;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -98,7 +100,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
     );
 builder.Services.AddAuthorization();
-builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<TokenServices>();
+builder.Services.AddScoped<PaymentService>();
 var app = builder.Build();
 
 
