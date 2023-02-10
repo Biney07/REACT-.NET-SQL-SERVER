@@ -18,5 +18,13 @@ namespace TESTING.Model
         {
             return Subtotal + DeliveryFee;
         }
+        public int CustomerId { get; set; }
+        public string Number { get; set; }
+        public DateTime Date { get; set; }
+        public decimal Amount { get; set; }
+        
+        public Customer? Customer { get; set; }
+
+
     }
 }

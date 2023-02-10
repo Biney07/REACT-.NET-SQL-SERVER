@@ -7,12 +7,12 @@ using TESTING.Model;
 
 namespace TESTING.Services
 {
-    public class TokenService
+    public class TokenServices
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
 
-        public TokenService(UserManager<User> userManager, IConfiguration configuration)
+        public TokenServices(UserManager<User> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
