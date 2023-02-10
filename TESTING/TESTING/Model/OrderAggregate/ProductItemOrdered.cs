@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
-namespace TESTING.Model
+namespace TESTING.Model.OrderAggregate
 {
     [Owned]
     public class ProductItemOrdered
     {
-        public int ProductId { get; set; }
+        public int ProductId { get; set; }       
         public string Name { get; set; }
         public string PictureUrl { get; set; }
     }

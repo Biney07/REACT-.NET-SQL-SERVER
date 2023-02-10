@@ -1,4 +1,4 @@
-﻿namespace TESTING.Model
+namespace TESTING.Model.OrderAggregate
 {
     public class OrderItem
     {

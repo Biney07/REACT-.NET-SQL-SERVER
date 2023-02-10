@@ -15,10 +15,10 @@ namespace TESTING.Controllers
     public class AccountController : BaseApiController
     {
         private readonly UserManager<User> _userManager;
-        private readonly TokenService _tokenService;
+        private readonly TokenServices _tokenService;
         private readonly AppDbContext _context;
 
-        public AccountController(UserManager<User> userManager, TokenService tokenService,AppDbContext context)
+        public AccountController(UserManager<User> userManager, TokenServices tokenService,AppDbContext context)
         {
             _userManager = userManager;
             _tokenService = tokenService;

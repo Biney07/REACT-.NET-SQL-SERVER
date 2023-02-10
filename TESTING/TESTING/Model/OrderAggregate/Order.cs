@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using TESTING.DTO;
+using System;
+using System.Collections.Generic;
 
-namespace TESTING.Model
+namespace TESTING.Model.OrderAggregate
 {
     public class Order
     {
@@ -13,18 +13,11 @@ namespace TESTING.Model
         public long Subtotal { get; set; }
         public long DeliveryFee { get; set; }
         public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
-
+        public string PaymentIntentId { get; set; }
+        
         public long GetTotal()
         {
             return Subtotal + DeliveryFee;
         }
-        public int CustomerId { get; set; }
-        public string Number { get; set; }
-        public DateTime Date { get; set; }
-        public decimal Amount { get; set; }
-        
-        public Customer? Customer { get; set; }
-
-
     }
 }
