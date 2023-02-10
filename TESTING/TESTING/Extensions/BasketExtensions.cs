@@ -4,7 +4,7 @@ using TESTING.Model;
 using TESTING.DTO;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Extensions
+namespace TESTING.Extensions
 {
     public static class BasketExtensions
     {

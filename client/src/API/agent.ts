@@ -62,7 +62,7 @@ const agent = {
     Account,
     Basket,
     Orders,
-    Payments
+    Payments,
 }
 
 export default agent

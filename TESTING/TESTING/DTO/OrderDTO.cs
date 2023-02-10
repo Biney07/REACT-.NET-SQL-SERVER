@@ -1,4 +1,6 @@
-﻿namespace TESTING.DTO
+﻿using TESTING.Model.OrderAggregate;
+
+namespace TESTING.DTO
 {
     public class OrderDTO
     {

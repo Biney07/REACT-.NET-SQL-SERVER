@@ -1,10 +1,11 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TESTING.Model;
 
-namespace TESTING.Model.OrderAggregate   
+namespace TESTING.Model.OrderAggregate
 {
     [Owned]
     public class ShippingAddress : Address
     {
-        
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using TESTING.DTO;
-using TESTING.Model;
+using TESTING.Model.OrderAggregate;
 
 namespace TESTING.Extensions
 {

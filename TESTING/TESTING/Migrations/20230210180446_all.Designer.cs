@@ -12,7 +12,7 @@ using TESTING.Data;
 namespace TESTING.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230210132810_all")]
+    [Migration("20230210180446_all")]
     partial class all
     {
         /// <inheritdoc />
@@ -140,6 +140,12 @@ namespace TESTING.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ClientSecret")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Baskets");
@@ -188,7 +194,7 @@ namespace TESTING.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("TESTING.Model.Order", b =>
+            modelBuilder.Entity("TESTING.Model.OrderAggregate.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -209,6 +215,9 @@ namespace TESTING.Migrations
                     b.Property<int>("OrderStatus")
                         .HasColumnType("int");
 
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<long>("Subtotal")
                         .HasColumnType("bigint");
 
@@ -217,7 +226,7 @@ namespace TESTING.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("TESTING.Model.OrderItem", b =>
+            modelBuilder.Entity("TESTING.Model.OrderAggregate.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -313,14 +322,14 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "fb4d9d9a-2ce8-4b18-ba8f-f07ded5b196c",
+                            ConcurrencyStamp = "9b679df4-ab72-45c5-b1e4-0045779fa5bc",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "85102c52-3954-48a8-99e5-4ff7dc891d83",
+                            ConcurrencyStamp = "112e8d92-75ca-4b05-b3cf-964796aa5cbc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -502,9 +511,9 @@ namespace TESTING.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("TESTING.Model.Order", b =>
+            modelBuilder.Entity("TESTING.Model.OrderAggregate.Order", b =>
                 {
-                    b.OwnsOne("TESTING.DTO.ShippingAddress", "ShippingAddress", b1 =>
+                    b.OwnsOne("TESTING.Model.OrderAggregate.ShippingAddress", "ShippingAddress", b1 =>
                         {
                             b1.Property<int>("OrderId")
                                 .HasColumnType("int");
@@ -549,13 +558,13 @@ namespace TESTING.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TESTING.Model.OrderItem", b =>
+            modelBuilder.Entity("TESTING.Model.OrderAggregate.OrderItem", b =>
                 {
-                    b.HasOne("TESTING.Model.Order", null)
+                    b.HasOne("TESTING.Model.OrderAggregate.Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId");
 
-                    b.OwnsOne("TESTING.Model.ProductItemOrdered", "ItemOrdered", b1 =>
+                    b.OwnsOne("TESTING.Model.OrderAggregate.ProductItemOrdered", "ItemOrdered", b1 =>
                         {
                             b1.Property<int>("OrderItemId")
                                 .HasColumnType("int");
@@ -597,7 +606,7 @@ namespace TESTING.Migrations
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("TESTING.Model.Order", b =>
+            modelBuilder.Entity("TESTING.Model.OrderAggregate.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });

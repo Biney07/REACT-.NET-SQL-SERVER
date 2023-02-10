@@ -5,7 +5,7 @@ using TESTING.Model;
 using Microsoft.Extensions.Configuration;
 using Stripe;
 
-namespace API.Services
+namespace TESTING.Services
 {
     public class PaymentService
     {

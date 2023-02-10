@@ -21,6 +21,7 @@ import BasketPage from "./Components/BasketComponets/BasketPage";
 import { fetchBasketAsync, setBasket } from "./Components/BasketComponets/basketSlice";
 import CheckoutPage from "./Pages/Checkout/CheckoutPage";
 import agent from './API/agent';
+import CheckoutWrapper from './Pages/Checkout/CheckoutWrapper';
 
 
 
@@ -68,7 +69,7 @@ export default function App() {
         <Route exact path='/catalog' component={Catalog} />
         <Route path='/catalog/:id' component={ProductDetails} />
         <PrivateRoute path='/onlyloggedin' component={LoggedInCanSee} />
-        <PrivateRoute path='/checkout' component={CheckoutPage} />
+        <PrivateRoute path='/checkout' component={CheckoutWrapper} />
         <PrivateRoute path='/orders' component={Orders} />
         <Route path={"/Order"}>
           <Orders />

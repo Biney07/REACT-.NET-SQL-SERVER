@@ -60,7 +60,9 @@ namespace TESTING.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuyerId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BuyerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClientSecret = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -97,7 +99,8 @@ namespace TESTING.Migrations
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Subtotal = table.Column<long>(type: "bigint", nullable: false),
                     DeliveryFee = table.Column<long>(type: "bigint", nullable: false),
-                    OrderStatus = table.Column<int>(type: "int", nullable: false)
+                    OrderStatus = table.Column<int>(type: "int", nullable: false),
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -308,8 +311,8 @@ namespace TESTING.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "fb4d9d9a-2ce8-4b18-ba8f-f07ded5b196c", "Member", "MEMBER" },
-                    { 2, "85102c52-3954-48a8-99e5-4ff7dc891d83", "Admin", "ADMIN" }
+                    { 1, "9b679df4-ab72-45c5-b1e4-0045779fa5bc", "Member", "MEMBER" },
+                    { 2, "112e8d92-75ca-4b05-b3cf-964796aa5cbc", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

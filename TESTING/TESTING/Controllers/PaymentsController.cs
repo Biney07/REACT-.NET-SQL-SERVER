@@ -7,22 +7,24 @@ using TESTING.Data;
 using TESTING.DTO;
 using TESTING.Model;
 //using TESTING.Model.OrderAggregate;
-using API.Extensions;
+using TESTING.Extensions;
 using TESTING.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Stripe;
+using TESTING.Model.OrderAggregate;
+//using API.Services;
 
 namespace TESTING.Controllers
 {
     public class PaymentsController : BaseApiController
     {
         private readonly PaymentService _paymentService;
-        private readonly StoreContext _context;
+        private readonly AppDbContext _context;
         private readonly IConfiguration _config;
-        public PaymentsController(PaymentService paymentService, StoreContext context, IConfiguration config)
+        public PaymentsController(PaymentService paymentService, AppDbContext context, IConfiguration config)
         {
             _config = config;
             _context = context;
@@ -55,24 +57,24 @@ namespace TESTING.Controllers
             return basket.MapBasketToDto();
         }
 
-        [HttpPost("webhook")]
-        public async Task<ActionResult> StripeWebhook()
-        {
-            var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
+        //[HttpPost("webhook")]
+        //public async Task<ActionResult> StripeWebhook()
+        //{
+        //    var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
 
-            var stripeEvent = EventUtility.ConstructEvent(json, Request.Headers["Stripe-Signature"],
-                _config["StripeSettings:WhSecret"]);
+        //    var stripeEvent = EventUtility.ConstructEvent(json, Request.Headers["Stripe-Signature"],
+        //        _config["StripeSettings:WhSecret"]);
 
-            var charge = (Charge)stripeEvent.Data.Object;
+        //    var charge = (Charge)stripeEvent.Data.Object;
 
-            var order = await _context.Orders.FirstOrDefaultAsync(x => 
-                x.PaymentIntentId == charge.PaymentIntentId);
+        //    var order = await _context.Orders.FirstOrDefaultAsync(x => 
+        //        x.PaymentIntentId == charge.PaymentIntentId);
 
-            if (charge.Status == "succeeded") order.OrderStatus = OrderStatus.PaymentReceived;
+        //    if (charge.Status == "succeeded") order.OrderStatus = OrderStatus.PaymentReceived;
 
-            await _context.SaveChangesAsync();
+        //    await _context.SaveChangesAsync();
 
-            return new EmptyResult();
-        }
+        //    return new EmptyResult();
+        //}
     }
 }

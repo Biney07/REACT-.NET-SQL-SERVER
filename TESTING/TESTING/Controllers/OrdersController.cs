@@ -10,6 +10,7 @@ using TESTING.Data;
 using TESTING.DTO;
 using TESTING.Extensions;
 using TESTING.Model;
+using TESTING.Model.OrderAggregate;
 
 namespace API.Controllers
 {
@@ -79,8 +80,8 @@ namespace API.Controllers
                 OrderItems = items,
                 BuyerId = User.Identity.Name,
                 ShippingAddress = orderDTO.ShippingAddress,
-                Subtotal = subtotal,
-                DeliveryFee = deliveryFee
+                DeliveryFee = deliveryFee,
+                PaymentIntentId = basket.PaymentIntentId
             };
 
             _context.Orders.Add(order);
