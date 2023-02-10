@@ -68,21 +68,6 @@ namespace TESTING.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
                 {
@@ -93,6 +78,30 @@ namespace TESTING.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Images", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BuyerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShippingAddressFullName = table.Column<string>(name: "ShippingAddress_FullName", type: "nvarchar(max)", nullable: false),
+                    ShippingAddressAddress1 = table.Column<string>(name: "ShippingAddress_Address1", type: "nvarchar(max)", nullable: false),
+                    ShippingAddressAddress2 = table.Column<string>(name: "ShippingAddress_Address2", type: "nvarchar(max)", nullable: false),
+                    ShippingAddressCity = table.Column<string>(name: "ShippingAddress_City", type: "nvarchar(max)", nullable: false),
+                    ShippingAddressState = table.Column<string>(name: "ShippingAddress_State", type: "nvarchar(max)", nullable: false),
+                    ShippingAddressZip = table.Column<string>(name: "ShippingAddress_Zip", type: "nvarchar(max)", nullable: false),
+                    ShippingAddressCountry = table.Column<string>(name: "ShippingAddress_Country", type: "nvarchar(max)", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Subtotal = table.Column<long>(type: "bigint", nullable: false),
+                    DeliveryFee = table.Column<long>(type: "bigint", nullable: false),
+                    OrderStatus = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,24 +121,6 @@ namespace TESTING.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailAdress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -263,32 +254,25 @@ namespace TESTING.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "OrderItem",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuyerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShippingAddressFullName = table.Column<string>(name: "ShippingAddress_FullName", type: "nvarchar(max)", nullable: false),
-                    ShippingAddressAddress1 = table.Column<string>(name: "ShippingAddress_Address1", type: "nvarchar(max)", nullable: false),
-                    ShippingAddressAddress2 = table.Column<string>(name: "ShippingAddress_Address2", type: "nvarchar(max)", nullable: false),
-                    ShippingAddressCity = table.Column<string>(name: "ShippingAddress_City", type: "nvarchar(max)", nullable: false),
-                    ShippingAddressState = table.Column<string>(name: "ShippingAddress_State", type: "nvarchar(max)", nullable: false),
-                    ShippingAddressZip = table.Column<string>(name: "ShippingAddress_Zip", type: "nvarchar(max)", nullable: false),
-                    ShippingAddressCountry = table.Column<string>(name: "ShippingAddress_Country", type: "nvarchar(max)", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Subtotal = table.Column<long>(type: "bigint", nullable: false),
-                    DeliveryFee = table.Column<long>(type: "bigint", nullable: false),
-                    OrderStatus = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true)
+                    ItemOrderedProductId = table.Column<int>(name: "ItemOrdered_ProductId", type: "int", nullable: false),
+                    ItemOrderedName = table.Column<string>(name: "ItemOrdered_Name", type: "nvarchar(max)", nullable: false),
+                    ItemOrderedPictureUrl = table.Column<string>(name: "ItemOrdered_PictureUrl", type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<long>(type: "bigint", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.PrimaryKey("PK_OrderItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Customer_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customer",
+                        name: "FK_OrderItem_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
                         principalColumn: "Id");
                 });
 
@@ -319,36 +303,13 @@ namespace TESTING.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "OrderItem",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemOrderedProductId = table.Column<int>(name: "ItemOrdered_ProductId", type: "int", nullable: false),
-                    ItemOrderedName = table.Column<string>(name: "ItemOrdered_Name", type: "nvarchar(max)", nullable: false),
-                    ItemOrderedPictureUrl = table.Column<string>(name: "ItemOrdered_PictureUrl", type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<long>(type: "bigint", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderItem", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_OrderItem_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "d89fde50-94e2-45c9-b543-4a9db168b08c", "Member", "MEMBER" },
-                    { 2, "2eee421e-9357-440f-9424-a0eaa3280dac", "Admin", "ADMIN" }
+                    { 1, "fb4d9d9a-2ce8-4b18-ba8f-f07ded5b196c", "Member", "MEMBER" },
+                    { 2, "85102c52-3954-48a8-99e5-4ff7dc891d83", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -404,11 +365,6 @@ namespace TESTING.Migrations
                 name: "IX_OrderItem_OrderId",
                 table: "OrderItem",
                 column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_CustomerId",
-                table: "Orders",
-                column: "CustomerId");
         }
 
         /// <inheritdoc />
@@ -442,9 +398,6 @@ namespace TESTING.Migrations
                 name: "UserAddress");
 
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -458,9 +411,6 @@ namespace TESTING.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Customer");
         }
     }
 }

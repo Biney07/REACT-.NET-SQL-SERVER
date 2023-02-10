@@ -125,37 +125,6 @@ namespace TESTING.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TESTING.Data.Useri", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("EmailAdress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("TESTING.Model.Basket", b =>
                 {
                     b.Property<int>("Id")
@@ -199,31 +168,6 @@ namespace TESTING.Migrations
                     b.ToTable("BasketItems");
                 });
 
-            modelBuilder.Entity("TESTING.Model.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customer");
-                });
-
             modelBuilder.Entity("TESTING.Model.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -249,11 +193,9 @@ namespace TESTING.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BuyerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("BuyerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("DeliveryFee")
                         .HasColumnType("bigint");
@@ -268,8 +210,6 @@ namespace TESTING.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -370,14 +310,14 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "979f6255-7c8f-4020-ba5f-542b49301dc4",
+                            ConcurrencyStamp = "fb4d9d9a-2ce8-4b18-ba8f-f07ded5b196c",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "9ca50492-5188-4bc6-8c5b-cc45fcc7cb7b",
+                            ConcurrencyStamp = "85102c52-3954-48a8-99e5-4ff7dc891d83",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -561,10 +501,6 @@ namespace TESTING.Migrations
 
             modelBuilder.Entity("TESTING.Model.Order", b =>
                 {
-                    b.HasOne("TESTING.Model.Customer", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId");
-
                     b.OwnsOne("TESTING.DTO.ShippingAddress", "ShippingAddress", b1 =>
                         {
                             b1.Property<int>("OrderId")
@@ -656,11 +592,6 @@ namespace TESTING.Migrations
             modelBuilder.Entity("TESTING.Model.Basket", b =>
                 {
                     b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("TESTING.Model.Customer", b =>
-                {
-                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("TESTING.Model.Order", b =>

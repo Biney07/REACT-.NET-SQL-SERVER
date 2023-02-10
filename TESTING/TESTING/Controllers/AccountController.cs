@@ -37,6 +37,7 @@ namespace TESTING.Controllers
                     Email = user.Email,
                     Username = user.UserName,
                     Token = await _tokenService.GenerateToken(user)
+
                 });
             }
             return userDtos;
@@ -64,7 +65,9 @@ namespace TESTING.Controllers
             {
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user),
+                Username = user.UserName,
                 Basket = anonBasket != null ? anonBasket.MapBasketToDto() : userBasket?.MapBasketToDto()
+       
             };
         }
 

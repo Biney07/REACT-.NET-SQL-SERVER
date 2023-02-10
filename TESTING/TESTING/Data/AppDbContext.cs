@@ -17,10 +17,8 @@ namespace TESTING.Data
         {
 
         }
-        public DbSet<Useri> Users { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Basket> Baskets { get; set; }
 
@@ -40,7 +38,7 @@ namespace TESTING.Data
                     new Role { Id = 2, Name = "Admin", NormalizedName = "ADMIN" });
         }
        
-        public DbSet<TESTING.Model.Customer> Customer { get; set; }
+      
 
 
 

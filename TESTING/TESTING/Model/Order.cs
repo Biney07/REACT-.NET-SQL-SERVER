@@ -6,7 +6,7 @@ namespace TESTING.Model
     public class Order
     {
         public int Id { get; set; }
-        public int BuyerId { get; set; }
+        public string BuyerId { get; set; }
         public ShippingAddress ShippingAddress { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public List<OrderItem> OrderItems { get; set; }
