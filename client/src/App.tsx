@@ -11,7 +11,7 @@ import Home from './Pages/Home';
 import FileUpload from './Pages/FileUpload';
 import Register from './Pages/Account/Register';
 import { fetchCurrentUser } from './Pages/Account/accountSlice';
-import Orders from './TEST/Orders';
+// import Orders from './TEST/Orders';
 import CreateOrder from './TEST/CreateOrder';
 import LoggedInCanSee from './Components/OnlyLoggedInCanSee';
 import PrivateRoute from './Components/PrivateRoute';
@@ -22,6 +22,7 @@ import { fetchBasketAsync, setBasket } from "./Components/BasketComponets/basket
 import CheckoutPage from "./Pages/Checkout/CheckoutPage";
 import agent from './API/agent';
 import CheckoutWrapper from './Pages/Checkout/CheckoutWrapper';
+import Orders from './Pages/Order/Order';
 
 
 

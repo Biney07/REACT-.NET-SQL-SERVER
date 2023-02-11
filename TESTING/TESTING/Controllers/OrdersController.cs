@@ -78,6 +78,7 @@ namespace API.Controllers
             var order = new Order
             {
                 OrderItems = items,
+                Subtotal = subtotal,
                 BuyerId = User.Identity.Name,
                 ShippingAddress = orderDTO.ShippingAddress,
                 DeliveryFee = deliveryFee,
