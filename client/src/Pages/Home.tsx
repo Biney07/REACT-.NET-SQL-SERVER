@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import Card from "../Components/Card";
+import Photo from "./Photo";
 import Post from "./post";
 
 
@@ -27,7 +28,7 @@ const Home: React.FC = () => {
     return (
         <>
         <div>
-            
+            <Photo/>
       
             <div style={{ margin: '51px', display: 'flex', flexDirection: 'row', flexWrap: "wrap", alignItems: "flex-start" }}>
              {data.map(item => (

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TESTING.Data;
 
@@ -11,9 +12,11 @@ using TESTING.Data;
 namespace TESTING.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230210142729_imageproductupload")]
+    partial class imageproductupload
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,14 +317,14 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "1b9d3a0a-0432-4321-ad3d-e9b9aaf71447",
+                            ConcurrencyStamp = "58186d20-21e6-4c39-bc43-87c81cdff6bf",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "18f17335-2ca0-43a4-991a-c33f07ec32b9",
+                            ConcurrencyStamp = "9728c8c8-6be2-46a5-a8b0-0122fadc2bf3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
