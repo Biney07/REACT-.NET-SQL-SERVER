@@ -1,13 +1,14 @@
 using System.Text.Json;
 using TESTING.Model;
+using TESTING.RequestHelpers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.CodeAnalysis;
+//using Microsoft.CodeAnalysis;
 
-namespace API.Extensions
+namespace TESTING.Extensions
 {
     public static class HttpExtensions
     {
-        public static void AddPaginationHeader(this HttpResponse response, Metadata metaData)
+        public static void AddPaginationHeader(this HttpResponse response, MetaData metaData)
         {
             var options = new JsonSerializerOptions{PropertyNamingPolicy = JsonNamingPolicy.CamelCase};
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TESTING.Model;
 
-namespace API.Extensions
+namespace TESTING.Extensions        
 {
     public static class ProductExtensions
     {

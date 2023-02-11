@@ -22,7 +22,7 @@ namespace TESTING.Data
                         Name = "Levrone Anabolic Double Impact 2kg",
                         Description =
                         "sit amet commodo magna eros quis urna.",
-                        Price = 60,
+                        Price = 6000,
                         PictureUrl = "https://levrosupplements.com/856-large_default/levrone-anabolic-double-impact-2kg.jpg",
                         Brand = "Kevin Levrone Black Series",
                         Type = "Anabolic Protein",
@@ -33,7 +33,7 @@ namespace TESTING.Data
                 {
                     Name = "Green Angular Board 3000",
                     Description = "Ma e mira ne bote.",
-                    Price = 20,
+                    Price = 2000,
                     PictureUrl = "https://levrosupplements.com/878-large_default/levrone-anabolic-creatine-300g.jpg",
                     Brand = "Bad Ass",
                     Type = "Creatine",
