@@ -40,7 +40,7 @@ namespace TESTING.Services
 
                 );
 
-            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);  
+            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
     }
 }

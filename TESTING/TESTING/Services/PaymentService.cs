@@ -1,3 +1,4 @@
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,11 +33,11 @@ namespace TESTING.Services
                 {
                     Amount = subtotal + deliveryFee,
                     Currency = "usd",
-                    PaymentMethodTypes = new List<string> {"card"}
+                    PaymentMethodTypes = new List<string> { "card" }
                 };
                 intent = await service.CreateAsync(options);
-            } 
-            else 
+            }
+            else
             {
                 var options = new PaymentIntentUpdateOptions
                 {

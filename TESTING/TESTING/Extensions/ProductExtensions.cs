@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using TESTING.Model;
 
-namespace TESTING.Extensions        
+namespace TESTING.Extensions
 {
     public static class ProductExtensions
     {
         public static IQueryable<Product> Sort(this IQueryable<Product> query, string orderBy)
         {
-            if (string.IsNullOrEmpty(orderBy)) return query.OrderBy(p => p.Name); 
+            if (string.IsNullOrEmpty(orderBy)) return query.OrderBy(p => p.Name);
 
             query = orderBy switch
             {
