@@ -85,6 +85,7 @@ export default function CheckoutPage() {
             console.log(paymentResult);
             if (paymentResult.paymentIntent?.status === 'succeeded') {
                 const orderNumber = await agent.Orders.create({ saveAddress, shippingAddress });
+                
                 setOrderNumber(orderNumber);
                 setPaymentSucceeded(true);
                 setPaymentMessage('Thank you - we have received your payment');

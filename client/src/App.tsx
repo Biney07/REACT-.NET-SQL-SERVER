@@ -5,9 +5,9 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom'
 import LoadingComponent from './Components/LoadingComponent';
 import { useAppDispatch } from './Store/hook';
-import Navbar from './Components/Navbar';
+import Navbar from './Components/Navbar/Navbar';
 import LogIn from './Pages/Account/LogIn';
-import Home from './Pages/Home';
+import Home from './Pages/Home/Home';
 import FileUpload from './Pages/FileUpload';
 import Register from './Pages/Account/Register';
 import { fetchCurrentUser } from './Pages/Account/accountSlice';

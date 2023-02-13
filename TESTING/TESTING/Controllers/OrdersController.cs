@@ -11,6 +11,7 @@ using TESTING.DTO;
 //using TESTING.Extensions;
 using TESTING.Model;
 using TESTING.Model.OrderAggregate;
+using System.Net.Mail;
 
 namespace API.Controllers
 {
@@ -73,7 +74,7 @@ namespace API.Controllers
             }
 
             var subtotal = items.Sum(item => item.Price * item.Quantity);
-            var deliveryFee = subtotal > 10000 ? 0 : 500;
+            var deliveryFee = subtotal > 50 ? 0 : 20;
 
             var order = new Order
             {
@@ -108,6 +109,47 @@ namespace API.Controllers
             }
 
             var result = await _context.SaveChangesAsync() > 0;
+            try {
+                var user = await _context.Users
+    .FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
+
+                var email = user.Email;
+
+                using (MailMessage mail = new MailMessage())
+                {
+                    mail.From = new MailAddress("nftkosova@gmail.com");
+                    mail.To.Add(email);
+                    mail.Subject = "Order Confirmation";
+                    string emailBody = "Dear " + User.Identity.Name + ", \n\n";
+                    emailBody += "Thank you for placing an order with us. Your order details are as follows:\n\n";
+                    emailBody += "Order Number: " + order.Id + "\n";
+                    emailBody += "Items Purchased:\n";
+                    foreach (var orderItem in order.OrderItems)
+                    {
+                        emailBody += "- " + orderItem.ItemOrdered.Name + ", Quantity: " + orderItem.Quantity + ", Price: " + orderItem.Price + "\n";
+                    }
+                    emailBody += "Subtotal: " + order.Subtotal + "\n";
+                    emailBody += "Delivery Fee: " + order.DeliveryFee + " EURO \n";
+                    emailBody += "Total: " + order.GetTotal() + " EURO \n\n";
+                    emailBody += "Shipping Address:\n";
+                    emailBody += "State: " + order.ShippingAddress.State + ", ";
+                    emailBody += "Country: " + order.ShippingAddress.Country + "\n";
+                    emailBody += "Address 1: " + order.ShippingAddress.Address1 + "\n";
+                    emailBody += "\nThank you for your business!\n\nBest regards,\n NFT KOSOVA";
+                    mail.Body = emailBody;
+                    mail.IsBodyHtml = false;
+                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    {
+                        smtp.Credentials = new System.Net.NetworkCredential("nftkosova@gmail.com", "sfozefnhclxwfvkm");
+                        smtp.EnableSsl = true;
+                        await smtp.SendMailAsync(mail);
+                    }
+                }
+            }
+            catch
+            {
+                // Log error message or display error message to user
+            }
 
             if (result) return CreatedAtRoute("GetOrder", new { id = order.Id }, order.Id);
 

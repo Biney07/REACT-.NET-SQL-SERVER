@@ -1,0 +1,60 @@
+
+.container {
+    position: relative;
+    margin-top: 150px;
+    color: var(--green-400);
+    margin-left: 70px;
+}
+
+
+.SubTitle::before {
+ 
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -70px;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 2px;
+    background-color: var(--green-400);
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.Title{
+color: var(--green-white-100);
+white-space: pre-line;
+    font-size: 2.8rem;
+   
+    font-weight: bolder;
+    line-height: 50px;
+    white-space: pre-line;
+    margin: 0px;
+}
+.paragraf {
+
+    content: '';
+ 
+    color: lighten(var(--green-300), 20%);
+    
+    margin-top: 19px;
+}
+.img {
+    border-radius: 10%;
+    height: 195px;
+    margin: 7px 20px;
+
+}
+.image-container{
+    display: flex;
+        margin-left: 80px;
+}
+.column{
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 46%;
+                flex-direction: column;
+        
+}

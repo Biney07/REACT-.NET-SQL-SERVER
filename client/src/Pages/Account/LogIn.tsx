@@ -8,7 +8,7 @@ import { FieldValues } from 'react-hook-form/dist/types';
 import { Box, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
-
+import back from './skenderbeu.png'
 
 
 export default function LogIn() {
@@ -36,8 +36,8 @@ export default function LogIn() {
     return (
         <>
 
-
-            <div className="App d-flex justify-content-center m-5 ">
+        <img className='background' src={back}></img>
+            <div className="d-flex  m-5 m-3 ">
                 <div className="home w-25 p-3 m-5">
 
 
