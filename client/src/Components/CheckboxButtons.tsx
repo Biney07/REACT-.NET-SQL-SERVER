@@ -1,5 +1,7 @@
 import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 import { useState } from "react";
+import style from "./ProductComponets/ProductCard.module.css"
+
 
 interface Props {
     items: string[];
@@ -7,7 +9,7 @@ interface Props {
     onChange: (items: string[]) => void;
 }
 
-export default function CheckboxButtons({items, checked, onChange}: Props) {
+export default function CheckboxButtons({ items, checked, onChange }: Props) {
     const [checkedItems, setCheckedItems] = useState(checked || []);
 
     function handleChecked(value: string) {
@@ -20,15 +22,17 @@ export default function CheckboxButtons({items, checked, onChange}: Props) {
     }
 
     return (
-        <FormGroup>
+
+        <FormGroup >
             {items.map(item => (
-                <FormControlLabel 
-                    control={<Checkbox 
+                <FormControlLabel className={style.radio_button}
+
+                    control={<Checkbox
                         checked={checkedItems.indexOf(item) !== -1}
                         onClick={() => handleChecked(item)}
-                    />} 
-                    label={item} 
-                    key={item} 
+                    />}
+                    label={item}
+                    key={item}
                 />
             ))}
         </FormGroup>

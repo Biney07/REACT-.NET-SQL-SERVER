@@ -1,12 +1,14 @@
 import { TextField } from "@mui/material";
 import { useController, UseControllerProps } from "react-hook-form";
+import style from "./ProductComponets/ProductCard.module.css"
+
 interface Props extends UseControllerProps {
     label: string;
 }
 export default function AppTextInput(props: Props) {
     const {fieldState, field} = useController({...props, defaultValue: ''})
     return (
-        <TextField 
+        <TextField className={style.form_control_label}
             {...props}
             {...field}
             fullWidth
