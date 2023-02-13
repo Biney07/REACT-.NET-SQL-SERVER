@@ -27,7 +27,9 @@ namespace TESTING.Data
                         Brand = "Kevin Levrone Black Series",
                         Type = "Anabolic Protein",
                         QuantityInStock = 50,
-                        
+                    CloudanaryPublicId =""
+
+
                     },
                 new Product
                 {
@@ -37,8 +39,9 @@ namespace TESTING.Data
                     PictureUrl = "https://levrosupplements.com/878-large_default/levrone-anabolic-creatine-300g.jpg",
                     Brand = "Bad Ass",
                     Type = "Creatine",
-                    QuantityInStock = 70
-                    
+                    QuantityInStock = 70,
+                    CloudanaryPublicId =""
+
                 }
 
                    });

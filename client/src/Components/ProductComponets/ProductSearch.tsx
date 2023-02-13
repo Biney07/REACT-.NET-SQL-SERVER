@@ -2,6 +2,8 @@ import { debounce, TextField } from "@mui/material";
 import { useState } from "react";
 import { setProductParams } from "../../Pages/Catalog/CatalogSlice";
 import { useAppDispatch, useAppSelector } from "../../Store/hook";
+import style from "./ProductCard.module.css"
+
 
 export default function ProductSearch() {
     const {productParams} = useAppSelector(state => state.catalog);
@@ -14,6 +16,7 @@ export default function ProductSearch() {
 
     return (
         <TextField
+        className={style.form_control_label}
             label='Search products'
             variant='outlined'
             fullWidth

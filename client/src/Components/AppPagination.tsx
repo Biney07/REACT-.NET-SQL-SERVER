@@ -1,6 +1,8 @@
 import { Typography, Pagination } from "@mui/material";
 import { Box } from "@mui/system";
 import { MetaData } from "../models/pagination";
+import style from "./ProductComponets/ProductCard.module.css"
+
 
 interface Props {
     metaData: MetaData;
@@ -18,7 +20,8 @@ export default function AppPagination({metaData, onPageChange}: Props) {
                     : currentPage*pageSize} of {totalCount} items
             </Typography>
             <Pagination
-                color='secondary'
+                className={style.form_control_label_button}
+                // color='secondary'
                 size='large'
                 count={totalPages}
                 page={currentPage}

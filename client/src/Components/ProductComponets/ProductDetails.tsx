@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../Store/hook";
 import { addBasketItemAsync } from "../BasketComponets/basketSlice";
 import { fetchProductAsync, productSelectors } from "../../Pages/Catalog/CatalogSlice";
 
+
 export default function ProductDetails() {
     const {basket, status} = useAppSelector(state => state.basket);
     const dispatch = useAppDispatch();  

@@ -8,6 +8,8 @@ import ProductSearch from "../../Components/ProductComponets/ProductSearch";
 import RadioButtonGroup from "../../Components/RadioButtonGroup";
 import { useAppDispatch, useAppSelector } from "../../Store/hook";
 import { fetchFilters, fetchProductsAsync, productSelectors, setPageNumber, setProductParams } from "./CatalogSlice";
+import style from "../../Components/ProductComponets/ProductCard.module.css"
+
 
 const sortOptions = [
     { value: 'name', label: 'Alphabetical' },
@@ -33,24 +35,24 @@ export default function Catalog() {
     return (
         <Grid container columnSpacing={4}>
             <Grid item xs={3}>
-                <Paper sx={{ mb: 2 }}>
+                <Paper className={style.form_control_label} sx={{ mb: 2 }}>
                     <ProductSearch />
                 </Paper>
-                <Paper sx={{ mb: 2, p: 2 }}>
+                <Paper className={style.form_control_label} sx={{ mb: 2, p: 2 }}>
                     <RadioButtonGroup
                         selectedValue={productParams.orderBy}
                         options={sortOptions}
                         onChange={(e) => dispatch(setProductParams({ orderBy: e.target.value }))}
                     />
                 </Paper>
-                <Paper sx={{ mb: 2, p: 2 }}>
+                <Paper className={style.form_control_label} sx={{ mb: 2, p: 2 }}>
                     <CheckboxButtons
                         items={brands}
                         checked={productParams.brands}
                         onChange={(items: string[]) => dispatch(setProductParams({ brands: items }))}
                     />
                 </Paper>
-                <Paper sx={{ mb: 2, p: 2 }}>
+                <Paper className={style.form_control_label} sx={{ mb: 2, p: 2 }}>
                     <CheckboxButtons
                         items={types}
                         checked={productParams.types}

@@ -1,4 +1,5 @@
 import { FormControl, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import style from "./ProductComponets/ProductCard.module.css"
 
 interface Props {
     options: any[];
@@ -6,12 +7,15 @@ interface Props {
     selectedValue: string;
 }
 
+
+
 export default function RadioButtonGroup({options, onChange, selectedValue}: Props) {
+   
     return (
-        <FormControl component="fieldset">
+        <FormControl component="fieldset" >
             <RadioGroup onChange={onChange} value={selectedValue}>
                 {options.map(({ value, label }) => (
-                    <FormControlLabel value={value} control={<Radio />} label={label} key={value} />
+                    <FormControlLabel className={style.radio_button} value={value} control={<Radio />} label={label} key={value} />
                 ))}
             </RadioGroup>
         </FormControl>

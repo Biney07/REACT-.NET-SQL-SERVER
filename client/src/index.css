@@ -1,3 +1,11 @@
+:root {
+  --white-100: #FFFFFF;
+  --dark-900: #09090A;
+  --dark-600: #808090;
+  --green-400: #00FF47;
+  --green-white-100: #C3EFC0;
+}
+
 body {
   background: var(--dark-900);
   margin: 0;
@@ -5,6 +13,8 @@ body {
    
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--dark-900);
+
 }
 html{
   font-family: 'Poppins', sans-serif !important;

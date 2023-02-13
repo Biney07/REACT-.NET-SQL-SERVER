@@ -1,5 +1,6 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { useController, UseControllerProps } from "react-hook-form"
+import style from "./ProductComponets/ProductCard.module.css"
 
 interface Props extends UseControllerProps {
     label: string;
@@ -10,6 +11,7 @@ export default function AppCheckbox(props: Props) {
     const {field} = useController({...props, defaultValue: false});
     return (
         <FormControlLabel 
+            className={style.form_control_label}
             control={
                 <Checkbox 
                     {...field}
