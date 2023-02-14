@@ -3,7 +3,7 @@ import {
     NavLink,
   } from "react-router-dom";
 import "./Sidebar.css"
-import logo from "../../../foto/logo.png";
+// import logo from "../../../foto/logo.png";
 
 
 export default function Sidebar() {
@@ -20,7 +20,7 @@ export default function Sidebar() {
                 <nav>
 
                     <div className="side-logo">
-                        <a href="/" style={{color: "white", textDecoration: "none"}}><img src={logo} alt="" />
+                        <a href="/" style={{color: "white", textDecoration: "none"}}><img  alt="no img" />
                         Martesa Jonë</a>
                     </div>
 

@@ -15,7 +15,7 @@ namespace TESTING.DTO
         public string Biografia { get; set; }
 
         
-        [DefaultValue(1)]
+        [DefaultValue(100)]
         public long Price { get; set; }
 
         [Required]

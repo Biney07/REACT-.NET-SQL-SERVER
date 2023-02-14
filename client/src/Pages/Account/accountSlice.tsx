@@ -19,6 +19,9 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
         try {
             const user = await agent.Account.login(data);
             console.log(user);
+            console.log(user.Id);
+            // console.log(user.Name);
+            console.log(user.roles);
             localStorage.setItem("user", JSON.stringify(user));
             console.log(localStorage.getItem("user"));
             return user;

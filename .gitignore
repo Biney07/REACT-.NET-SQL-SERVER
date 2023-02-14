@@ -40,3 +40,5 @@ TESTING/TESTING/bin/Debug/net6.0/TESTING.pdb
 TESTING/TESTING/bin/Debug/net6.0/TESTING.dll
 *.vsidx
 *.v2
+TESTING/.vs/TESTING/DesignTimeBuild/.dtbcache.v2
+TESTING/.vs/TESTING/v17/.suo

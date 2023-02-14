@@ -23,8 +23,9 @@ namespace TESTING.Data
         public DbSet<Banori> Banoret { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Sponzor> Sponzors { get; set; }
 
-      //to get the seed data
+        //to get the seed data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
