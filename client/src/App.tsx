@@ -16,7 +16,7 @@ import CreateOrder from './TEST/CreateOrder';
 import LoggedInCanSee from './Components/OnlyLoggedInCanSee';
 import PrivateRoute from './Components/PrivateRoute';
 import Catalog from './Pages/Catalog/Catalog';
-import ProductDetails from './Components/ProductComponets/ProductDetails';
+import BanoriDetails from './Components/BanoriComponets/BanoriDetails';
 import BasketPage from "./Components/BasketComponets/BasketPage";
 import { fetchBasketAsync, setBasket } from "./Components/BasketComponets/basketSlice";
 import CheckoutPage from "./Pages/Checkout/CheckoutPage";
@@ -68,7 +68,7 @@ export default function App() {
           <FileUpload />
         </Route>
         <Route exact path='/catalog' component={Catalog} />
-        <Route path='/catalog/:id' component={ProductDetails} />
+        <Route path='/catalog/:id' component={BanoriDetails} />
         <PrivateRoute path='/onlyloggedin' component={LoggedInCanSee} />
         <PrivateRoute path='/checkout' component={CheckoutWrapper} />
         <PrivateRoute path='/orders' component={Orders} />

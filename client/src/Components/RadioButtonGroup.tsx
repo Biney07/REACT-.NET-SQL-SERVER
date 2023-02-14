@@ -1,5 +1,5 @@
 import { FormControl, RadioGroup, FormControlLabel, Radio } from "@mui/material";
-import style from "./ProductComponets/ProductCard.module.css"
+import style from "./BanoriComponets/BanoriCard.module.css"
 
 interface Props {
     options: any[];

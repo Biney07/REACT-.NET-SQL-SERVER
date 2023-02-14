@@ -29,11 +29,11 @@ export const fetchBasketAsync = createAsyncThunk<Basket>(
     }
 )
 
-export const addBasketItemAsync = createAsyncThunk<Basket, {productId: number, quantity?: number}>(
+export const addBasketItemAsync = createAsyncThunk<Basket, {banoriId: number, quantity?: number}>(
     'basket/addBasketItemAsync',
-    async ({productId, quantity = 1}, thunkAPI) => {
+    async ({banoriId, quantity = 1}, thunkAPI) => {
         try {
-            return await agent.Basket.addItem(productId, quantity);
+            return await agent.Basket.addItem(banoriId, quantity);
         } catch (error: any) {
             return thunkAPI.rejectWithValue({error: error.data})
         }
@@ -41,11 +41,11 @@ export const addBasketItemAsync = createAsyncThunk<Basket, {productId: number, q
 )
 
 export const removeBasketItemAsync = createAsyncThunk<void, 
-    {productId: number, quantity: number, name?: string}>(
+    {banoriId: number, quantity: number, name?: string}>(
     'basket/removeBasketItemAsync',
-    async ({productId, quantity}, thunkAPI) => {
+    async ({banoriId, quantity}, thunkAPI) => {
         try {
-            await agent.Basket.removeItem(productId, quantity);
+            await agent.Basket.removeItem(banoriId, quantity);
         } catch (error: any) {
             return thunkAPI.rejectWithValue({error: error.data})
         }
@@ -65,14 +65,14 @@ export const basketSlice = createSlice({
     },
     extraReducers: (builder => {
         builder.addCase(addBasketItemAsync.pending, (state, action) => {
-            state.status = 'pendingAddItem' + action.meta.arg.productId;
+            state.status = 'pendingAddItem' + action.meta.arg.banoriId;
         });
         builder.addCase(removeBasketItemAsync.pending, (state, action) => {
-            state.status = 'pendingRemoveItem' + action.meta.arg.productId + action.meta.arg.name;
+            state.status = 'pendingRemoveItem' + action.meta.arg.banoriId + action.meta.arg.name;
         });
         builder.addCase(removeBasketItemAsync.fulfilled, (state, action) => {
-            const {productId, quantity} = action.meta.arg;
-            const itemIndex = state.basket?.items.findIndex(i => i.productId === productId);
+            const {banoriId, quantity} = action.meta.arg;
+            const itemIndex = state.basket?.items.findIndex(i => i.banoriId === banoriId);
             if (itemIndex === -1 || itemIndex === undefined) return;
             state.basket!.items[itemIndex].quantity -= quantity;
             if (state.basket?.items[itemIndex].quantity === 0) 

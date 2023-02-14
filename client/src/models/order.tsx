@@ -9,7 +9,7 @@ export interface ShippingAddress {
 }
 
 export interface OrderItem {
-    productId: number;
+    banoriId: number;
     name: string;
     pictureUrl: string;
     price: number;

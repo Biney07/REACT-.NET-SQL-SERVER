@@ -55,6 +55,26 @@ namespace TESTING.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Banoret",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Biografia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<long>(type: "bigint", nullable: false),
+                    PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    RelationshipStatus = table.Column<bool>(type: "bit", nullable: false),
+                    Profesioni = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CloudanaryPublicId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Banoret", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Baskets",
                 columns: table => new
                 {
@@ -105,25 +125,6 @@ namespace TESTING.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<long>(type: "bigint", nullable: false),
-                    PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QuantityInStock = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -257,12 +258,39 @@ namespace TESTING.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BasketItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    BanoriId = table.Column<int>(type: "int", nullable: false),
+                    BasketId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BasketItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BasketItems_Banoret_BanoriId",
+                        column: x => x.BanoriId,
+                        principalTable: "Banoret",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BasketItems_Baskets_BasketId",
+                        column: x => x.BasketId,
+                        principalTable: "Baskets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderItem",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemOrderedProductId = table.Column<int>(name: "ItemOrdered_ProductId", type: "int", nullable: false),
+                    ItemOrderedBanoriId = table.Column<int>(name: "ItemOrdered_BanoriId", type: "int", nullable: false),
                     ItemOrderedName = table.Column<string>(name: "ItemOrdered_Name", type: "nvarchar(max)", nullable: false),
                     ItemOrderedPictureUrl = table.Column<string>(name: "ItemOrdered_PictureUrl", type: "nvarchar(max)", nullable: false),
                     Price = table.Column<long>(type: "bigint", nullable: false),
@@ -279,40 +307,13 @@ namespace TESTING.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "BasketItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    BasketId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BasketItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BasketItems_Baskets_BasketId",
-                        column: x => x.BasketId,
-                        principalTable: "Baskets",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BasketItems_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "9b679df4-ab72-45c5-b1e4-0045779fa5bc", "Member", "MEMBER" },
-                    { 2, "112e8d92-75ca-4b05-b3cf-964796aa5cbc", "Admin", "ADMIN" }
+                    { 1, "01242a4d-4f92-4eb5-bcb0-3ea7f157778f", "Member", "MEMBER" },
+                    { 2, "57cfb530-eb33-47ad-bf85-ff62761f3425", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -355,14 +356,14 @@ namespace TESTING.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BasketItems_BanoriId",
+                table: "BasketItems",
+                column: "BanoriId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BasketItems_BasketId",
                 table: "BasketItems",
                 column: "BasketId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BasketItems_ProductId",
-                table: "BasketItems",
-                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItem_OrderId",
@@ -404,10 +405,10 @@ namespace TESTING.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Baskets");
+                name: "Banoret");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Baskets");
 
             migrationBuilder.DropTable(
                 name: "Orders");

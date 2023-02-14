@@ -22,7 +22,7 @@ namespace TESTING.Extensions
                     Total = order.GetTotal(),
                     OrderItems = order.OrderItems.Select(item => new OrderItemDTO
                     {
-                        ProductId = item.ItemOrdered.ProductId,
+                        BanoriId = item.ItemOrdered.BanoriId,
                         Name = item.ItemOrdered.Name,
                         PictureUrl = item.ItemOrdered.PictureUrl,
                         Price = item.Price,

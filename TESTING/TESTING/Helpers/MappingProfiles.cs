@@ -8,8 +8,8 @@ namespace TESTING.Helpers
     {
         public MappingProfiles()
         {
-            CreateMap<CreateProductDto, Product>();
-            CreateMap<UpdateProductDTO, Product>();
+            CreateMap<CreateBanoriDto, Banori>();
+            CreateMap<UpdateBanoriDTO, Banori>();
         }
     }
 }

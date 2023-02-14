@@ -18,20 +18,20 @@ namespace TESTING.Extensions
                 ClientSecret = basket.ClientSecret,
                 Items = basket.Items.Select(item => new BasketItemDto
                 {
-                    ProductId = item.ProductId,
-                    Name = item.Product.Name,
-                    Price = item.Product.Price,
-                    PictureUrl = item.Product.PictureUrl,
-                    Type = item.Product.Type,
-                    Brand = item.Product.Brand,
+                    BanoriId = item.BanoriId,
+                    Name = item.Banori.Name,
+                    Price = item.Banori.Price,
+                    PictureUrl = item.Banori.PictureUrl,
                     Quantity = item.Quantity
+
+
                 }).ToList()
             };
         }
 
         public static IQueryable<Basket> RetrieveBasketWithItems(this IQueryable<Basket> query, string buyerId)
         {
-            return query.Include(i => i.Items).ThenInclude(p => p.Product).Where(b => b.BuyerId == buyerId);
+            return query.Include(i => i.Items).ThenInclude(p => p.Banori).Where(b => b.BuyerId == buyerId);
         }
     }
 }

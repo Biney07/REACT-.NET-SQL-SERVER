@@ -120,7 +120,7 @@ namespace TESTING.Controllers
 
             return await _context.Baskets
                 .Include(i => i.Items)
-                .ThenInclude(p => p.Product)
+                .ThenInclude(p => p.Banori)
                 .FirstOrDefaultAsync(x => x.BuyerId == buyerId);
         }
         [Authorize]

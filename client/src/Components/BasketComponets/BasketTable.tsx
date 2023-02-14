@@ -19,7 +19,7 @@ export default function BasketTable({ items, isBasket = true }: Props) {
             <Table sx={{ minWidth: 650 }}>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Product</TableCell>
+                        <TableCell>Banori</TableCell>
                         <TableCell align="right">Price</TableCell>
                         <TableCell align="center">Quantity</TableCell>
                         <TableCell align="right">Subtotal</TableCell>
@@ -30,7 +30,7 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                 <TableBody>
                     {items.map(item => (
                         <TableRow
-                            key={item.productId}
+                            key={item.banoriId}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
@@ -43,8 +43,8 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                             <TableCell align="center">
                                 {isBasket &&
                                     <LoadingButton
-                                        loading={status === 'pendingRemoveItem' + item.productId + 'rem'}
-                                        onClick={() => dispatch(removeBasketItemAsync({ productId: item.productId, quantity: 1, name: 'rem' }))}
+                                        loading={status === 'pendingRemoveItem' + item.banoriId + 'rem'}
+                                        onClick={() => dispatch(removeBasketItemAsync({ banoriId: item.banoriId, quantity: 1, name: 'rem' }))}
                                         color='error'
                                     >
                                         <Remove />
@@ -52,8 +52,8 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                                 {item.quantity}
                                 {isBasket &&
                                     <LoadingButton
-                                        loading={status === 'pendingAddItem' + item.productId}
-                                        onClick={() => dispatch(addBasketItemAsync({ productId: item.productId }))}
+                                        loading={status === 'pendingAddItem' + item.banoriId}
+                                        onClick={() => dispatch(addBasketItemAsync({ banoriId: item.banoriId }))}
                                         color='secondary'
                                     >
                                         <Add />
@@ -63,8 +63,8 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                             {isBasket &&
                                 <TableCell align="right">
                                     <LoadingButton
-                                        loading={status === 'pendingRemoveItem' + item.productId + 'del'}
-                                        onClick={() => dispatch(removeBasketItemAsync({ productId: item.productId, quantity: item.quantity, name: 'del' }))}
+                                        loading={status === 'pendingRemoveItem' + item.banoriId + 'del'}
+                                        onClick={() => dispatch(removeBasketItemAsync({ banoriId: item.banoriId, quantity: item.quantity, name: 'del' }))}
                                         color='error'
                                     >
                                         <Delete />

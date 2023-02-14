@@ -20,7 +20,7 @@ namespace TESTING.Data
 
         }
         public DbSet<Image> Images { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Banori> Banoret { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Basket> Baskets { get; set; }
 

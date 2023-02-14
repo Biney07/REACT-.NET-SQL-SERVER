@@ -5,13 +5,15 @@ using Microsoft.AspNetCore.Http;
 
 namespace TESTING.DTO
 {
-    public class CreateProductDto
+    public class UpdateBanoriDTO
     {
+        [Key]
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
 
         [Required]
-        public string Description { get; set; }
+        public string Biografia { get; set; }
 
         [Required]
         [Range(100, Double.PositiveInfinity)]
@@ -19,16 +21,16 @@ namespace TESTING.DTO
 
         [Required]
         public IFormFile File { get; set; }
+        [Required]
+        public bool RelationshipStatus { get; set; }
+        [Required]
+        public int Age { get; set; }
+
 
         [Required]
-        public string Type { get; set; }
+        public string Profesioni { get; set; }
 
-        [Required]
-        public string Brand { get; set; }
 
-        [Required]
-        [Range(0, 200)]
-        public int QuantityInStock { get; set; }
     }
 }
 

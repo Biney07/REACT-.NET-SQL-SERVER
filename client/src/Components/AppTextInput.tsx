@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { useController, UseControllerProps } from "react-hook-form";
-import style from "./ProductComponets/ProductCard.module.css"
+import style from "./BanoriComponets/BanoriCard.module.css"
 
 interface Props extends UseControllerProps {
     label: string;

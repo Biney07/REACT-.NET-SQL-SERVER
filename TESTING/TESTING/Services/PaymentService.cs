@@ -24,7 +24,7 @@ namespace TESTING.Services
 
             var intent = new PaymentIntent();
 
-            var subtotal = basket.Items.Sum(item => item.Quantity * item.Product.Price);
+            var subtotal = basket.Items.Sum(item => item.Quantity * item.Banori.Price);
             var deliveryFee = subtotal > 10000 ? 0 : 500;
 
             if (string.IsNullOrEmpty(basket.PaymentIntentId))

@@ -46,15 +46,15 @@ const requests = {
 }
 
 const Catalog = {
-    list: (params: URLSearchParams) => requests.get('products', params),
-    details: (id: number) => requests.get(`products/${id}`),
-    fetchFilters: () => requests.get('products/filters')
+    list: (params: URLSearchParams) => requests.get('banoret', params),
+    details: (id: number) => requests.get(`banoret/${id}`),
+    fetchFilters: () => requests.get('banoret/filters')
 }
 
 const Basket = {
     get: () => requests.get('basket'),
-    addItem: (productId: number, quantity = 1) => requests.post(`basket?productId=${productId}&quantity=${quantity}`, {}),
-    removeItem: (productId: number, quantity = 1) => requests.delete(`basket?productId=${productId}&quantity=${quantity}`)
+    addItem: (banoriId: number, quantity = 1) => requests.post(`basket?banoriId=${banoriId}&quantity=${quantity}`, {}),
+    removeItem: (banoriId: number, quantity = 1) => requests.delete(`basket?banoriId=${banoriId}&quantity=${quantity}`)
 }
 
 const Account = {

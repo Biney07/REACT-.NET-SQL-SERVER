@@ -12,6 +12,7 @@ using TESTING.DTO;
 using TESTING.Model;
 using TESTING.Model.OrderAggregate;
 using System.Net.Mail;
+using Microsoft.Build.Evaluation;
 
 namespace API.Controllers
 {
@@ -55,22 +56,23 @@ namespace API.Controllers
 
             foreach (var item in basket.Items)
             {
-                var productItem = await _context.Products.FindAsync(item.ProductId);
-                var itemOrdered = new ProductItemOrdered
+                var banoriItem = await _context.Banoret.FindAsync(item.BanoriId);
+                var itemOrdered = new BanoriItemOrdered
                 {
-                    ProductId = productItem.Id,
-                    Name = productItem.Name,
-                    PictureUrl = productItem.PictureUrl
+                    BanoriId = banoriItem.Id,
+                    Name = banoriItem.Name,
+                    PictureUrl = banoriItem.PictureUrl
                 };
 
                 var orderItem = new OrderItem
                 {
                     ItemOrdered = itemOrdered,
-                    Price = productItem.Price,
+                    Price = banoriItem.Price,
                     Quantity = item.Quantity
+
                 };
                 items.Add(orderItem);
-                productItem.QuantityInStock -= item.Quantity;
+               
             }
 
             var subtotal = items.Sum(item => item.Price * item.Quantity);

@@ -6,21 +6,21 @@ import LoadingComponent from "../LoadingComponent";
 import NotFound from "./NotFound";
 import { useAppDispatch, useAppSelector } from "../../Store/hook";
 import { addBasketItemAsync } from "../BasketComponets/basketSlice";
-import { fetchProductAsync, productSelectors } from "../../Pages/Catalog/CatalogSlice";
+import { fetchBanoriAsync, banoriSelectors } from "../../Pages/Catalog/CatalogSlice";
 
 
-export default function ProductDetails() {
+export default function BanoriDetails() {
     const {basket, status} = useAppSelector(state => state.basket);
     const dispatch = useAppDispatch();  
     const { id } = useParams<{ id: string }>();
-    const product = useAppSelector(state => productSelectors.selectById(state, id));
-    const {status: productStatus} = useAppSelector(state => state.catalog);
+    const banori = useAppSelector(state => banoriSelectors.selectById(state, id));
+    const {status: banoriStatus} = useAppSelector(state => state.catalog);
     const [quantity, setQuantity] = useState(0);
-    const item = basket?.items.find(i => i.productId === product?.id);
+    const item = basket?.items.find(i => i.banoriId === banori?.id);
     useEffect(() => {
         if (item) setQuantity(item.quantity);
-        if (!product) dispatch(fetchProductAsync(parseInt(id)))
-    }, [id, item, dispatch, product]);
+        if (!banori) dispatch(fetchBanoriAsync(parseInt(id)))
+    }, [id, item, dispatch, banori]);
 
     function handleInputChange(event: any) {
         if (event.target.value > 0) {
@@ -32,49 +32,46 @@ export default function ProductDetails() {
 
         if (!item || quantity > item.quantity) {
             const updatedQuantity = item ? quantity - item.quantity : quantity;
-            dispatch(addBasketItemAsync({productId: product?.id!, quantity: updatedQuantity}))
+            dispatch(addBasketItemAsync({banoriId: banori?.id!, quantity: updatedQuantity}))
         } else {
             const updatedQuantity = item.quantity - quantity;
-            dispatch(addBasketItemAsync({productId: product?.id!, quantity: updatedQuantity}))
+            dispatch(addBasketItemAsync({banoriId: banori?.id!, quantity: updatedQuantity}))
         }
     }
 
-    if (productStatus.includes('pending')) return <LoadingComponent message='Loading product...' />
+    if (banoriStatus.includes('pending')) return <LoadingComponent message='Loading banori...' />
 
-    if (!product) return <NotFound />
+    if (!banori) return <NotFound />
 
     return (
         <Grid container spacing={6} sx={{ justifyContent: 'center', paddingTop: '60px' }}>
             <Grid item xs={5}>
-                <img src={product.pictureUrl} alt={product.name} style={{ width: '80%' }} />
+                <img src={banori.pictureUrl} alt={banori.name} style={{ width: '80%' }} />
             </Grid>
             <Grid item xs={4}>
-                <Typography variant='h3'>{product.name}</Typography>
+                <Typography variant='h3'>{banori.name}</Typography>
                 <Divider />
-                <Typography variant='h4' color='secondary'>${(product.price / 100).toFixed(2)}</Typography>
+                <Typography variant='h4' color='secondary'>${(banori.price / 100).toFixed(2)}</Typography>
                 <TableContainer>
                     <Table>
                         <TableBody>
                             <TableRow>
                                 <TableCell>Name</TableCell>
-                                <TableCell>{product.name}</TableCell>
+                                <TableCell>{banori.name}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Description</TableCell>
-                                <TableCell>{product.description}</TableCell>
+                                <TableCell>{banori.biografia}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>Type</TableCell>
-                                <TableCell>{product.type}</TableCell>
+                                <TableCell>Age</TableCell>
+                                <TableCell>{banori.age}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>Brand</TableCell>
-                                <TableCell>{product.brand}</TableCell>
+                                <TableCell>Profesioni</TableCell>
+                                <TableCell>{banori.profesioni}</TableCell>
                             </TableRow>
-                            <TableRow>
-                                <TableCell>Quantity in stock</TableCell>
-                                <TableCell>{product.quantityInStock}</TableCell>
-                            </TableRow>
+                           
                         </TableBody>
                     </Table>
                 </TableContainer>

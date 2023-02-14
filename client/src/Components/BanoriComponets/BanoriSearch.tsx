@@ -1,23 +1,23 @@
 import { debounce, TextField } from "@mui/material";
 import { useState } from "react";
-import { setProductParams } from "../../Pages/Catalog/CatalogSlice";
+import { setBanoriParams } from "../../Pages/Catalog/CatalogSlice";
 import { useAppDispatch, useAppSelector } from "../../Store/hook";
-import style from "./ProductCard.module.css"
+import style from "./BanoriCard.module.css"
 
 
-export default function ProductSearch() {
-    const {productParams} = useAppSelector(state => state.catalog);
-    const [searchTerm, setSearchTerm] = useState(productParams.searchTerm);
+export default function BanoriSearch() {
+    const {banoriParams} = useAppSelector(state => state.catalog);
+    const [searchTerm, setSearchTerm] = useState(banoriParams.searchTerm);
     const dispatch = useAppDispatch();
 
     const debouncedSearch = debounce((event: any) => {
-        dispatch(setProductParams({searchTerm: event.target.value}))
+        dispatch(setBanoriParams({searchTerm: event.target.value}))
     }, 1000)
 
     return (
         <TextField
         className={style.form_control_label}
-            label='Search products'
+            label='Search banoret'
             variant='outlined'
             fullWidth
             value={searchTerm || ''}

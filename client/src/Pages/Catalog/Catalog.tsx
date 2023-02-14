@@ -3,12 +3,12 @@ import { useEffect } from "react";
 import AppPagination from "../../Components/AppPagination";
 import CheckboxButtons from "../../Components/CheckboxButtons";
 import LoadingComponent from "../../Components/LoadingComponent";
-import ProductList from "../../Components/ProductComponets/ProductList";
-import ProductSearch from "../../Components/ProductComponets/ProductSearch";
+import BanoriList from "../../Components/BanoriComponets/BanoriList";
+import BanoriSearch from "../../Components/BanoriComponets/BanoriSearch";
 import RadioButtonGroup from "../../Components/RadioButtonGroup";
 import { useAppDispatch, useAppSelector } from "../../Store/hook";
-import { fetchFilters, fetchProductsAsync, productSelectors, setPageNumber, setProductParams } from "./CatalogSlice";
-import style from "../../Components/ProductComponets/ProductCard.module.css"
+import { fetchFilters, fetchBanoriAsync, banoriSelectors, setPageNumber, setBanoriParams, fetchBanoretAsync } from "./CatalogSlice";
+import style from "../../Components/BanoriComponets/BanoriCard.module.css"
 
 
 const sortOptions = [
@@ -18,50 +18,44 @@ const sortOptions = [
 ]
 
 export default function Catalog() {
-    const products = useAppSelector(productSelectors.selectAll);
-    const { productsLoaded, filtersLoaded, brands, types, productParams, metaData } = useAppSelector(state => state.catalog);
+    const banoret = useAppSelector(banoriSelectors.selectAll);
+    const { banoretLoaded, filtersLoaded, profesionet, banoriParams, metaData } = useAppSelector(state => state.catalog);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (!productsLoaded) dispatch(fetchProductsAsync());
-    }, [productsLoaded, dispatch])
+        if (!banoretLoaded) dispatch(fetchBanoretAsync());
+    }, [banoretLoaded, dispatch])
 
     useEffect(() => {
         if (!filtersLoaded) dispatch(fetchFilters());
     }, [filtersLoaded, dispatch]);
 
-    if (!filtersLoaded) return <LoadingComponent message='Loading products...' />
+    if (!filtersLoaded) return <LoadingComponent message='Loading banoret...' />
 
     return (
         <Grid container columnSpacing={4}>
             <Grid item xs={3}>
                 <Paper className={style.form_control_label} sx={{ mb: 2 }}>
-                    <ProductSearch />
+                    <BanoriSearch />
                 </Paper>
                 <Paper className={style.form_control_label} sx={{ mb: 2, p: 2 }}>
                     <RadioButtonGroup
-                        selectedValue={productParams.orderBy}
+                        selectedValue={banoriParams.orderBy}
                         options={sortOptions}
-                        onChange={(e) => dispatch(setProductParams({ orderBy: e.target.value }))}
+                        onChange={(e) => dispatch(setBanoriParams({ orderBy: e.target.value }))}
                     />
                 </Paper>
                 <Paper className={style.form_control_label} sx={{ mb: 2, p: 2 }}>
                     <CheckboxButtons
-                        items={brands}
-                        checked={productParams.brands}
-                        onChange={(items: string[]) => dispatch(setProductParams({ brands: items }))}
+                        items={profesionet}
+                        checked={banoriParams.profesionet}
+                        onChange={(items: string[]) => dispatch(setBanoriParams({ profesionet: items }))}
                     />
                 </Paper>
-                <Paper className={style.form_control_label} sx={{ mb: 2, p: 2 }}>
-                    <CheckboxButtons
-                        items={types}
-                        checked={productParams.types}
-                        onChange={(items: string[]) => dispatch(setProductParams({ types: items }))}
-                    />
-                </Paper>
+              
             </Grid>
             <Grid item xs={9}>
-                <ProductList products={products} />
+                <BanoriList banoret={banoret} />
             </Grid>
             <Grid item xs={3} />
             <Grid item xs={9} sx={{mb: 2}}>

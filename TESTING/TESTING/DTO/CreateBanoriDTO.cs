@@ -1,36 +1,33 @@
 ﻿
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
 namespace TESTING.DTO
 {
-    public class UpdateProductDTO
+    public class CreateBanoriDto
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
 
         [Required]
-        public string Description { get; set; }
+        public string Biografia { get; set; }
 
-        [Required]
-        [Range(100, Double.PositiveInfinity)]
+        
+        [DefaultValue(1)]
         public long Price { get; set; }
 
         [Required]
         public IFormFile File { get; set; }
 
         [Required]
-        public string Type { get; set; }
+        public int Age { get; set; }
+        [Required]
+        public bool RelationshipStatus { get; set; }
 
         [Required]
-        public string Brand { get; set; }
-
-        [Required]
-        [Range(0, 200)]
-        public int QuantityInStock { get; set; }
+        public string Profesioni { get; set; }
 
     }
 }
