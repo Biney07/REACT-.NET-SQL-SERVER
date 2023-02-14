@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import { signInUser } from './accountSlice';
+import { fetchCurrentUser, signInUser } from './accountSlice';
 import { useAppDispatch} from '../../Store/hook';
 import { MDBBtn, MDBCheckbox, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import { useForm } from 'react-hook-form';
