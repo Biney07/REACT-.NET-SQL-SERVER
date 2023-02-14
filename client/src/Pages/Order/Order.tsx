@@ -5,6 +5,7 @@ import LoadingComponent from "../../Components/LoadingComponent";
 import { Order } from "../../models/order";
 import { currencyFormat } from "../../util/util";
 import OrderDetailed from "./OrderDetailed";
+import style from "./Order.module.css"
 
 export default function Orders() {
     const [orders, setOrders] = useState<Order[] | null>(null);
@@ -28,7 +29,7 @@ export default function Orders() {
     )
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer className={style.table} component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -52,7 +53,7 @@ export default function Orders() {
                             <TableCell align="right">{order.orderDate.split('T')[0]}</TableCell>
                             <TableCell align="right">{order.orderStatus}</TableCell>
                             <TableCell align="right">
-                                <Button onClick={() => setSelectedOrderNumber(order.id)}>
+                                <Button className={style.order_button} onClick={() => setSelectedOrderNumber(order.id)}>
                                     View
                                 </Button>
                             </TableCell>
