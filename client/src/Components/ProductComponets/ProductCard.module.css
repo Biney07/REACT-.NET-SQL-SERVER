@@ -2,7 +2,7 @@
   
   .card {
     margin-top: 20px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(94, 249, 51, 0.319) 0%, rgba(255, 255, 255, 0.05) 70%) !important;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.67) 0%, rgba(255, 255, 255, 0.05) 70%) !important;
     border-radius: 10px !important;
     box-shadow: rgba(100, 100, 111, 0.362) 0px 7px 29px 0px !important;
     color: #fff !important;

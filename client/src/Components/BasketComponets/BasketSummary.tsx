@@ -2,6 +2,7 @@
 import { TableContainer, Paper, Table, TableBody, TableRow, TableCell } from "@mui/material";
 import { useAppSelector } from "../../Store/hook";
 import { currencyFormat } from "../../util/util";
+import Style from "./Basket.module.css"
 
 interface Props {
     subtotal?: number;
@@ -14,23 +15,23 @@ export default function BasketSummary({subtotal}: Props) {
 
     return (
         <>
-            <TableContainer component={Paper} variant={'outlined'}>
-                <Table>
-                    <TableBody>
+            <TableContainer className={Style.table_body} component={Paper} variant={'outlined'}>
+                <Table >
+                    <TableBody >
                         <TableRow>
-                            <TableCell colSpan={2}>Subtotal</TableCell>
-                            <TableCell align="right">{currencyFormat(subtotal)}</TableCell>
+                            <TableCell className={Style.table_content_summary} colSpan={2}>Subtotal</TableCell>
+                            <TableCell className={Style.table_content_summary} align="right">{currencyFormat(subtotal)}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell colSpan={2}>Delivery fee*</TableCell>
-                            <TableCell align="right">{currencyFormat(deliveryFee)}</TableCell>
+                            <TableCell className={Style.table_content_summary} colSpan={2}>Delivery fee*</TableCell>
+                            <TableCell className={Style.table_content_summary} align="right">{currencyFormat(deliveryFee)}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell colSpan={2}>Total</TableCell>
-                            <TableCell align="right">{currencyFormat(subtotal + deliveryFee)}</TableCell>
+                            <TableCell className={Style.table_content_summary} colSpan={2}>Total</TableCell>
+                            <TableCell className={Style.table_content_summary} align="right">{currencyFormat(subtotal + deliveryFee)}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>
+                            <TableCell className={Style.table_content_summary} colSpan={3}>
                                 <span style={{fontStyle: 'italic'}}>*Orders over $100 qualify for free delivery</span>
                             </TableCell>
                         </TableRow>
