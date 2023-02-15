@@ -12,8 +12,8 @@ using TESTING.Data;
 namespace TESTING.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230214175938_sponzor")]
-    partial class sponzor
+    [Migration("20230215005433_all")]
+    partial class all
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,6 +236,34 @@ namespace TESTING.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("TESTING.Model.Moment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Moments");
+                });
+
             modelBuilder.Entity("TESTING.Model.OrderAggregate.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -292,6 +320,30 @@ namespace TESTING.Migrations
                     b.ToTable("OrderItem");
                 });
 
+            modelBuilder.Entity("TESTING.Model.Prime", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("week")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Primes");
+                });
+
             modelBuilder.Entity("TESTING.Model.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -325,14 +377,14 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "21961325-8be1-4179-b555-38bc77dc4f5d",
+                            ConcurrencyStamp = "e20ea300-f840-4984-9d71-41a91c9f9499",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "47639c93-494a-4e26-9789-7943e7b9444a",
+                            ConcurrencyStamp = "efa77666-8530-40b5-90c5-e50a21dda8d5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

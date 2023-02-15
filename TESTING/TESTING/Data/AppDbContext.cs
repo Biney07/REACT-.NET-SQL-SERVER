@@ -24,6 +24,8 @@ namespace TESTING.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<Sponzor> Sponzors { get; set; }
+        public DbSet<Moment> Moments { get; set; }
+        public DbSet<Prime> Primes { get; set; }
 
         //to get the seed data
         protected override void OnModelCreating(ModelBuilder builder)

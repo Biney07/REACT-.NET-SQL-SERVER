@@ -103,6 +103,22 @@ namespace TESTING.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Moments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VideoURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Moments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -125,6 +141,40 @@ namespace TESTING.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Primes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    week = table.Column<int>(type: "int", nullable: false),
+                    VideoURL = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Primes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sponzors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CloudanaryPublicId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sponzors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -312,8 +362,8 @@ namespace TESTING.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "01242a4d-4f92-4eb5-bcb0-3ea7f157778f", "Member", "MEMBER" },
-                    { 2, "57cfb530-eb33-47ad-bf85-ff62761f3425", "Admin", "ADMIN" }
+                    { 1, "e20ea300-f840-4984-9d71-41a91c9f9499", "Member", "MEMBER" },
+                    { 2, "efa77666-8530-40b5-90c5-e50a21dda8d5", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -396,7 +446,16 @@ namespace TESTING.Migrations
                 name: "Images");
 
             migrationBuilder.DropTable(
+                name: "Moments");
+
+            migrationBuilder.DropTable(
                 name: "OrderItem");
+
+            migrationBuilder.DropTable(
+                name: "Primes");
+
+            migrationBuilder.DropTable(
+                name: "Sponzors");
 
             migrationBuilder.DropTable(
                 name: "UserAddress");
