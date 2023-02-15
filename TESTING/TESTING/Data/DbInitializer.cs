@@ -40,40 +40,39 @@ namespace TESTING.Data
                 }
 
                 // Seed admin user if there are none in the database
-                if (!context.Users.Any(u => u.UserName == "admin@gmail.com"))
-                {
-                    var user = new User
-                    {
-                        UserName = "admin@gmail.com",
-                        Email = "admin@gmail.com",
-                        EmailConfirmed = true
-                    };
+                //if (!context.Users.Any(u => u.UserName == "admin@gmail.com"))
+                //{
+                //    var user = new User
+                //    {
+                //        UserName = "admin@gmail.com",
+                //        Email = "admin@gmail.com",
+                //        EmailConfirmed = true
+                //    };
 
-                    var password = new PasswordHasher<User>();
-                    var hashed = password.HashPassword(user, "Albin2002@");
-                    user.PasswordHash = hashed;
+                //    var password = new PasswordHasher<User>();
+                //    var hashed = password.HashPassword(user, "Albin2002@");
+                //    user.PasswordHash = hashed;
 
-                    context.Users.Add(user);
-                    context.SaveChanges();
+                //    context.Users.Add(user);
+                //    context.SaveChanges();
 
-                    var adminRole = new Role
-                    {
-                        Name = "Admin",
-                        NormalizedName = "ADMIN"
-                    };
+                //    var adminRole = new Role
+                //    {
+                //        Name = "Admin",
+                //        NormalizedName = "ADMIN"
+                //    };
 
-                    context.Roles.Add(adminRole);
-                    context.SaveChanges();
+                //    context.Roles.Add(adminRole);
 
-                    var userRole = new IdentityUserRole<int>
-                    {
-                        UserId = user.Id,
-                        RoleId = adminRole.Id
-                    };
+                //    var userRole = new IdentityUserRole<int>
+                //    {
+                //        UserId = user.Id,
+                //        RoleId = adminRole.Id
+                //    };
 
-                    context.UserRoles.Add(userRole);
-                    context.SaveChanges();
-                }
+                //    context.UserRoles.Add(userRole);
+                //    context.SaveChanges();
+                //}
             }
         }
     }

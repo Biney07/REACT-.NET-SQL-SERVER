@@ -8,7 +8,7 @@ using System.Data;
 using System.Reflection.Emit;
 using TESTING.Model;
 using TESTING.Model.OrderAggregate;
-
+using TESTING.Model.Post;
 
 namespace TESTING.Data
 {
@@ -26,6 +26,9 @@ namespace TESTING.Data
         public DbSet<Sponzor> Sponzors { get; set; }
         public DbSet<Moment> Moments { get; set; }
         public DbSet<Prime> Primes { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<PostLike> PostLikes { get; set; }
+        public DbSet<PostComment> PostComments { get; set; }
 
         //to get the seed data
         protected override void OnModelCreating(ModelBuilder builder)
