@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import './App.css';
-// import { Route, Switch } from 'react-router-dom'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
+import { BrowserRouter as Router, Switch, Route, Link, useLocation } from 'react-router-dom';
 import AdminPage from './AdminPage';
 import LoadingComponent from './Components/LoadingComponent';
 import { useAppDispatch } from './Store/hook';
@@ -29,12 +29,18 @@ import Orders from './Pages/Order/Order';
 // import AppUser from './AppUser';
 import Sidebar from './Components/Sidebar/Sidebar';
 import OrdersCRUD from './Components/TableCRUD/OrdersCRUD';
+import AdminRoute from './Admin/AdminRoute';
+import AdminLayout from './Admin/AdminLayout';
 
 
 
 export default function App() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
+
+  // Use the `useLocation` hook
+  const location = useLocation();
+  const hideNavbar = location.pathname.startsWith('/admin');
 
   const initApp = useCallback(async () => {
     try {
@@ -47,63 +53,44 @@ export default function App() {
 
   useEffect(() => {
     initApp().then(() => setLoading(false));
-
+    
   }, [initApp])
-
 
   if (loading) { return <LoadingComponent message='Initialising app...' /> }
 
-  const userIsAdmin = false; // replace with actual authentication logic
-
   return (
     <>
-
-{/* {userIsAdmin ? <Sidebar /> : <Navbar />} */}
-{/* {userIsAdmin ? null : } */}
-<Navbar />
+      {!hideNavbar && <Navbar />}
       <Switch>
-        {/* <Route component={AppUser}> */}
-          <Route path={"/"} exact>
-            <Home />
-          </Route>
-          <Route path={"/Home"}>
-            <Home />
-          </Route>
+        <Route path={"/"} exact>
+          <Home />
+        </Route>
+        <Route path={"/Home"}>
+          <Home />
+        </Route>
 
-          <Route path={"/Login"}>
-            <LogIn />
-          </Route>
-          <Route path='/basket' component={BasketPage} />
-          <Route path={"/Register"}>
-            <Register />
-          </Route>
-          <Route path={"/FileUpload"}>
-            <FileUpload />
-          </Route>
+        <Route path={"/Login"}>
+          <LogIn />
+        </Route>
+        <Route path='/basket' component={BasketPage} />
+        <Route path={"/Register"}>
+          <Register />
+        </Route>
+        <Route path={"/FileUpload"}>
+          <FileUpload />
+        </Route>
+        <Route exact path='/catalog' component={Catalog} />
+        <Route path='/catalog/:id' component={BanoriDetails} />
+        <PrivateRoute path='/onlyloggedin' component={LoggedInCanSee} />
+        <PrivateRoute path='/checkout' component={CheckoutWrapper} />
+        <PrivateRoute path='/orders' component={Orders} />
+        <Route path={"/Order"}>
+          <Orders />
+        </Route>
+        <Route path="/create-order" component={CreateOrder} />
 
-          <Route exact path='/catalog' component={Catalog} />
-          <Route path='/catalog/:id' component={BanoriDetails} />
-          <PrivateRoute path='/onlyloggedin' component={LoggedInCanSee} />
-          <PrivateRoute path='/checkout' component={CheckoutWrapper} />
-          <PrivateRoute path='/orders' component={Orders} />
-          <Route path={"/Order"}>
-            <Orders />
-          </Route>
-          <Route path="/create-order" component={CreateOrder} />
-          {/* <Route path="/admin/orders" component={OrdersCRUD} /> */}
-          <PrivateRoute roles={['Admin']} path='/admin/orders' component={OrdersCRUD} />
-        {/* </Route> */}
 
-{/* 
-        {userIsAdmin && (
-          <Route path="/admin">
-            <AdminPage>
-              <Switch>
-                <Route path="/admin/settings" component={SettingsPage} />
-              </Switch>
-            </AdminPage>
-          </Route>
-        )} */}
+        <AdminRoute path="/admin" component={AdminLayout} />
       </Switch>
       
 

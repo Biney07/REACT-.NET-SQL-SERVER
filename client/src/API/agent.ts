@@ -11,7 +11,7 @@ const responseBody = (response: AxiosResponse) => response.data;
 axios.interceptors.request.use(config => {
 
     let userData = localStorage.getItem("user");
-
+    console.log(localStorage.getItem("user"));
     if (userData) {
      
         let data = JSON.parse(userData);

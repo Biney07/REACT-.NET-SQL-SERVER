@@ -8,6 +8,8 @@ using TESTING.Data;
 using TESTING.DTO;
 using TESTING.Model;
 using TESTING.Services;
+using System.Security.Claims;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TESTING.Controllers
 {
@@ -61,13 +63,16 @@ namespace TESTING.Controllers
                 await _context.SaveChangesAsync();
             }
 
+
+            var roles = await _userManager.GetRolesAsync(user);
+            var userRole = roles.FirstOrDefault();
             return new UserDTO
             {
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user),
                 Username = user.UserName,
+                Role = userRole,
                 Basket = anonBasket != null ? anonBasket.MapBasketToDto() : userBasket?.MapBasketToDto()
-       
             };
         }
 

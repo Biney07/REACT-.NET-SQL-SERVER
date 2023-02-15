@@ -18,12 +18,12 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
     async (data, thunkAPI) => {
         try {
             const user = await agent.Account.login(data);
-            console.log(user);
-            console.log(user.Id);
-            // console.log(user.Name);
-            console.log(user.roles);
+           
             localStorage.setItem("user", JSON.stringify(user));
             console.log(localStorage.getItem("user"));
+            window.addEventListener('beforeunload', () => {
+                localStorage.setItem('user', JSON.stringify(user));
+            });
             return user;
         } catch (error: any) {
             return thunkAPI.rejectWithValue({ error: error.data });
@@ -33,21 +33,22 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
 export const fetchCurrentUser = createAsyncThunk<User>(
     'account/fetchCurrentUser',
     async (_, thunkAPI) => {
-        thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)));
         try {
             console.log("fetch");
             const userDto = await agent.Account.currentUser();
             const user = userDto;
             localStorage.setItem('user', JSON.stringify(user));
+            thunkAPI.dispatch(setUser(user));
             return user;
         } catch (error:any) {
-            return thunkAPI.rejectWithValue({ error: error.data });
+            const storedUser = JSON.parse(localStorage.getItem('user')!);
+            if (storedUser) {
+              thunkAPI.dispatch(setUser(storedUser));
+              return storedUser;
+            } else {
+              return thunkAPI.rejectWithValue({ error: error.data });
+            }
         }
-    },
-    {
-        condition: () => {
-            if (!localStorage.getItem('user')) return false;
-        },
     }
 );
 
