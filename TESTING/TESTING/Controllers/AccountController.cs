@@ -67,7 +67,7 @@ namespace TESTING.Controllers
             var roles = await _userManager.GetRolesAsync(user);
             var userRole = roles.FirstOrDefault();
             return new UserDTO
-            {
+            {   Id = user.Id,
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user),
                 Username = user.UserName,

@@ -7,13 +7,13 @@
 }
 
 body {
-  background: var(--dark-900);
+  background: var(--white-100);
   margin: 0;
   font-family: 'Poppins', sans-serif !important;
    
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--dark-900);
+  background: var(--white-100);
 
 }
 html{
