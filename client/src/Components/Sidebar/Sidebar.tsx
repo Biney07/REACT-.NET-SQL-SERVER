@@ -13,11 +13,6 @@ import RemoveRedEyeTwoToneIcon from '@mui/icons-material/RemoveRedEyeTwoTone';
 
 export default function Sidebar() {
 
-    // const [clicked, setClick] = useState(false)
-
-    // function click() {
-    //     setClick(clicked => true)
-    // }
 
     return (
         <>
@@ -30,8 +25,6 @@ export default function Sidebar() {
                     </div>
 
                     <ul className="side-list">
-                        {/* <li onClick={click} className={clicked ? "active" : " "}><a href="">Gjeneral</a></li> */}
-                        {/* <li > */}
                         <NavLink exact to="/admin" className="nav-item"><HomeRepairServiceIcon className="margin"/> Gjeneral</NavLink>
                         <NavLink to="/admin/posts" className="nav-item"><NewspaperIcon className="margin"/>  Postet</NavLink>
                         <NavLink to="/admin/banoret" className="nav-item"><InsertEmoticonIcon className="margin"/>  Banoret</NavLink>

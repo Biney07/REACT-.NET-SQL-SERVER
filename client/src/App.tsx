@@ -4,7 +4,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import './App.css';
 
 import { BrowserRouter as Router, Switch, Route, Link, useLocation } from 'react-router-dom';
-import AdminPage from './AdminPage';
 import LoadingComponent from './Components/LoadingComponent';
 import { useAppDispatch } from './Store/hook';
 import Navbar from './Components/Navbar/Navbar';
