@@ -12,7 +12,7 @@ using Microsoft.OpenApi.Models;
 using Stripe;
 using TESTING.Helpers;
 using AutoMapper;
-
+using Microsoft.Extensions.Options;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -103,6 +103,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
     );
 builder.Services.AddAuthorization();
+
 builder.Services.AddScoped<TokenServices>();
 builder.Services.AddScoped<ImageService>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
@@ -124,6 +125,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+
+
 DbInitializer.Seed(app);
+
 app.Run();
 // This method gets called by the runtime. Use this method to add services to the container.  if (args.Length == 1 && args[0].ToLower() == "seeddata")

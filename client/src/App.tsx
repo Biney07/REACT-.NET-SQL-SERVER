@@ -10,7 +10,7 @@ import { useAppDispatch } from './Store/hook';
 import Navbar from './Components/Navbar/Navbar';
 import LogIn from './Pages/Account/LogIn';
 import Home from './Pages/Home/Home';
-import FileUpload from './Pages/FileUpload';
+
 import Register from './Pages/Account/Register';
 import { fetchCurrentUser } from './Pages/Account/accountSlice';
 // import Orders from './TEST/Orders';
@@ -33,6 +33,8 @@ import AdminRoute from './Admin/AdminRoute';
 import AdminLayout from './Admin/AdminLayout';
 // import BanoriList from './Components/BanoriComponets/BanoriList';
 import BanoriListt from './Admin/Task/TaskList/BanoriListt';
+import Posts from './Pages/Posts/Posts';
+import CreatePost from './Pages/Posts/CreatePost';
 
 
 
@@ -78,9 +80,9 @@ export default function App() {
         <Route path={"/Register"}>
           <Register />
         </Route>
-        <Route path={"/FileUpload"}>
-          <FileUpload />
-        </Route>
+        
+        <Route exact path='/CreatePost' component={CreatePost} />
+        <Route exact path='/Posts' component={Posts} />
         <Route exact path='/catalog' component={Catalog} />
         <Route path='/catalog/:id' component={BanoriDetails} />
         <PrivateRoute path='/onlyloggedin' component={LoggedInCanSee} />
