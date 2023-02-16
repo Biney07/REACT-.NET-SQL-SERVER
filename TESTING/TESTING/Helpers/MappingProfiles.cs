@@ -11,6 +11,7 @@ namespace TESTING.Helpers
             CreateMap<CreateBanoriDto, Banori>();
             CreateMap<UpdateBanoriDTO, Banori>();
             CreateMap<SponzorDTO, Sponzor>();
+            CreateMap<CreateSponzorDTO, Sponzor>();
             CreateMap<UpdateSponzorDTO, Sponzor>();
         }
     }

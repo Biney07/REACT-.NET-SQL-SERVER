@@ -38,6 +38,8 @@ import PostListt from './Admin/Posts/PostList/PostListt';
 import { toast } from 'react-toastify';
 import OnlyLoggedInCanSeeAdmin from './Components/OnlyLoggedInCanSeeAdmin';
 import AdminGeneral from './Admin/AdminGeneral';
+import MomentList from './Admin/Moments/MomentList/MomentList';
+import SponzorList from './Admin/Sponzoret/SponzoretList/SponzorList';
 
 
 
@@ -123,6 +125,8 @@ export default function App() {
         <AdminRoute path="/admin/onlyLoggedin" component={OnlyLoggedInCanSeeAdmin} />
         <AdminRoute path="/admin/posts" component={PostListt} />
         <AdminRoute path="/admin/banoret" component={BanoriListt} />
+        <AdminRoute path="/admin/moments" component={MomentList} />
+        <AdminRoute path="/admin/sponzors" component={SponzorList} />
         <AdminRoute path="/admin/settings" component={AdminGeneral} />
         {/* /admin/posts
             /admin/banoret
