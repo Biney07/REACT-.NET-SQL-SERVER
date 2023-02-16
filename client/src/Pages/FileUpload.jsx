@@ -19,9 +19,9 @@ export default function FileUpload() {
     const file = e.target[0]?.files[0]
     if (!file) return;
     const storageRef = ref(storage, `files/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    const uploadBanori = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on("state_changed",
+    uploadBanori.on("state_changed",
       (snapshot) => {
         const progress =
           Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
@@ -31,7 +31,7 @@ export default function FileUpload() {
         alert(error);
       },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        getDownloadURL(uploadBanori.snapshot.ref).then((downloadURL) => {
           setImgUrl(downloadURL)
 
         });

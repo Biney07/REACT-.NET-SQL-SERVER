@@ -28,9 +28,11 @@ import Orders from './Pages/Order/Order';
 // import AppAdmin from './AdminPage';
 // import AppUser from './AppUser';
 import Sidebar from './Components/Sidebar/Sidebar';
-import OrdersCRUD from './Components/TableCRUD/OrdersCRUD';
+import OrdersCRUD from './Admin/TableCRUD/OrdersCRUD';
 import AdminRoute from './Admin/AdminRoute';
 import AdminLayout from './Admin/AdminLayout';
+// import BanoriList from './Components/BanoriComponets/BanoriList';
+import BanoriListt from './Admin/Task/TaskList/BanoriListt';
 
 
 
@@ -86,6 +88,9 @@ export default function App() {
         <PrivateRoute path='/orders' component={Orders} />
         <Route path={"/Order"}>
           <Orders />
+        </Route>
+        <Route path={"/banoret"}>
+          <BanoriListt />
         </Route>
         <Route path="/create-order" component={CreateOrder} />
 

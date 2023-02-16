@@ -92,7 +92,7 @@ namespace TESTING.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete("{id}")]
+        [HttpDelete("banori/{id}")]
         public async Task<ActionResult> DeleteBanori(int id)
         {
             var banori = await _context.Banoret.FindAsync(id);
@@ -111,7 +111,15 @@ namespace TESTING.Controllers
             return BadRequest(new ProblemDetails { Title = "Problem deleting banori" });
         }
 
-    
+
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<Banori>>> GetAllBanoret()
+        {
+            var banoret = await _context.Banoret.ToListAsync();
+            return Ok(banoret);
+
+        }
+
         [HttpGet]
         public async Task<ActionResult<PagedList<Banori>>> GetAll([FromQuery] BanoriParams banoriParams)
         {

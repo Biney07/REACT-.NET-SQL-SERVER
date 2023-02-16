@@ -1,7 +1,7 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import agent from "../../API/agent";
-import LoadingComponent from "../LoadingComponent";
+import LoadingComponent from "../../Components/LoadingComponent";
 import { Order } from "../../models/order";
 import { currencyFormat } from "../../util/util";
 // import OrderDetailed from "./OrderDetailed";
