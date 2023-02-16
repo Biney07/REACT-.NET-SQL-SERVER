@@ -1,0 +1,68 @@
+body{
+    overflow-x: hidden;
+}
+
+#tabela{
+    text-align: center; 
+    border:lightgrey;
+}
+#tabela thead{
+    font-size: 14px;
+    color: grey;
+}
+#tabela td{
+    padding-top: 15px;
+    vertical-align: baseline;
+    padding-bottom: 15px;
+}
+#tabela .emri{
+    text-align: start; 
+    padding-left: 40px;
+}
+
+
+.delete{
+    background-color: #F12B2C;
+    border: none;
+    color: white;
+    font-size: 12px;
+    padding: 2px 15px;
+    border-radius: 20px;
+}
+.edit{
+    background-color: rgb(60, 206, 255);
+    border: none;
+    color: white;
+    font-size: 12px;
+    padding: 2px 15px;
+    border-radius: 20px;
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.column h5{
+    padding-left: 20px;
+    padding-top: 20px;
+    font-weight: bold;
+}
+
+.table-card{
+    background-color: white;
+    margin: 50px;
+    margin-top: 0;
+    border: 2px solid lightgrey;
+    border-radius: 8px;
+}
+.singer-img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+.section2{
+    top: 50px;
+    max-width: 79%;
+    left: 300px;
+    position: relative;
+}

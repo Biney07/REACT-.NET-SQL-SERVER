@@ -75,35 +75,52 @@ const Payments = {
 }
 
 const Banoret = {
-    // update: (values: any,id: number) => requests.put('Banoret')
+    update: (values: any,id: number) => requests.put(`Banoret/UpdateBanori/${id}`,values),
     delete: (id:number) => requests.delete(`Banoret/banori/${id}`),
-    create: (values: any) => requests.post('Banoret', values),
+    create: (values: any) => requests.post('Banoret/createBanor', values),
     get: () => requests.get('GetAll'),
 }
 
-// const Comments= {
-//     getCommentsByPostId: (postId: number) =>
-//       requests.get(`Comments/GetCommentsByPostId/${postId}`),
-//     createComment: (comment: any) => requests.post('Comments', comment),
-//     getComment: (id: number) => requests.get(`Comments/${id}`),
-//     deleteComment: (id: number) => requests.delete(`Comments/${id}`),
-//   }
+const Comments= {
+    getCommentsByPostId: (postId: number) =>
+    requests.get(`Comments/GetCommentsByPostId/${postId}`),
+    createComment: (comment: any) => requests.post('Comments', comment),
+    getComment: (id: number) => requests.get(`Comments/${id}`),
+    deleteComment: (id: number) => requests.delete(`Comments/${id}`),
+}
 //   const Likes = {
-//     likePost: (postId: number, userId: number) =>
-//       agent.post<LikeDTO>(`/Likes/Like/${postId}?userId=${userId}`),
-  
-//     unlikePost: (postId: number, userId: number) =>
-//       agent.delete(`/Likes/Unlike/${postId}/${userId}`),
-  
-//     getLikesByUserId: (params: PagingParams, userId: number) =>
-//       agent.get<GetLikesByUserIdResponse>(`/Likes/GetLikesByUserId/${userId}`, params),
-//   }
-//   const Posts= {
-//     getPosts: () => requests.get('Posts'),
-//     createPost: (post: any) => requests.post('Posts', post),
-//     getPost: (id: number) => requests.get(`Posts/${id}`),
-//     deletePost: (id: number) => requests.delete(`Posts/${id}`),
-//   }
+    //     likePost: (postId: number, userId: number) =>
+    //       agent.post<LikeDTO>(`/Likes/Like/${postId}?userId=${userId}`),
+    
+    //     unlikePost: (postId: number, userId: number) =>
+    //       agent.delete(`/Likes/Unlike/${postId}/${userId}`),
+    
+    //     getLikesByUserId: (params: PagingParams, userId: number) =>
+    //       agent.get<GetLikesByUserIdResponse>(`/Likes/GetLikesByUserId/${userId}`, params),
+    //   }
+    const Posts= {
+        
+        getPosts: () => requests.get('Posts'),
+        createPost: (post: any) => requests.post('Posts', post),
+        getPost: (id: number) => requests.get(`Posts/${id}`),
+        UpdatePost: (id: number,post:any) => requests.put(`Posts/${id}`,post),
+        deletePost: (id: number) => requests.delete(`Posts/${id}`),
+    }
+    
+    const Moments={
+        get: () => requests.get('Moments'),
+        create: (values: any) => requests.post('Moments/addMoment', values),
+        delete: (id:number) => requests.delete(`Moments/delMoment/${id}`),
+        update: (values: any,id: number) => requests.put(`Moments/updateMoment/${id}`,values),
+        
+    }
+    const Sponzors={
+        get: () => requests.get('Sponzors'),
+        create: (values: any) => requests.post('Sponzors/createSponzor', values),
+        delete: (id:number) => requests.delete(`Sponzors/deleteSponzor/${id}`),
+        update: (values: any,id: number) => requests.put(`Sponzors/updateSponzor/${id}`,values),
+        
+    }
 
 const agent = {
     Catalog,
@@ -111,7 +128,12 @@ const agent = {
     Basket,
     Orders,
     Payments,
-    Banoret
+    Banoret,
+    Posts,
+    // Likes,
+    Comments,
+    Moments,
+    Sponzors
 }
 
 export default agent

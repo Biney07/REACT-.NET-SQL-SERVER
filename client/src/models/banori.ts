@@ -3,6 +3,7 @@ export interface Banori {
     name: string;
     biografia: string;
     price: number;
+    File?: File;
     pictureUrl: string;
     RelationshipStatus: string;
     profesioni: string;

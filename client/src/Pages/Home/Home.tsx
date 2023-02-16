@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react';
 import image from './BackGround.png'
 import girl from './1.jpg'
 import gif from './9.jpg'
-import photo3  from './2.png'
+import photo3 from './2.png'
 import './Home.css'
 import Button from "../../Components/Button/Button";
 import { NavLink } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 interface Item {
-    id: number;
-    img: string;
+  id: number;
+  img: string;
 }
 
 const Home: React.FC = () => {
-    const [data, setData] = useState<Item[]>([]);
-   
-  
+  const [data, setData] = useState<Item[]>([]);
 
     return (
         <>
@@ -36,8 +36,11 @@ const Home: React.FC = () => {
         <div className="image-container">
           <NavLink to={"/Catalog"}><Button title="Voto" buttonType={"green"} style={{width:"500px",marginTop:"30px"}}></Button></NavLink>  
         </div>
+        <div className="image-container">
+          <NavLink to={"/Register"}><Button title="Register now" buttonType={"green"} style={{ width: "500px", marginTop: "30px" }}></Button></NavLink>
         </div>
-        </>
-    );
+      </div>
+    </>
+  );
 }
 export default Home

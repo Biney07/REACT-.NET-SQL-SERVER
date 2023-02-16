@@ -25,6 +25,7 @@ namespace TESTING.Controllers
             var moments = await _context.Moments.ToListAsync();
             return moments.Select(moment => new MomentDTO
             {
+               Id = moment.Id, 
                Title= moment.Title,
                Description= moment.Description,
                VideoURL= moment.VideoURL,
@@ -42,12 +43,11 @@ namespace TESTING.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("addMoment")]
         public async Task<ActionResult<MomentDTO>> CreateMoment(MomentDTO moment)
         {
             var newMoment = new Moment
             {
-
                 Title = moment.Title,
                 Description = moment.Description,
                 VideoURL = moment.VideoURL,
@@ -60,7 +60,7 @@ namespace TESTING.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut("updateMoment/{id}")]
         public async Task<ActionResult<MomentDTO>> UpdateMoment(UpdateMomentDTO moment, int id)
         {
             var originalMoment = await _context.Moments.FindAsync(id);
@@ -85,7 +85,7 @@ namespace TESTING.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpDelete("delMoment/{id}")]
         public async Task<ActionResult> DeleteMoment(int id)
         {
             var originalMoment = await _context.Moments.FindAsync(id);

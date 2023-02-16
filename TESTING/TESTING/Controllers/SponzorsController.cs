@@ -53,8 +53,8 @@ namespace TESTING.Controllers
 
 
 
-        [HttpPost]
-        public async Task<ActionResult<Sponzor>> CreateSponzor([FromForm] SponzorDTO sponzorDTO)
+        [HttpPost("createSponzor")]
+        public async Task<ActionResult<Sponzor>> CreateSponzor([FromForm] CreateSponzorDTO sponzorDTO)
         {
             
             var sponzor = _mapper.Map<Sponzor>(sponzorDTO);
@@ -81,7 +81,7 @@ namespace TESTING.Controllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut("updateSponzor/{id}")]
         public async Task<ActionResult<Sponzor>> UpdateSponzor([FromForm] UpdateSponzorDTO sponzorDto, int id)
         {
             //var originalSponzor = await _context.Sponzors.FindAsync(id);
@@ -129,7 +129,7 @@ namespace TESTING.Controllers
 
         }
 
-        [HttpDelete]
+        [HttpDelete("deleteSponzor/{id}")]
         public async Task<ActionResult> DeleteSponzor(int id)
         {
             //var originalSponzor = await _context.Sponzors.FindAsync(id);

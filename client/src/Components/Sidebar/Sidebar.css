@@ -52,7 +52,9 @@
   color: white !important;
 }
 
-
+.margin{
+  margin-right: 10px;
+}
 .devider{
   border-top: 2px solid;
 }
