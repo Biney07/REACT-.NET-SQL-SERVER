@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import { fetchCurrentUser, signInUser } from './accountSlice';
-import { useAppDispatch} from '../../Store/hook';
+import { useAppDispatch } from '../../Store/hook';
 import { MDBBtn, MDBCheckbox, MDBCol, MDBIcon, MDBRow } from 'mdb-react-ui-kit';
 import { useForm } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types';
 import { Box, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link, useHistory } from 'react-router-dom';
-import back from './skenderbeu.png'
-
+import back from './login.png'
+import './account.css'
 
 export default function LogIn() {
     const history = useHistory();
@@ -36,9 +36,20 @@ export default function LogIn() {
     return (
         <>
 
-        <img className='background' src={back}></img>
-            <div className="d-flex  m-5 m-3 ">
-                <div className="home w-25 p-3 m-5">
+            <img
+             
+                style={{
+                    backgroundImage: 'linear-gradient(to left top, #051937, #28306b, #5f449e, #a352cb, #f257ed)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    width: '100%',
+                    height: '100%',
+                    display: 'block',
+                }}
+            />
+            <div className="d-flex " style={{ justifyContent: 'center' }}>
+                <div className="home w-25 p-3 m-5" style={{ backgroundColor: 'white', padding: '50px', margin: '50px', textAlign: 'center', borderRadius: '10px' }}>
+
 
 
                     <h1 className='mb-3'>LOG IN</h1>
@@ -96,7 +107,7 @@ export default function LogIn() {
                                 </MDBCol>
                             </MDBRow>
 
-                            <MDBBtn type='submit' className='bg-success' block>
+                            <MDBBtn type='submit' block style={{ backgroundColor: '#16104e', color: 'white', }}>
                                 Sign in
                             </MDBBtn>
                             <div className='text-center m-2'>
@@ -126,6 +137,7 @@ export default function LogIn() {
                     </div>
                 </div>
             </div>
+
         </>
     );
 }

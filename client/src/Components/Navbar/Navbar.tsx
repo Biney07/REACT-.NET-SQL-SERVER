@@ -5,17 +5,17 @@ import { useAppSelector } from "../../Store/hook";
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import SignedInMenu from "./SignedInMenu";
-import { ShoppingCart } from "@mui/icons-material";
+import { Mail, ShoppingCart } from "@mui/icons-material";
 import logo from "./logo.png"
 import './Navbar.css'
 const pages = [
     { name: 'Home', route: '/' },
-    { name: 'Orders', route: '/Order' },
-    { name: 'Catalog', route: '/Catalog' },
-       { name: 'Music', route: '/Music' },
-          { name: 'Art', route: '/Art' },
-             { name: 'Video', route: '/Video' },
-              { name: 'Monumente', route: '/Monumente' },
+    { name: 'Votat', route: '/Order' },
+    { name: 'Voto', route: '/Catalog' },
+       { name: 'Prime', route: '/Prime' },
+        
+             { name: 'Fan Page', route: '/Posts' },
+              { name: 'Momentet', route: '/Momentet' },
 ];
 
 
@@ -49,7 +49,7 @@ export default function Navbar() {
                 <Toolbar disableGutters>
                     <img className="logo" src={logo}></img>
                     <h1 className="title">
-                        NFT KOSOVA
+                        Big Brother Vip
                     </h1>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -93,9 +93,9 @@ export default function Navbar() {
                     </Box>
 
                     <Box sx={{ display: 'flex', flexGrow: 0, alignItems: 'center' }}>
-                    <IconButton component={Link} to='/basket' size='large' sx={{ color: 'inherit' }}>
-                        <Badge badgeContent={itemCount} color='secondary'>
-                            <ShoppingCart />
+                    <IconButton component={Link} to='/basket' size='large' >
+                        <Badge className="blue" badgeContent={itemCount} color='secondary'>
+                            <Mail />
                         </Badge>
                     </IconButton>
                         {
@@ -103,7 +103,7 @@ export default function Navbar() {
                                 <SignedInMenu />) : (
                                 <div>
                                     <NavLink className="green" to='/Login'>Login</NavLink>
-                                    <NavLink className="white" to='/Register'>Register</NavLink>
+                                    <NavLink className="green" to='/Register'>Register</NavLink>
                                 </div>
                             )}
                     </Box>

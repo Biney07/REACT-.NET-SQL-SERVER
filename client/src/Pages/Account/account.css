@@ -1,0 +1,15 @@
+.MDBBtn, .MDBCheckbox {
+    background-color: #16104e;
+    color: white;
+  }
+  .home {
+    background-color: white;
+    padding: 50px;
+    margin: 50px;
+    text-align: center;
+  }
+  .login-container {
+    background-image: linear-gradient(to left top, #051937, #28306b, #5f449e, #a352cb, #f257ed);
+    display: flex;
+    justify-content: center;
+  }

@@ -16,37 +16,35 @@ export default function BanoriCard({ Banori }: Props) {
     const dispatch = useAppDispatch();
     return (
         <Card className={style.card}>
-            <CardMedia className={style.card_media}
-                // sx={{ height: 140, backgroundSize: 'contain', bgcolor: 'primary.light' }}
-                image={Banori.pictureUrl}
-                title={Banori.name}
-            />
-            <CardHeader className={style.card_header}
-                // avatar={
-                //     <Avatar className={style.avatar} >
-                //         {Banori.name.charAt(0).toUpperCase()}
-                //     </Avatar>
-                // }
-                title={Banori.name}
-            // titleTypographyProps={{
-            //     sx: { fontWeight: 'bold', color: 'primary.main' }
-            // }}
-            />
-            <CardContent className={style.card_content}>
-                <Typography className={style.card_content_title} gutterBottom color='secondary' variant="h5">
-                    {currencyFormat(Banori.price)}
-                </Typography>
+            <Link to={`./catalog/${Banori.id}`}>
+                <CardMedia
+                    className={style.card_media}
+                    image={Banori.pictureUrl}
+                    title={Banori.name}
+                    sx={{ padding: '0px' }}
+                />
+            </Link>
 
-            </CardContent>
-            <CardActions className={style.card_actions}>
-                <LoadingButton className={style.card_actions_button}
-                    loading={status.includes('pendingAddItem' + Banori.id)}
-                    onClick={() => dispatch(addBasketItemAsync({ banoriId: Banori.id }))}
-                    size="small">
-                    Add to cart
-                </LoadingButton>
-                <Button size="small"><Link className={style.card_actions_link} to={`/catalog/${Banori.id}`} >View</Link></Button>
-            </CardActions>
+            <div style={{ padding: '0px 20px' }}>
+                <CardHeader className={style.card_header}
+                    title={Banori.name}
+                    titleTypographyProps={{
+                        variant: "h4",
+                        align: "center",
+                        sx: { fontWeight: '200', color: '#16104e', fontSize: "35px", fontFamily: "Poppins" }
+                    }}
+                />
+                <CardActions className={style.card_actions}>
+                    <LoadingButton className={style.card_actions_button}
+                        loading={status.includes('pendingAddItem' + Banori.id)}
+                        onClick={() => dispatch(addBasketItemAsync({ banoriId: Banori.id }))}
+                        size="large"
+                        sx={{ width: "100%", margin: 2 }}>
+                        Voto
+                    </LoadingButton>
+                </CardActions>
+            </div>
         </Card>
+
     )
 }

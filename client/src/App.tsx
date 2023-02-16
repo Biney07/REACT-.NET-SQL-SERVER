@@ -35,6 +35,8 @@ import AdminLayout from './Admin/AdminLayout';
 import BanoriListt from './Admin/Task/TaskList/BanoriListt';
 import Posts from './Pages/Posts/Posts';
 import CreatePost from './Pages/Posts/CreatePost';
+import Momentet from './Pages/Momentet/Momentet';
+import CreateMoment from './Pages/Momentet/CreateMoment';
 
 
 
@@ -57,7 +59,7 @@ export default function App() {
 
   useEffect(() => {
     initApp().then(() => setLoading(false));
-    
+
   }, [initApp])
 
   if (loading) { return <LoadingComponent message='Initialising app...' /> }
@@ -80,7 +82,8 @@ export default function App() {
         <Route path={"/Register"}>
           <Register />
         </Route>
-        
+        <Route  path='/Momentet' component={Momentet} />
+        <Route  path='/CreateMoment' component={CreateMoment} />
         <Route exact path='/CreatePost' component={CreatePost} />
         <Route exact path='/Posts' component={Posts} />
         <Route exact path='/catalog' component={Catalog} />
@@ -99,7 +102,7 @@ export default function App() {
 
         <AdminRoute path="/admin" component={AdminLayout} />
       </Switch>
-      
+
 
 
     </>
