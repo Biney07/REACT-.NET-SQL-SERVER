@@ -1,31 +1,40 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { ComponentType } from "react";
+import { Redirect, Route, RouteComponentProps, RouteProps } from "react-router";
+import { useAppSelector } from "../Store/hook";
+import { toast } from "react-toastify";
+import Sidebar from "../Components/Sidebar/Sidebar";
+import "./adminDashboard.css"
 
-// Import the admin layout component
-import AdminLayout from './AdminLayout';
-
-interface AdminRouteProps {
-    component: React.FC<any>;
-    path: string;
+interface Props extends RouteProps {
+  component: ComponentType<RouteComponentProps<any>> | ComponentType<any>;
 }
 
-// Define the admin panel route
-const AdminRoute = ({ component: Component, ...rest }: AdminRouteProps) => (
-    <Route
-        {...rest}
-        render={(props) =>
-            // Check if the user is an admin
-            localStorage.getItem('role') === 'Admin' ? (
-                // If the user is an admin, load the admin layout component
-                <AdminLayout>
-                    <Component {...props} />
-                </AdminLayout>
-            ) : (
-                // If the user is not an admin, redirect them to the home page
-                <Redirect to="/" />
-            )
-        }
-    />
-);
+export default function AdminRoute({ component: Component, ...rest }: Props) {
+  const { user } = useAppSelector(state => state.account);
+  const isAdmin = user?.role === "Admin";
+  
+  return (
+    <Route {...rest} render={props => {
+      if (!user) {
+        return <Redirect to={{ pathname: "/login", state: { from: props.location } }} />;
+      }
 
-export default AdminRoute;
+      if (!isAdmin) {
+        toast.error("Access denied: You do not have permission to view this page.");
+        return <Redirect to="/" />;
+      }
+
+      return (
+      <>
+        <Sidebar />
+        <div className="section2">
+        <Component {...props} />
+
+        </div>
+      </>
+      
+      );
+    }} />
+  );
+}
+

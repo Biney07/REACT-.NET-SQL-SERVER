@@ -3,6 +3,11 @@ import {
     NavLink,
   } from "react-router-dom";
 import "./Sidebar.css"
+import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
+import SettingsIcon from '@mui/icons-material/Settings';
+import RemoveRedEyeTwoToneIcon from '@mui/icons-material/RemoveRedEyeTwoTone';
 // import logo from "../../../foto/logo.png";
 
 
@@ -20,35 +25,19 @@ export default function Sidebar() {
                 <nav>
 
                     <div className="side-logo">
-                        <a href="/" style={{color: "white", textDecoration: "none"}}><img  alt="no img" />
-                        Martesa Jonë</a>
+                        <a href="/" style={{color: "white", textDecoration: "none"}}>
+                        <RemoveRedEyeTwoToneIcon className="margin"/>B.B.V.Ks ADMIN</a>
                     </div>
 
                     <ul className="side-list">
                         {/* <li onClick={click} className={clicked ? "active" : " "}><a href="">Gjeneral</a></li> */}
                         {/* <li > */}
-                        <NavLink to="/admin/gjeneral" className="nav-item"><span className="material-icons">menu</span>Gjeneral</NavLink>
-                        <NavLink to="/admin/kengetaret" className="nav-item"><span className="material-icons">music_note</span>Kengetaret</NavLink>
-                        <NavLink to="/admin/resturante" className="nav-item"><span className="material-icons">restaurant</span>Resturante</NavLink>
-                        <NavLink to="/admin/sallon" className="nav-item"><span className="material-icons">auto_awesome</span>Sallon Bukurie</NavLink>
-                        <NavLink to="/admin/garderob" className="nav-item"><span className="material-icons">checkroom</span>Garderoba</NavLink>
-                        <NavLink to="/admin/userat" className="nav-item"><span className="material-icons">person</span>Userat</NavLink>
+                        <NavLink exact to="/admin" className="nav-item"><HomeRepairServiceIcon className="margin"/> Gjeneral</NavLink>
+                        <NavLink to="/admin/posts" className="nav-item"><NewspaperIcon className="margin"/>  Postet</NavLink>
+                        <NavLink to="/admin/banoret" className="nav-item"><InsertEmoticonIcon className="margin"/>  Banoret</NavLink>
                         <hr className="devider"/>
-                        <NavLink to="/admin/settings" className="nav-item"><span className="material-icons">settings</span>Settings </NavLink>
+                        <NavLink to="/admin/settings" className="nav-item"><SettingsIcon className="margin"/>  Settings </NavLink>
                        
-                        {/* Gjeneral
-Kengetar
-Resturante
-Sallon Bukurie
-Garderoba
-Userat
-Settings */}
-                        {/* <li ><a href="">Restaurante</a></li>
-                        <li ><a href="">Sallon Bukurie</a></li>
-                        <li ><a href="">Garderoba</a></li>
-                        <li ><a href="">Userat</a></li>
-                        <li ><a href="">Kompanite</a></li>
-                        <li ><a href="">Settings</a></li> */}
                     </ul>
                 </nav>
             </div>

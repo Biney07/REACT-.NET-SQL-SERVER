@@ -30,12 +30,15 @@ import Orders from './Pages/Order/Order';
 import Sidebar from './Components/Sidebar/Sidebar';
 import OrdersCRUD from './Admin/TableCRUD/OrdersCRUD';
 import AdminRoute from './Admin/AdminRoute';
-import AdminLayout from './Admin/AdminLayout';
+import AdminLayout from './Admin/AdminGeneral';
 // import BanoriList from './Components/BanoriComponets/BanoriList';
 import BanoriListt from './Admin/Banoret/TaskList/BanoriListt';
 import Posts from './Pages/Posts/Posts';
 import CreatePost from './Pages/Posts/CreatePost';
 import PostListt from './Admin/Posts/PostList/PostListt';
+import { toast } from 'react-toastify';
+import OnlyLoggedInCanSeeAdmin from './Components/OnlyLoggedInCanSeeAdmin';
+import AdminGeneral from './Admin/AdminGeneral';
 
 
 
@@ -43,9 +46,24 @@ export default function App() {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   toast.error('Not Authorized to go here', {
+  //     position: "top-center",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "colored",
+  //     });
+  // }, [AdminRoute]);
+
+
   // Use the `useLocation` hook
   const location = useLocation();
   const hideNavbar = location.pathname.startsWith('/admin');
+
 
   const initApp = useCallback(async () => {
     try {
@@ -62,6 +80,8 @@ export default function App() {
   }, [initApp])
 
   if (loading) { return <LoadingComponent message='Initialising app...' /> }
+
+
 
   return (
     <>
@@ -92,16 +112,23 @@ export default function App() {
         <Route path={"/Order"}>
           <Orders />
         </Route>
-        <Route path={"/banoret"}>
+        {/* <Route path={"/banoret"}>
           <BanoriListt />
-        </Route>
-        <Route path={"/postet"}>
+        </Route> */}
+        {/* <Route path={"/postet"}>
           <PostListt />
-        </Route>
+        </Route> */}
         <Route path="/create-order" component={CreateOrder} />
 
-
-        <AdminRoute path="/admin" component={AdminLayout} />
+        <AdminRoute exact path="/admin" component={AdminGeneral} />
+        <AdminRoute path="/admin/onlyLoggedin" component={OnlyLoggedInCanSeeAdmin} />
+        <AdminRoute path="/admin/posts" component={PostListt} />
+        <AdminRoute path="/admin/banoret" component={BanoriListt} />
+        <AdminRoute path="/admin/settings" component={AdminGeneral} />
+        {/* /admin/posts
+            /admin/banoret
+            /admin/settings
+        */}
       </Switch>
       
 
