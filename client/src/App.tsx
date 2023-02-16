@@ -32,9 +32,10 @@ import OrdersCRUD from './Admin/TableCRUD/OrdersCRUD';
 import AdminRoute from './Admin/AdminRoute';
 import AdminLayout from './Admin/AdminLayout';
 // import BanoriList from './Components/BanoriComponets/BanoriList';
-import BanoriListt from './Admin/Task/TaskList/BanoriListt';
+import BanoriListt from './Admin/Banoret/TaskList/BanoriListt';
 import Posts from './Pages/Posts/Posts';
 import CreatePost from './Pages/Posts/CreatePost';
+import PostListt from './Admin/Posts/PostList/PostListt';
 
 
 
@@ -93,6 +94,9 @@ export default function App() {
         </Route>
         <Route path={"/banoret"}>
           <BanoriListt />
+        </Route>
+        <Route path={"/postet"}>
+          <PostListt />
         </Route>
         <Route path="/create-order" component={CreateOrder} />
 

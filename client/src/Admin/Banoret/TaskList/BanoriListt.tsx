@@ -6,7 +6,6 @@ import { Banori, BanoriParams } from "../../../models/banori";
 import { banoriSelectors, fetchBanoretAsync } from "../../../Pages/Catalog/CatalogSlice";
 import { useAppDispatch, useAppSelector } from "../../../Store/hook";
 import CreateBanori from "../CreateTask/CreateBanori";
-import BanoriCardd from "../TaskCard/BanoriCardd";
 import BanoriPopup from "../ViewTask/BanoriPopup";
 import "./task-list.scss";
 

@@ -81,13 +81,13 @@ const Banoret = {
     get: () => requests.get('GetAll'),
 }
 
-// const Comments= {
-//     getCommentsByPostId: (postId: number) =>
-//       requests.get(`Comments/GetCommentsByPostId/${postId}`),
-//     createComment: (comment: any) => requests.post('Comments', comment),
-//     getComment: (id: number) => requests.get(`Comments/${id}`),
-//     deleteComment: (id: number) => requests.delete(`Comments/${id}`),
-//   }
+const Comments= {
+    getCommentsByPostId: (postId: number) =>
+      requests.get(`Comments/GetCommentsByPostId/${postId}`),
+    createComment: (comment: any) => requests.post('Comments', comment),
+    getComment: (id: number) => requests.get(`Comments/${id}`),
+    deleteComment: (id: number) => requests.delete(`Comments/${id}`),
+  }
 //   const Likes = {
 //     likePost: (postId: number, userId: number) =>
 //       agent.post<LikeDTO>(`/Likes/Like/${postId}?userId=${userId}`),
@@ -98,12 +98,14 @@ const Banoret = {
 //     getLikesByUserId: (params: PagingParams, userId: number) =>
 //       agent.get<GetLikesByUserIdResponse>(`/Likes/GetLikesByUserId/${userId}`, params),
 //   }
-//   const Posts= {
-//     getPosts: () => requests.get('Posts'),
-//     createPost: (post: any) => requests.post('Posts', post),
-//     getPost: (id: number) => requests.get(`Posts/${id}`),
-//     deletePost: (id: number) => requests.delete(`Posts/${id}`),
-//   }
+  const Posts= {
+
+    getPosts: () => requests.get('Posts'),
+    createPost: (post: any) => requests.post('Posts', post),
+    getPost: (id: number) => requests.get(`Posts/${id}`),
+    UpdatePost: (id: number,post:any) => requests.put(`Posts/${id}`,post),
+    deletePost: (id: number) => requests.delete(`Posts/${id}`),
+  }
 
 const agent = {
     Catalog,
@@ -111,7 +113,10 @@ const agent = {
     Basket,
     Orders,
     Payments,
-    Banoret
+    Banoret,
+    Posts,
+    // Likes,
+    Comments,
 }
 
 export default agent

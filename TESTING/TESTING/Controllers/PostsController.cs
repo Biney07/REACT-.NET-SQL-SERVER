@@ -78,6 +78,50 @@ namespace TESTING.Controllers
             return CreatedAtAction(nameof(GetPost), new { id = postDTO.Id }, postDTO);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePost(int id, PostDTO postDTO)
+        {
+            if (id != postDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            var post = await _context.Posts.FindAsync(id);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            post.Title = postDTO.Title;
+            post.Body = postDTO.Body;
+
+            try
+            {
+                _context.Posts.Update(post);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PostExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        private bool PostExists(int id)
+        {
+            return _context.Posts.Any(p => p.Id == id);
+        }
+
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<PostDTO>> DeletePost(int id)
         {
