@@ -75,9 +75,9 @@ const Payments = {
 }
 
 const Banoret = {
-    // update: (values: any,id: number) => requests.put('Banoret')
+    update: (values: any,id: number) => requests.put(`Banoret/UpdateBanori/${id}`,values),
     delete: (id:number) => requests.delete(`Banoret/banori/${id}`),
-    create: (values: any) => requests.post('Banoret', values),
+    create: (values: any) => requests.post('Banoret/createBanor', values),
     get: () => requests.get('GetAll'),
 }
 

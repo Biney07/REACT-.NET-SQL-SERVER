@@ -35,7 +35,7 @@ namespace TESTING.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("createBanor")]
         public async Task<ActionResult<Banori>> CreateBanori([FromForm] CreateBanoriDto banoriDto)
         {
             var banori = _mapper.Map<Banori>(banoriDto);
@@ -61,7 +61,7 @@ namespace TESTING.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPut("UpdateBanori/{id}")]
         public async Task<ActionResult<Banori>> UpdateBanori([FromForm] UpdateBanoriDTO banoriDto)
         {
             var banori = await _context.Banoret.FindAsync(banoriDto.Id);

@@ -1,3 +1,5 @@
+import { Delete } from "@mui/icons-material";
+import { Table, TableBody, TableContainer, TableHead, TableCell, TableRow, Button, Paper} from "@mui/material";
 import React, { useState, useEffect } from "react";
 import agent from "../../../API/agent";
 import { Banori, BanoriParams } from "../../../models/banori";
@@ -42,49 +44,54 @@ const BanoriListt: React.FC = () => {
       <button className="card-layout__add" onClick={handleOpen}>
         + Shto banori
       </button>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Relationship</th>
-            <th>Age</th>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Price</th>
-            <th>Profession</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {React.Children.toArray(
-            banoret?.map((banori) => (
-              <tr key={banori.id}>
-                <td>{banori.id}</td>
-                <td>{banori.RelationshipStatus}</td>
-                <td>{banori.age}</td>
-                <td>{banori.name}</td>
-                <td>
-                  <img src={banori.pictureUrl} alt={banori.name} height="50" />
-                </td>
-                <td>{banori.price}</td>
-                <td>{banori.profesioni}</td>
-                <td>
-                  <button onClick={() => handleDelete(banori.id)}>Delete</button>
-                  <button onClick={() => {
-                    setSelectedBanori(banori);
-                    setIsOpenpop(true);
-                  }}>Edit</button>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-      {/* <BanoriPopup
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Relationship</TableCell>
+              <TableCell>Age</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Image</TableCell>
+              <TableCell>Price</TableCell>
+              <TableCell>Profession</TableCell>
+              <TableCell>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {React.Children.toArray(
+              banoret?.map((banori) => (
+                <TableRow key={banori.id}>
+                  <TableCell>{banori.id}</TableCell>
+                  <TableCell>{banori.RelationshipStatus}</TableCell>
+                  <TableCell>{banori.age}</TableCell>
+                  <TableCell>{banori.name}</TableCell>
+                  <TableCell>
+                    <img src={banori.pictureUrl} alt={banori.name} height="50" />
+                  </TableCell>
+                  <TableCell>{banori.price}</TableCell>
+                  <TableCell>{banori.profesioni}</TableCell>
+                  <TableCell>
+                    <Button onClick={() => handleDelete(banori.id)} variant="contained" startIcon={<Delete />}>Delete</Button>
+                    <Button onClick={() => {
+                      setSelectedBanori(banori);
+                      setIsOpenpop(true);
+                    }} variant="contained">Edit</Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {selectedBanori &&
+      
+      <BanoriPopup
         isOpen={isOpenpop}
         setIsOpen={setIsOpenpop}
         banori={selectedBanori}
-      /> */}
+      />
+      }
       <CreateBanori setIsOpen={setIsOpen} isOpen={isOpen} />
     </>
   );

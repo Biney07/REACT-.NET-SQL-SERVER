@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+
+import React, { FormEvent, FormEventHandler, useState } from "react";
 import agent from "../../../API/agent";
 import { FormInput } from "../../../Components/components/formComponents/FormComponents";
-// import { Banori } from "../../../models/banori";
 import "../../popup.scss";
 
 interface Props {
@@ -10,103 +10,134 @@ interface Props {
 }
 
 const CreateBanori: React.FC<Props> = ({ setIsOpen, isOpen }) => {
-  const [banori, setBanori] = useState({
+
+  const [banor, setBanor] = useState({
     name: "",
     biografia: "",
     price: 100,
-    pictureUrl: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1",
-    RelationshipStatus: "True",
-    profesioni: "",
+    File: new Blob([]),
     age: 0,
+    relationshipStatus: false,
+    profesioni: "",
   });
 
-  const handleClose = () => {
+    const handleClose = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = () => {
+        const arrayBuffer = reader.result as ArrayBuffer;
+        const blob = new Blob([arrayBuffer]);
+        setBanor((prev) => {
+          return { ...prev, File: blob };
+        });
+      };
+    }
+  };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
-    setBanori((prev) => {
+      setBanor((prev) => {
       return { ...prev, [name]: value };
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    agent.Banoret.create(banori)
-      .then((banori) => setBanori(banori))
-      .catch(function (error) {
-        console.log(error.response.data);
-      });
-    // window.location.reload();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("name", banor.name);
+    formData.append("biografia", banor.biografia);
+    formData.append("price", banor.price.toString());
+    formData.append("File", banor.File);
+    formData.append("age", banor.age.toString());
+    formData.append("relationshipStatus",  banor.relationshipStatus ? 'true' : 'false');
+    formData.append("profesioni", banor.profesioni);
+    try {
+      const result = await agent.Banoret.create(formData);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return isOpen ? (
     <div className="popup">
-      <div className="popup__inner">
-        <button className="popup__close-button" onClick={handleClose}>
-          X
-        </button>
-        <h1>Shto banoriun</h1>
-        <form className="popup__form" onSubmit={handleSubmit}>
-          <FormInput
-            label="Name"
-            type="text"
-            name="name"
-            placeholder="name"
-            onChange={handleChange}
-          />
-          <FormInput
-            label="Biography"
-            type="text"
-            name="biografia"
-            placeholder="biography"
-            onChange={handleChange}
-          />
-          <FormInput
-            label="Price"
-            type="number"
-            name="price"
-            placeholder="price"
-            onChange={handleChange}
-          />
-          <FormInput
-            label="Picture Url"
-            type="text"
-            name="pictureUrl"
-            placeholder="picture url"
-            onChange={handleChange}
-          />
-          <FormInput
-            label="Relationship Status"
-            type="text"
-            name="RelationshipStatus"
-            placeholder="relationship status"
-            onChange={handleChange}
-            />
-          <FormInput
-            label="Profession"
-            type="text"
-            name="profesioni"
-            placeholder="profession"
-            onChange={handleChange}
-            />
-          <FormInput
-            label="Age"
-            type="number"
-            name="age"
-            placeholder="age"
-            onChange={handleChange}
-          />
-          <button type="submit">Shtot banorin</button>
-        </form>
-      </div>
+       <div className="popup__inner">
+         <button className="popup__close-button" onClick={handleClose}>
+           X
+         </button>
+     <h1>Shto banoriun</h1>
+    <form onSubmit={handleSubmit} className="popup__form" asp-action="Create" encType="multipart/form-data">
+      <FormInput
+        label="Name"
+        name="name"
+        type="text"
+        placeholder=""
+        onChange={handleChange}
+        
+      />
+      <FormInput
+        label="Biografia"
+        name="biografia"
+        type="text"
+        placeholder=""
+        onChange={handleChange}
+        
+      />
+      <FormInput
+        label="Price"
+        name="price"
+        type="number"
+        placeholder=""
+        onChange={handleChange}
+        
+      />
+      <FormInput
+        label="File"
+        name="File"
+        type="file"
+        placeholder=""
+        onChange={handleFileInputChange}
+      />
+      <FormInput
+        label="Age"
+        name="age"
+        type="number"
+        placeholder=""
+        onChange={handleChange}
+        
+      />
+      <FormInput
+        label="Relationship Status"
+        name="relationshipStatus"
+        type="checkbox"
+        placeholder=""
+        onChange={handleChange}
+        
+      />
+      <FormInput
+        label="Profesioni"
+        name="profesioni"
+        type="text"
+        placeholder=""
+        onChange={handleChange}
+        
+      />
+      <button type="submit">Create Banor</button>
+    </form>
+
     </div>
-  ) : (
-    <></>
-  );
+    </div>
+    ): (
+          <></>
+    );
 };
 
 export default CreateBanori;

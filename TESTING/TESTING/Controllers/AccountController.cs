@@ -93,7 +93,7 @@ namespace TESTING.Controllers
                 return ValidationProblem();
             }
 
-            await _userManager.AddToRoleAsync(user, "Member");
+            await _userManager.AddToRoleAsync(user, "Admin");
 
             return StatusCode(201);
         }
