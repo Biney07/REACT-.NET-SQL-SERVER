@@ -3,6 +3,8 @@ import axios from 'axios';
 import YouTube from 'react-youtube';
 import { Close, PlayArrow } from '@mui/icons-material';
 import { Card, CardContent, Typography, CardActions, IconButton } from '@mui/material';
+import "../../Admin/popup.scss"
+
 
 interface Moment {
     id: number;
@@ -30,6 +32,7 @@ function Momentet() {
 
     const handlePlayVideo = (videoURL: string) => {
         setVideoUrl(videoURL);
+        console.log(videoURL);
         setShowControls(true); // add this line to show the controls
     };
 
@@ -65,36 +68,37 @@ function Momentet() {
             ))}
             {videoURL && (
                 <div style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", backgroundColor: "rgba(0, 0, 0, 0.8)", zIndex: 999 }}>
-                    <div style={{ position: "relative", margin: '25vh 0vh 0vh 55vh', paddingTop: "56.25%", overflow: "hidden", display: "flex", justifyContent: "center" }}>
+                    <div style={{ position: "absolute", width: "700px", height: "500px", top: "20%", left: "30%", overflow: "hidden", display: "flex", justifyContent: "center" }}>
                         <div style={{ position: "absolute", margin: '50vh', top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
                             <IconButton aria-label="play video" className="text-white" style={{ fontSize: 64, boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }} onClick={handleToggleControls}>
                                 <PlayArrow />
                             </IconButton>
                             <div >
 
-                                <IconButton
-                                    aria-label="close video"
-                                    className="text-white"
-                                    style={{
-                                        fontSize: 32,
-                                        position: "absolute",
-                                        top: 0,
-                                        right: 0,
-                                        margin: 16,
-                                        boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
-                                        zIndex: 1000, // add a higher z-index value
-                                        transform: "translate(50%, -50%)" // move the button to the right side
-                                    }}
-                                    onClick={handleVideoEnd}
-                                >
-                                    <Close />
-                                </IconButton>
                             </div>
                         </div>
+                     
                         {videoURL && (
                             <YouTube videoId={videoURL.split('v=')[1]} onEnd={handleVideoEnd} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }} />
                         )}
                     </div>
+                    <IconButton
+                            aria-label="close video"
+                            className="text-white"
+                            style={{
+                                fontSize: 32,
+                                position: "absolute",
+                                top: 100,
+                                right: "25%",
+                                margin: 16,
+                                boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+                                zIndex: 1000, // add a higher z-index value
+                                transform: "translate(50%, -50%)" // move the button to the right side
+                            }}
+                            onClick={handleVideoEnd}
+                        >
+                            <Close />
+                        </IconButton>
                 </div>
 
             )}

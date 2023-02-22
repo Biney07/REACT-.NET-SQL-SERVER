@@ -87,7 +87,7 @@ export default function Navbar() {
                             <Button
                                 key={page.name}
                                 sx={{ color: 'white' }}>
-                                <NavLink className="nav-link" to={page.route}>{page.name}</NavLink>
+                                <NavLink className="nav-link" activeClassName=" " to={page.route}>{page.name}</NavLink>
                             </Button>
                         ))}
                     </Box>
