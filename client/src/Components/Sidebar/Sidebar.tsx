@@ -12,6 +12,8 @@ import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import PaidIcon from '@mui/icons-material/Paid';
 import HomeIcon from '@mui/icons-material/Home';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import LiveTvIcon from '@mui/icons-material/LiveTv';
+import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 // import logo from "../../../foto/logo.png";
 
 
@@ -31,11 +33,13 @@ export default function Sidebar() {
                     </div>
 
                     <ul className="side-list">
-                        <NavLink exact to="/admin" className="nav-item"><HomeRepairServiceIcon className="margin"/> Gjeneral</NavLink>
+                        <NavLink exact to="/admin" className="nav-item"><VerifiedOutlinedIcon className="margin"/> Nominimet</NavLink>
                         <NavLink to="/admin/posts" className="nav-item"><NewspaperIcon className="margin"/>  Postet</NavLink>
                         <NavLink to="/admin/banoret" className="nav-item"><InsertEmoticonIcon className="margin"/>  Banoret</NavLink>
                         <NavLink to="/admin/moments" className="nav-item"><OndemandVideoIcon className="margin"/>  Momentet</NavLink>
+                        <NavLink to="/admin/primes" className="nav-item"><LiveTvIcon className="margin"/>  Prime</NavLink>
                         <NavLink to="/admin/sponzors" className="nav-item"><PaidIcon className="margin"/>  Sponzoret</NavLink>
+                        
 
                         <hr className="devider"/>
                         <NavLink to="/admin/settings" className="nav-item"><SettingsIcon className="margin"/>  Settings </NavLink>

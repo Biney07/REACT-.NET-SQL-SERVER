@@ -114,6 +114,15 @@ const Comments= {
         update: (values: any,id: number) => requests.put(`Moments/updateMoment/${id}`,values),
         
     }
+
+    const Primes={
+        get: () => requests.get('Primes'),
+        create: (values: any) => requests.post('Primes/addPrime', values),
+        delete: (id:number) => requests.delete(`Primes/delPrime/${id}`),
+        update: (values: any,id: number) => requests.put(`Primes/updatePrime/${id}`,values),
+        
+    }
+
     const Sponzors={
         get: () => requests.get('Sponzors'),
         create: (values: any) => requests.post('Sponzors/createSponzor', values),
@@ -133,6 +142,7 @@ const agent = {
     // Likes,
     Comments,
     Moments,
+    Primes,
     Sponzors
 }
 

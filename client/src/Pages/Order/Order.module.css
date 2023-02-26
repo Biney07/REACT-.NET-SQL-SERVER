@@ -1,33 +1,9 @@
 .table {
-    background: #000000 !important;
-    background-color: #000000;
-    
-    color: #ffffffdb !important;
-    /* padding: 0 !important; */
-    border: 2px solid #808090;
-    border-radius: 10px !important;
     margin-top: 20px;
-    margin-left: 10px;
-    width: 99% !important;
+    margin-left: 4%;
+    width: 92% !important;
+    border: solid rgba(0, 0, 0, 0.145) 2px ;
   }
   .order_button{
-    color: #00FF47 !important;
-  }
-
-  .table tr{
-
-    color: #ffffffdb !important;
-
-  }
-
-  .table th{
-
-    color: #ffffffdb !important;
-
-  }
-
-  .table td{
-
-    color: #ffffffdb !important;
-
+    color: #090050 !important;
   }

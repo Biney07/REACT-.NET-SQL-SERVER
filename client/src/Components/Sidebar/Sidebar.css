@@ -42,13 +42,13 @@
   
 }
 .side-list .nav-item:hover{
-  background: #505874;
+  background: #251b7b;
   color: white;
   transition: 0.2s;
 
 }
 .active{
-  background: #505874;
+  background: #251b7b;
   border-left: 4px solid #DDE2FF;
   color: white !important;
 }

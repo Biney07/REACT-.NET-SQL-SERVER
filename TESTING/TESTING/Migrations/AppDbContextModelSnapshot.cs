@@ -256,6 +256,9 @@ namespace TESTING.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("clicks")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Moments");
@@ -404,6 +407,21 @@ namespace TESTING.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Banoret")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lojrat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -411,6 +429,9 @@ namespace TESTING.Migrations
                     b.Property<string>("VideoURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("clicks")
+                        .HasColumnType("int");
 
                     b.Property<int>("week")
                         .HasColumnType("int");
@@ -453,14 +474,14 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "60e79146-8da1-4e36-b7ba-418ef4773968",
+                            ConcurrencyStamp = "9e6623f4-c56f-474d-8462-e60505996317",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "6252be1c-474e-43b8-9a11-e087eff5c333",
+                            ConcurrencyStamp = "696e9f78-7959-4286-a33e-268c4e066243",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

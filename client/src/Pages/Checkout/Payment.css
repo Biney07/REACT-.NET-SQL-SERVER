@@ -166,16 +166,17 @@ color: var(--blue);
 }
 
 .muitextfieldwhite .MuiOutlinedInput-notchedOutline {
-  border-color: #fff;
+  border-color: #000;
 }
 
 .muitextfieldwhite .MuiInputLabel-root {
-  color: #fff !important;
+  color: #000 !important;
 }
 
 .muitextfieldwhite .MuiOutlinedInput-input {
-  color: #fff !important;
+  color: #000 !important;
 }
 .MuiStepIcon-root {
   color: #14a44d;
 }
+
