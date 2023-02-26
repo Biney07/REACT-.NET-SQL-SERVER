@@ -8,6 +8,7 @@ export interface Banori {
     RelationshipStatus: boolean;
     profesioni: string;
     age: number;
+    nominated:boolean;
 }
 
 export interface BanoriParams {

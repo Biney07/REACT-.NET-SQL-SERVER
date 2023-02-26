@@ -3,23 +3,24 @@ import { useAppDispatch, useAppSelector } from '../Store/hook';
 import { banoriSelectors, fetchBanoretAsync, addSelectedBanori, removeSelectedBanori, updateBanoretArray } from '../Pages/Catalog/CatalogSlice';
 import LoadingComponent from '../Components/LoadingComponent';
 import axios from 'axios';
-import { Banori } from '../models/banori';
-import { Nominimet } from '../models/nominimet';
+import { Button, CircularProgress } from '@mui/material';
 
 function AdminGeneral() {
   const dispatch = useAppDispatch();
   const banoret = useAppSelector(banoriSelectors.selectAll);
   const selectedBanoret = useAppSelector(state => state.catalog.selectedBanoret);
   const [checkedItems, setCheckedItems] = useState(new Set(selectedBanoret.map(banori => banori.id)));
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     dispatch(fetchBanoretAsync());
   }, [dispatch]);
 
- const handleCheckboxChange = (id: number, event: any) => {
+const handleCheckboxChange = (id: number, event: any) => {
   const isChecked = event.target.checked;
+  const banoriIndex = banoret.findIndex(banori => banori.id === id);
   if (isChecked) {
-    dispatch(addSelectedBanori(banoret.find(banori => banori.id === id)));
+    dispatch(addSelectedBanori(banoret[banoriIndex]));
     setCheckedItems(checkedItems.add(id));
   } else {
     dispatch(removeSelectedBanori({ id }));
@@ -29,55 +30,55 @@ function AdminGeneral() {
 };
 
 
-const saveSelectedBanori = (selectedBanori: Banori[]): Promise<void> => {
-  return new Promise<void>((resolve, reject) => {
-    const nominimet: Nominimet = {
-      Banoret: selectedBanori.map(banori => {
-        return {
-          id: banori.id,
-          name: banori.name,
-          biografia: banori.biografia,
-          price: banori.price,
-          pictureUrl: banori.pictureUrl,
-          age: banori.age,
-          RelationshipStatus: banori.RelationshipStatus,
-          profesioni: banori.profesioni,
-          cloudanaryPublicId: banori.pictureUrl
-        };
-      }),
-    };
-
-    axios.post('https://localhost:7226/api/Nominimet', nominimet)
-      .then(response => {
-        console.log('Saved successfully:', response.data);
-        // Dispatch an action to update the store, if needed
-        dispatch(updateBanoretArray(selectedBanori));
-        resolve(); // resolve the promise on success
-      })
-      .catch(error => {
-        console.error('Error while saving:', error);
-        reject(error); // reject the promise on error
-      });
-  });
+const updateBanor = async (ii: number) => {
+  try {
+   
+    const response = await axios.put(
+      `https://localhost:7226/api/Banoret/api/banori/nominated/`,
+      { id: ii, nominated: true },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 };
+
 
 const handleSaveClick = async () => {
-  const selectedBanoriIds = Array.from(checkedItems);
-  const selectedBanori = banoret.filter((banori) =>
-    selectedBanoriIds.includes(banori.id)
-  );
-  console.log(selectedBanori);
+  try {
+      setIsLoading(true);
+  for (const Banor of banoret) {
+       await axios.put(
+      `https://localhost:7226/api/Banoret/api/banori/nominated/`,
+      { id: Banor.id, nominated: false },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    }
+    // Loop through the selected banoris and call the updateBanor function for each of them
+    for (const banori of selectedBanoret) {
+        console.log(banori.id);
+      await updateBanor(banori.id);
+    }
 
-  await new Promise<void>(resolve => {
-    saveSelectedBanori(selectedBanori);
-    resolve();
-  });
-
-  // Clear the checked items
-  setCheckedItems(new Set());
+    // Clear the checked items and deselect the selected banoris
+    // setCheckedItems(new Set());
+    setIsLoading(false);
+  } catch (error) {
+    setIsLoading(false);
+    console.error('Error while updating banoris:', error);
+    // You can show an error message to the user here
+  }
 };
-
-
+ console.log(banoret);
 
   if (!banoret) {
     return <LoadingComponent message="Loading banoret..." />;
@@ -101,7 +102,16 @@ const handleSaveClick = async () => {
           </div>
         ))}
       </div>
-      <button onClick={handleSaveClick}>Save</button>
+      <Button
+      className='ButtonAdmin'
+    variant="contained"
+    color="primary"
+    onClick={handleSaveClick}
+    disabled={isLoading}
+    startIcon={isLoading ? <CircularProgress size={20} /> : null}
+  >
+    Save
+  </Button>
     </div>
   );
 }

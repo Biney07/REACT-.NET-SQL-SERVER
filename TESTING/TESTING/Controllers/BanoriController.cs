@@ -10,6 +10,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using TESTING.DTO;
 using TESTING.Services;
+using System.Net;
 
 namespace TESTING.Controllers
 {
@@ -80,7 +81,7 @@ namespace TESTING.Controllers
                 if (!string.IsNullOrEmpty(banori.CloudanaryPublicId))
                     await _imageService.DeleteImageAsync(banori.CloudanaryPublicId);
 
-                banori.PictureUrl = imageResult.SecureUrl.ToString();
+                    banori.PictureUrl = imageResult.SecureUrl.ToString();
                 banori.CloudanaryPublicId = imageResult.PublicId;
             }
 
@@ -137,7 +138,28 @@ namespace TESTING.Controllers
             return banoret;
         }
 
+        [HttpPut]
+        [Route("api/banori/nominated/")]
+        public async Task<ActionResult> updateNominated([FromBody] UpdateNominatedRequest request)
+        {
+            // First, find the Banori object with the specified ID in your data store
+            Banori banoriToUpdate = await _context.Banoret.FindAsync(request.Id);
 
+            // If the object doesn't exist, return a 404 Not Found response
+            if (banoriToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            // Otherwise, update the Nominated property of the Banori object
+            banoriToUpdate.Nominated = request.Nominated;
+
+            // Save the changes to your data store
+            await _context.SaveChangesAsync();
+
+            // Return a 204 No Content response to indicate that the update was successful
+            return Ok();
+        }
 
         [HttpGet("filters")]
         public async Task<IActionResult> GetFilters()

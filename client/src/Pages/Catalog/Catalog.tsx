@@ -19,10 +19,14 @@ const sortOptions = [
 
 export default function Catalog() {
     const banoret = useAppSelector(banoriSelectors.selectAll);
+    const nominatedBanoret = banoret.filter(banori => banori.nominated);
+    
     const { banoretLoaded, filtersLoaded, profesionet, banoriParams, metaData } = useAppSelector(state => state.catalog);
     const dispatch = useAppDispatch();
 
+  
     useEffect(() => {
+       
         if (!banoretLoaded) dispatch(fetchBanoretAsync());
     }, [banoretLoaded, dispatch])
 
@@ -33,19 +37,22 @@ export default function Catalog() {
     if (!filtersLoaded) return <LoadingComponent message='Loading banoret...' />
 
     return (
-        <Grid container >
-           
-            <Grid item >
-                <BanoriList banoret={banoret} />
-            </Grid>
-            <Grid item  />
-            <Grid item  >
-                {metaData &&
-                <AppPagination 
-                    metaData={metaData}
-                    onPageChange={(page: number) => dispatch(setPageNumber({pageNumber: page}))}
-                />}
-            </Grid>
-        </Grid>
+
+
+<Grid container direction="column" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <Grid item>
+    <BanoriList banoret={nominatedBanoret} />
+  </Grid>
+  <Grid item sx={{padding:'30px'}} >
+    {metaData && (
+      <AppPagination 
+      
+        metaData={metaData}
+        onPageChange={(page: number) => dispatch(setPageNumber({pageNumber: page}))}
+      />
+    )}
+  </Grid>
+</Grid>
+
     )
 }

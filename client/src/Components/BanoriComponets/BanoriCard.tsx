@@ -3,6 +3,7 @@ import { addBasketItemAsync } from "../BasketComponets/basketSlice";
 import { useAppDispatch, useAppSelector } from "../../Store/hook";
 import style from "./BanoriCard.module.css";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 interface Props {
   Banori: Banori;
@@ -11,6 +12,7 @@ interface Props {
 export default function BanoriCard({ Banori }: Props) {
   const { status } = useAppSelector((state) => state.basket);
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const [voteCount, setVoteCount] = useState<number>(
     Math.floor(Math.random() * 1201) + 1800
   );
@@ -22,7 +24,15 @@ export default function BanoriCard({ Banori }: Props) {
     return () => clearInterval(interval);
   }, []);
 
-
+function handleClick() {
+  const user = localStorage.getItem("user");
+  if (!user) {
+    
+    history.push("/Login");
+  } else {
+    dispatch(addBasketItemAsync({ banoriId: Banori.id }));
+  }
+}
   return (
 <article>
 
@@ -31,13 +41,13 @@ export default function BanoriCard({ Banori }: Props) {
     }} src={Banori.pictureUrl} alt="" />
     <div className={style.card_content_container}>
       <h2 className={style.emribanorit}>{Banori.name}</h2>
-      <button
-        className={style.votobutton}
-        onClick={() => dispatch(addBasketItemAsync({ banoriId: Banori.id }))}
-        disabled={status.includes("pendingAddItem" + Banori.id)}
-      >
-        Voto
-      </button>
+        <button
+    className={style.votobutton}
+    onClick={() => handleClick()}
+    disabled={status.includes("pendingAddItem" + Banori.id)}
+  >
+    Voto
+  </button>
     
     </div>
         <div style={{

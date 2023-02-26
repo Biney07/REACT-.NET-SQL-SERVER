@@ -79,6 +79,7 @@ const Banoret = {
     delete: (id:number) => requests.delete(`Banoret/banori/${id}`),
     create: (values: any) => requests.post('Banoret/createBanor', values),
     get: () => requests.get('GetAll'),
+    updateNom:(values: any,id: number) => requests.put(`Banoret/banori/nominated/${id}?nominated=${values}`,{})
 }
 
 const Comments= {

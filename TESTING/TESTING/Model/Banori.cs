@@ -11,6 +11,8 @@
         public bool RelationshipStatus { get; set; }
         public string Profesioni { get; set; }
         public string CloudanaryPublicId { get; set; }
+        public bool Nominated { get; set; } = false;
+        public bool Eleminuar { get; set; } = false;
     }
 }
 
