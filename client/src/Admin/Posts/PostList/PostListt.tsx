@@ -10,6 +10,7 @@ import PostEdit from "../PostEdit/PostEdit";
 // import CreatePost from "../CreateTask/CreatePost";
 // import PostPopup from "../ViewTask/PostPopup";
 import "./task-list.scss";
+import '../../adminDashboard.css'
 
 const PostListt: React.FC = () => {
   // const posts = useAppSelector(postSelectors.selectAll);
@@ -30,6 +31,7 @@ const PostListt: React.FC = () => {
 
   const handleDelete = (id: number) => {
     agent.Posts.deletePost(id)
+    window.location.reload();
     };
 
 
@@ -50,12 +52,12 @@ const PostListt: React.FC = () => {
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>userId</TableCell>
-              <TableCell>title</TableCell>
-              <TableCell>body</TableCell>
-              <TableCell>createdDate</TableCell>
-              <TableCell>likes</TableCell>
-              <TableCell>comments</TableCell>
+              <TableCell>UserId</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell>Date Created</TableCell>
+              <TableCell>Likes</TableCell>
+              <TableCell>Comments</TableCell>
               <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
@@ -71,8 +73,8 @@ const PostListt: React.FC = () => {
                   <TableCell>{(post.likes).length}</TableCell>
                   <TableCell>{(post.comments).length}</TableCell>
                   <TableCell>
-                    <Button onClick={() => handleDelete(post.id)} variant="contained" startIcon={<Delete />}>Delete</Button>
-                    <Button onClick={() => {
+                    <Button className='ButtonAdmin' onClick={() => handleDelete(post.id)} variant="contained" startIcon={<Delete />}>Delete</Button>
+                    <Button  className='ButtonAdmin' onClick={() => {
                       setSelectedPost(post);
                       setIsOpenpop(true);
                     }} variant="contained">Edit</Button>

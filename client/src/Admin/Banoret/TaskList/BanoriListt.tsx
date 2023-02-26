@@ -1,5 +1,5 @@
 import { Delete } from "@mui/icons-material";
-import { Table, TableBody, TableContainer, TableHead, TableCell, TableRow, Button, Paper} from "@mui/material";
+import { Table, TableBody, TableContainer, TableHead, TableCell, TableRow, Button, Paper, CircularProgress} from "@mui/material";
 import React, { useState, useEffect } from "react";
 import agent from "../../../API/agent";
 import { Banori, BanoriParams } from "../../../models/banori";
@@ -17,7 +17,7 @@ const BanoriListt: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpenpop, setIsOpenpop] = useState<boolean>(false);
   const [selectedBanori, setSelectedBanori] = useState<Banori | null>(null);
-
+  const [loading, setLoading] = useState<{[id: number]: boolean}>({});
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
   };
@@ -26,11 +26,12 @@ const BanoriListt: React.FC = () => {
     if (!banoretLoaded) dispatch(fetchBanoretAsync());
 }, [banoretLoaded, dispatch])
 
-  const handleDelete = (id: number) => {
-    agent.Banoret.delete(id)
-    };
-
-
+ const handleDelete = async (id: number) => {
+  setLoading(prevLoading => ({...prevLoading, [id]: true}));
+  await agent.Banoret.delete(id);
+  setLoading(prevLoading => ({...prevLoading, [id]: false}));
+  window.location.reload();
+};
   // useEffect(() => {
   //   agent.Banoret.get().then((response) => {
   //     setBanoriat(response);
@@ -39,7 +40,7 @@ const BanoriListt: React.FC = () => {
 
   return (
     <>
-      <h1>Banoriat</h1>
+      <h1>Banorët</h1>
       <button className="card-layout__add" onClick={handleOpen}>
         + Shto banori
       </button>
@@ -71,8 +72,8 @@ const BanoriListt: React.FC = () => {
                   <TableCell>{banori.price}</TableCell>
                   <TableCell>{banori.profesioni}</TableCell>
                   <TableCell>
-                    <Button onClick={() => handleDelete(banori.id)} variant="contained" startIcon={<Delete />}>Delete</Button>
-                    <Button onClick={() => {
+                    <Button className='ButtonAdmin' onClick={() => handleDelete(banori.id)} variant="contained" startIcon={<Delete />}  disabled={loading[banori.id]}>  {loading[banori.id] ? <CircularProgress size={24} /> : 'Delete'}</Button>
+                    <Button className='ButtonAdmin' onClick={() => {
                       setSelectedBanori(banori);
                       setIsOpenpop(true);
                     }} variant="contained">Edit</Button>

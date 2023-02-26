@@ -13,6 +13,7 @@ using Stripe;
 using TESTING.Helpers;
 using AutoMapper;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -77,7 +78,6 @@ builder.Services.AddTransient<DbInitializer>();
 
 
 
-
 builder.Services.AddIdentityCore<User>(opt =>
 {
     opt.User.RequireUniqueEmail = true;
@@ -125,9 +125,19 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+try
+{
+    await context.Database.MigrateAsync();
+    await DbInitializer.Initialize(context, userManager);
+}
+catch (Exception ex)
+{
+    logger.LogError(ex, "A problem occurred during migration");
+}
 
-
-DbInitializer.Seed(app);
 
 app.Run();
-// This method gets called by the runtime. Use this method to add services to the container.  if (args.Length == 1 && args[0].ToLower() == "seeddata")

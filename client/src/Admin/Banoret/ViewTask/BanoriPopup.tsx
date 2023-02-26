@@ -67,6 +67,7 @@ const BanoriPopup: React.FC<Props> = ({ setIsOpen, isOpen, banori }) => {
     try {
       const result = await agent.Banoret.update(formData, banori.id);
       console.log(result);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -133,8 +134,8 @@ const BanoriPopup: React.FC<Props> = ({ setIsOpen, isOpen, banori }) => {
             onChange={handleFileInputChange}
           />
           <div className="popup__buttons">
-            <button type="submit">Save</button>
-            <button onClick={handleClose}>Cancel</button>
+            <button className="ButtonAdmin" type="submit">Save</button>
+            <button className="ButtonAdmin" onClick={handleClose}>Cancel</button>
           </div>
         </form>
       </div>

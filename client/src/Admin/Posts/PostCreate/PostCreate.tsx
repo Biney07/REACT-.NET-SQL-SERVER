@@ -38,8 +38,7 @@ const CreatePostForm: React.FC<Props> = ({ setIsOpen, isOpen }) => {
         console.log('Post created successfully');
         setTitle('');
         setBody('');
-
-        history.push('/postet');
+        history.push('/Posts');
       })
       .catch((error) => {
         console.log(error);

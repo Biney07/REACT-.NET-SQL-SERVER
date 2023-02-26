@@ -453,14 +453,14 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "1596fb18-eeff-4e7e-abae-11208063305f",
+                            ConcurrencyStamp = "60e79146-8da1-4e36-b7ba-418ef4773968",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "91081c5b-541b-423c-b447-1d58e71d26ab",
+                            ConcurrencyStamp = "6252be1c-474e-43b8-9a11-e087eff5c333",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

@@ -45,11 +45,12 @@ function Momentet() {
 
     };
 
-    return (
+    return (<>
+        <h1 style={{fontFamily:'HeyBeauty', fontSize:'70px',justifyContent:'center',display:'flex', color:'var(--blue)', margin:'0px 0px 50px 0px'}}>Momentet</h1>
         <div className="row" style={{ marginRight: '2%', marginLeft: '2%', marginTop: '20px' }}>
             {moments.map(moment => (
                 <div key={moment.id} className="col-md-4 col-xs-6 mb-3" style={{ marginBottom: '30px' }}>
-                    <div className="card">
+                    <div className="card" style={{ width: '490px' }}>
                         <div onClick={() => handlePlayVideo(moment.videoURL)} style={{ position: 'relative', cursor: 'pointer' }}>
                             <img src={`https://img.youtube.com/vi/${moment.videoURL.split('v=')[1]}/mqdefault.jpg`} className="card-img-top" alt={moment.title} style={{ width: '100%' }} />
                             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -103,6 +104,7 @@ function Momentet() {
 
             )}
         </div>
+        </>
     );
 }
 

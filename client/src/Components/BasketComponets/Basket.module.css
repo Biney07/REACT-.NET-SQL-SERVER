@@ -1,19 +1,25 @@
 
 
 .table_content {
-    background: black !important;
-    color: rgba(255, 255, 255, 0.727) !important;
+    background: white !important;
+    color: var(--blue) !important;
+    font-size: 25px !important;
   }
+    .table_title {
+      background: white !important;
+      color: var(--blue) !important;
+      font-size: 23px !important;
+    }
 
   .table_content img{
-    border-radius: 10px;
+    border-radius: 6px;
   }
 
   .table_content_summary {
     /* background: black !important; */
-    font-weight: 500;
-    font-size: 15px;
-    color: rgb(255, 255, 255) !important;
+    font-weight: 400;
+    font-size: 25px;
+    color: var(--blue) !important;
   }
 
   .table_button svg{
@@ -29,19 +35,24 @@
   .checkOut_button{
     /* padding: 5px; */
     border-radius: 8px !important;
-    background: transparent !important;
-    border: 2px solid rgba(245, 245, 245, 0.851) !important;
+    background: var(--blue) !important;
+    color: white;
     
   }
+ .checkOut_button:hover {
+          background: rgb(84, 83, 186) !important;
+          color: white !important;
+
+   }
   
   .table_body{
-    border: 2px solid rgba(245, 245, 245, 0.851) !important;
-    background: black !important;
+    border: 2px solid var(--blue) !important;
+    background: rgb(255, 255, 255) !important;
     /* background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(190, 255, 172, 0.319) 0%, rgba(255, 255, 255, 0.05) 70%) !important; */
     /* border-radius: 10px !important; */
     /* box-shadow: rgba(100, 100, 111, 0.362) 0px 7px 29px 0px !important; */
-    color: #fff !important;
-    border-radius: 8px !important;
+    color: var(--blue) !important;
+    border-radius:  8px !important;
     padding: 30px !important;
     margin-bottom: 20px !important;
     /* margin-right: 30px !important; */

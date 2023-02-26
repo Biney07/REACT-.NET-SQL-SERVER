@@ -13,6 +13,7 @@ using TESTING.Model;
 using TESTING.Model.OrderAggregate;
 using System.Net.Mail;
 using Microsoft.Build.Evaluation;
+using System.Globalization;
 
 namespace API.Controllers
 {
@@ -119,30 +120,34 @@ namespace API.Controllers
 
                 using (MailMessage mail = new MailMessage())
                 {
-                    mail.From = new MailAddress("nftkosova@gmail.com");
+                    mail.From = new MailAddress("bigbrothervipkosovaa@gmail.com");
                     mail.To.Add(email);
                     mail.Subject = "Order Confirmation";
-                    string emailBody = "Dear " + User.Identity.Name + ", \n\n";
-                    emailBody += "Thank you for placing an order with us. Your order details are as follows:\n\n";
-                    emailBody += "Order Number: " + order.Id + "\n";
-                    emailBody += "Items Purchased:\n";
+                    string emailBody = "I/e Dashur " + User.Identity.Name + ", \n\n";
+                    emailBody += "Faleminderit qe votuat per banoret e preferuar ne shtepine me te madhe ne Kosove!\n\n";
+                    emailBody += "Vota ID: " + order.Id + "\n";
+                    emailBody += "Ju votuat per:\n";
                     foreach (var orderItem in order.OrderItems)
                     {
-                        emailBody += "- " + orderItem.ItemOrdered.Name + ", Quantity: " + orderItem.Quantity + ", Price: " + orderItem.Price + "\n";
+                        decimal PRICE = orderItem.Price / 100;
+                        string PRICE_FORMATED = PRICE.ToString("0.00");
+                        emailBody += "- " + orderItem.ItemOrdered.Name + ", Numri i votave: " + orderItem.Quantity + ", Qmimi: " + PRICE_FORMATED + "\n";
                     }
-                    emailBody += "Subtotal: " + order.Subtotal + "\n";
-                    emailBody += "Delivery Fee: " + order.DeliveryFee + " EURO \n";
-                    emailBody += "Total: " + order.GetTotal() + " EURO \n\n";
-                    emailBody += "Shipping Address:\n";
-                    emailBody += "State: " + order.ShippingAddress.State + ", ";
-                    emailBody += "Country: " + order.ShippingAddress.Country + "\n";
-                    emailBody += "Address 1: " + order.ShippingAddress.Address1 + "\n";
-                    emailBody += "\nThank you for your business!\n\nBest regards,\n NFT KOSOVA";
+                    decimal Subtotal = order.Subtotal / 100;
+                    string subtotal_formatted = subtotal.ToString("0.00");
+                    emailBody += "Nentotali: " + subtotal_formatted + "\n";
+                    decimal TAX = order.DeliveryFee / 100;
+                    string TAX_formatted = TAX.ToString("0.00");
+                    emailBody += "Tax: " + TAX_formatted + " EURO \n";
+                    decimal TOTAL = order.GetTotal() / 100;
+                    string TOTAL_formatted = TOTAL.ToString("0.00");
+                    emailBody += "Totali: " + TOTAL_formatted + " EURO \n\n";   
+                   
                     mail.Body = emailBody;
                     mail.IsBodyHtml = false;
                     using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                     {
-                        smtp.Credentials = new System.Net.NetworkCredential("nftkosova@gmail.com", "sfozefnhclxwfvkm");
+                        smtp.Credentials = new System.Net.NetworkCredential("bigbrothervipkosovaa@gmail.com", "fyujsaxpygbiiacy");
                         smtp.EnableSsl = true;
                         await smtp.SendMailAsync(mail);
                     }

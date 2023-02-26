@@ -1,10 +1,11 @@
 import { Delete } from "@mui/icons-material";
-import { Table, TableBody, TableContainer, TableHead, TableCell, TableRow, Button, Paper} from "@mui/material";
+import { Table, TableBody, TableContainer, TableHead, TableCell, TableRow, Button, Paper, CircularProgress} from "@mui/material";
 import React, { useState, useEffect } from "react";
 import agent from "../../../API/agent";
 import { Moment } from "../../../models/moment";
 import MomentCreate from "../MomentCreate/MomentCreate";
 import MomentEdit from "../MomentEdit/MomentEdit";
+import EditIcon from '@mui/icons-material/Edit';
 import "./task-list.scss";
 
 const MomentList: React.FC = () => {
@@ -12,14 +13,17 @@ const MomentList: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpenpop, setIsOpenpop] = useState<boolean>(false);
   const [selectedMoment, setSelectedMoment] = useState<Moment | null>(null);
-
+  const [loading, setLoading] = useState<{[id: number]: boolean}>({});
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const handleDelete = (id: number) => {
-    agent.Moments.delete(id);
-  };
+const handleDelete = async (id: number) => {
+  setLoading(prevLoading => ({...prevLoading, [id]: true}));
+  await agent.Moments.delete(id);
+  setLoading(prevLoading => ({...prevLoading, [id]: false}));
+  window.location.reload();
+};
 
   useEffect(() => {
     agent.Moments.get().then((response) => {
@@ -51,15 +55,15 @@ const MomentList: React.FC = () => {
                 <TableRow key={moment.id}>
                   <TableCell>{moment.id}</TableCell>
                   <TableCell>{moment.title}</TableCell>
-                  <TableCell>{moment.description}</TableCell>
+                  <TableCell>{moment.description}</TableCell>  
                   <TableCell>{moment.videoURL}</TableCell>
                   <TableCell>{moment.date}</TableCell>
                   <TableCell>
-                    <Button onClick={() => handleDelete(moment.id)} variant="contained" startIcon={<Delete />}>Delete</Button>
-                    <Button onClick={() => {
+                    <Button className='ButtonAdmin' onClick={() => handleDelete(moment.id)} variant="contained" startIcon={<Delete />}  disabled={loading[moment.id]}> {loading[moment.id] ? <CircularProgress size={24} /> : 'Delete'}</Button>
+                    <Button className='ButtonAdmin' onClick={() => {
                       setSelectedMoment(moment);
                       setIsOpenpop(true);
-                    }} variant="contained">Edit</Button>
+                    }} variant="contained" startIcon={<EditIcon />}>Edit</Button>
                   </TableCell>
                 </TableRow>
               ))

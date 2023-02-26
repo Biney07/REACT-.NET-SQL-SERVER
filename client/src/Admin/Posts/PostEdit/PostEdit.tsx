@@ -37,6 +37,7 @@ const PostEdit: React.FC<Props> = ({ setIsOpen, isOpen, post }) => {
     event.preventDefault();
     try {
       const result = await agent.Posts.UpdatePost(post.id,editedPost);
+      window.location.reload();
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -65,8 +66,8 @@ const PostEdit: React.FC<Props> = ({ setIsOpen, isOpen, post }) => {
             onChange={handleChange}
           />
           <div className="popup__buttons">
-            <button type="submit">Save</button>
-            <button onClick={handleClose}>Cancel</button>
+            <button className='ButtonAdmin' type="submit">Save</button>
+            <button className='ButtonAdmin'onClick={handleClose}>Cancel</button>
           </div>
         </form>
       </div>

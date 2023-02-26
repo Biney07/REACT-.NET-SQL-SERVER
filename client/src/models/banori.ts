@@ -5,7 +5,7 @@ export interface Banori {
     price: number;
     File?: File;
     pictureUrl: string;
-    RelationshipStatus: string;
+    RelationshipStatus: boolean;
     profesioni: string;
     age: number;
 }

@@ -8,7 +8,8 @@ export default function AddressForm() {
     const { control, formState } = useFormContext();
     return (
         <>
-            <Typography variant="h6" gutterBottom>
+        <div className='AdressForm'>
+            <Typography  variant="h6" gutterBottom>
                 Shipping address
             </Typography>
             <Grid container spacing={3}>
@@ -42,6 +43,7 @@ export default function AddressForm() {
                     />
                 </Grid>
             </Grid>
+            </div>
         </>
     );
 }

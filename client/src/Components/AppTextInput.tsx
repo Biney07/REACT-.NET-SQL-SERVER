@@ -4,17 +4,20 @@ import style from "./BanoriComponets/BanoriCard.module.css"
 
 interface Props extends UseControllerProps {
     label: string;
+    
 }
 export default function AppTextInput(props: Props) {
     const {fieldState, field} = useController({...props, defaultValue: ''})
     return (
-        <TextField className={style.form_control_label}
+        <TextField  
+        
             {...props}
             {...field}
             fullWidth
             variant='outlined'
             error={!!fieldState.error}
             helperText={fieldState.error?.message}
+
         />
     )
 }

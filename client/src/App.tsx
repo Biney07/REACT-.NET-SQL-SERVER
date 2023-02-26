@@ -42,6 +42,7 @@ import OnlyLoggedInCanSeeAdmin from './Components/OnlyLoggedInCanSeeAdmin';
 import AdminGeneral from './Admin/AdminGeneral';
 import MomentList from './Admin/Moments/MomentList/MomentList';
 import SponzorList from './Admin/Sponzoret/SponzoretList/SponzorList';
+import PaymentForm from './Pages/Checkout/PaymentForm';
 
 
 
@@ -104,6 +105,7 @@ export default function App() {
         <Route path={"/Register"}>
           <Register />
         </Route>
+        <Route  path='/PAYMENT' component={PaymentForm} />
         <Route  path='/Momentet' component={Momentet} />
         <Route  path='/CreateMoment' component={CreateMoment} />
         <Route exact path='/CreatePost' component={CreatePost} />

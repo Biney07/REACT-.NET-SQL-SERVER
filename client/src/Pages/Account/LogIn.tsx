@@ -27,11 +27,21 @@ export default function LogIn() {
     async function submitForm(data: FieldValues) {
         try {
             await dispatch(signInUser(data));
-            history.push('/onlyloggedin');
-        } catch (error) {
-            console.log(error);
-        }
+        const userStr = localStorage.getItem('user');
+  if (userStr !== null) {
+    const user = JSON.parse(userStr);
+    if (user.role === 'Admin') {
+      history.push('/admin');
+      window.location.reload();
+    } else {
+      history.push('/Home');
+       window.location.reload();
     }
+  }
+  // Note: avoid calling `window.location.reload()` here
+} catch (error) {
+  console.log(error);
+}}
 
     return (
         <>

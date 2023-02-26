@@ -23,18 +23,14 @@ export default function BasketSummary({subtotal}: Props) {
                             <TableCell className={Style.table_content_summary} align="right">{currencyFormat(subtotal)}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell className={Style.table_content_summary} colSpan={2}>Delivery fee*</TableCell>
+                            <TableCell className={Style.table_content_summary} colSpan={2}>Tax</TableCell>
                             <TableCell className={Style.table_content_summary} align="right">{currencyFormat(deliveryFee)}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={Style.table_content_summary} colSpan={2}>Total</TableCell>
                             <TableCell className={Style.table_content_summary} align="right">{currencyFormat(subtotal + deliveryFee)}</TableCell>
                         </TableRow>
-                        <TableRow>
-                            <TableCell className={Style.table_content_summary} colSpan={3}>
-                                <span style={{fontStyle: 'italic'}}>*Orders over $100 qualify for free delivery</span>
-                            </TableCell>
-                        </TableRow>
+                      
                     </TableBody>
                 </Table>
             </TableContainer>

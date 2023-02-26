@@ -2,15 +2,15 @@ import { configureStore } from '@reduxjs/toolkit'
 import { basketSlice } from '../Components/BasketComponets/basketSlice';
 import { accountSlice } from '../Pages/Account/accountSlice'
 import { catalogSlice } from '../Pages/Catalog/CatalogSlice';
+import { banoriSlice } from '../Admin/Banoret/BanoriSlice';
 
 //Reducers are pure functions that receive the current state and incoming action as arguments, and return a new state.
 const store = configureStore({
   reducer: {
         catalog: catalogSlice.reducer,
         account: accountSlice.reducer,
-        basket: basketSlice.reducer
-
-   
+        basket: basketSlice.reducer,
+        banori: banoriSlice.reducer,
 
   }
 })

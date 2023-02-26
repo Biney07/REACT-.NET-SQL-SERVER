@@ -1,138 +1,115 @@
-.card {
-  margin-top: 20px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.67) 0%, rgba(255, 255, 255, 0.05) 70%) !important;
-  border-radius: 10px !important;
-  box-shadow: rgba(100, 100, 111, 0.362) 0px 7px 29px 0px !important;
-  color: #fff !important;
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&family=Titillium+Web&family=Work+Sans&display=swap');
+@font-face {
+  font-family: 'HeyBeauty';
+  src: url('../../../public/HeyBeauty.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'THERIDGE';
+  src: url('../../../public/THERIDGE.ttf') format('truetype');
 }
 
-.form_control_label {
-  background: white !important;
-  background-color: white;
-
-  color: #16104e !important;
-  /* padding: 0 !important; */
-  border: 1px solid #16104e;
-  margin-top: 20px;
-  margin-left: 10px;
+.banoretContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+    .heading {
+      text-align: center;
+      width: 100%;
+      font-family: 'HeyBeauty';
+      font-size: 57px;
+      color:var(--blue)
+    }
+.carta {
+  margin: 36px 15px 0px 15px;
 }
 
-.form_control_label_button button {
-  border: 1px solid #16104e;
-  color: #fff;
-}
-
-.form_control_label input {
-  color: #ffffffdb !important;
-}
-
-.form_control_label label {
-  background: white !important;
-  background-color: white;
-  color: black !important;
-  padding: 0 !important;
-}
-
-.form_control_label:has(.MuiPaper-root .MuiPaper-elevation .MuiPaper-rounded .MuiPaper-elevation1 .css-19yx21k-MuiPaper-root) {
-  background: white !important;
-  background-color: white !important;
-}
-
-.radio_button span :not(label) {
-  /* background: #00FF47; */
-  color: #16104e !important;
-  /* accent-color: #00FF47 !important; */
-}
-
-.card_header {
-  align-items: center !important;
-  display: flex !important;
-  color: whitesmoke !important;
-  font-weight: 800 !important;
-
-  padding-top: 0 !important;
-
-}
-
-.avatar {
-  background-color: #00b0ff !important;
-  border-radius: 50% !important;
-  color: #fff !important;
-  font-weight: bold !important;
-  height: 40px !important;
-  width: 40px !important;
+.card_content_container {
+    position: absolute; 
+      display: flex;
+      align-items: flex-end;
+      bottom: 0;
+      right: 0;
+      margin: 0 15px 17px 0;
+      flex-direction: column;
 }
 
 
-
-/* .card {
-    width: 400px;
-    height: 200px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-  } */
-
-/* h1 {
-    color: white;
-    font-size: 36px;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  } */
-
-.card_media {
-  border-radius: 20px;
-  margin: 15px !important;
-  /* background-color: #00b0ff !important; */
-  background-size: contain !important;
-  height: 254px !important;
+article {
+  margin-left: 20px;
+  margin-right: 20px;
+  --hover: 0;
 }
 
-.card_content {
-  padding: 20px !important;
-  padding-top: 0 !important;
-
+article:hover {
+  --hover: 1;
+}
+figure {
+  width: 460px;
+  aspect-ratio: 8 / 5;
+  --bg: rgb(221, 247, 253);
+  --accent: var(--blue);
+  transition: background 0.2s;
+  background:
+    radial-gradient(circle at top left, var(--accent), transparent 75%),
+    var(--bg);
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  
 }
 
-.card_content_title {
-  padding-top: 0 !important;
-  color: whitesmoke !important;
-  font-size: 22px !important;
+figure:after {
+  content: "";
+  position: absolute;
+  width: 20%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  bottom: 0%;
+  left: 10%;
+  background: linear-gradient(-65deg, var(--blue) 50%, var(--accent) 50%);
+  filter: blur(25px);
+  transform:
+    translateX(calc(var(--hover) * 15%)) scale(calc(1 + (var(--hover) * 0.2)));
+  transition: transform 0.2s, background 0.2s;
 }
 
-.card_content_subtitle {
-  color: #fff !important;
-  font-size: 14px !important;
+
+.emribanorit {
+font-family: 'Titillium Web', sans-serif;
+  font-weight: 800;
+  font-size: 72px;
+  color: var(--blue);
+  text-shadow: 0px 0px 7px white;
+  margin-bottom: 1px;
 }
-
-.card_actions {
-  display: flex !important;
-  justify-content: space-between !important;
-
-  padding-top: 0 !important;
-}
-
-.card_actions_button {
+.votobutton {
   background-color: #16104e !important;
   border: none !important;
   border-radius: 10px !important;
   color: #fff !important;
-  font-size: 14px !important;
-  padding: 10px 20px !important;
+  font-size: 17px !important;
+  font-weight: 400;
+  padding: 6px 40px !important;
   /* padding-top: 0 !important; */
 
 }
-
-.card_actions_link {
-  color: #ffffffd7 !important;
-  border: 2px solid #ffffffd7;
-  font-size: 14px !important;
-  text-decoration: none !important;
+.votobutton:hover {
+  background-color: #3d31a9 !important;
+ 
   /* padding-top: 0 !important; */
-  padding: 10px 20px !important;
-  border-radius: 10px !important;
 
-
-
+}
+.votacounter{
+font-size: 45px !important;
+  font-weight: bold;
+  font-family: 'THERIDGE';
 }

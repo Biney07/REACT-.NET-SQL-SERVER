@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import agent from "../../../API/agent";
 import { FormInputUpdate } from "../../../Components/components/formComponents/FormComponents";
 import { Moment } from "../../../models/moment";
+import { Close } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 
 interface Props {
   isOpen: boolean;
@@ -29,6 +31,7 @@ const MomentEdit: React.FC<Props> = ({ setIsOpen, isOpen, moment }) => {
     try {
       await agent.Moments.update(editedMoment,moment.id);
       setIsOpen(false);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -41,9 +44,11 @@ const MomentEdit: React.FC<Props> = ({ setIsOpen, isOpen, moment }) => {
   return isOpen ? (
     <div className="popup">
       <div className="popup__inner">
-        <button className="popup__close-button" onClick={handleClose}>
-          X
-        </button>
+     <div className="popup__close-button-wrapper">
+      <IconButton className="RedCloseButton" onClick={handleClose}>
+        <Close  />
+      </IconButton>
+    </div>
         <h1>Edit Moment</h1>
         <form onSubmit={handleSubmit}>
           <FormInputUpdate
@@ -70,7 +75,7 @@ const MomentEdit: React.FC<Props> = ({ setIsOpen, isOpen, moment }) => {
             value={editedMoment.videoURL}
             onChange={handleChange}
           />
-          <button type="submit">Save Changes</button>
+          <button className="ButtonAdmin" type="submit">Save Changes</button>
         </form>
       </div>
     </div>

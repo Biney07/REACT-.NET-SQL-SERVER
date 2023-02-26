@@ -29,6 +29,7 @@ const MomentCreate: React.FC<Props> = ({ setIsOpen, isOpen }) => {
     event.preventDefault();
     try {
       await agent.Moments.create(moment);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }

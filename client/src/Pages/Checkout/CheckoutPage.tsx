@@ -12,7 +12,7 @@ import { validationSchema } from "./CheckoutValidation";
 import agent from "../../API/agent";
 import { clearBasket } from "../../Components/BasketComponets/basketSlice";
 import PaymentForm from "./PaymentForm";
-
+import './Payment.css'
 const steps = ['Shipping address', 'Review your order', 'Payment details'];
 
 export default function CheckoutPage() {
@@ -88,7 +88,7 @@ export default function CheckoutPage() {
                 
                 setOrderNumber(orderNumber);
                 setPaymentSucceeded(true);
-                setPaymentMessage('Thank you - we have received your payment');
+                setPaymentMessage('Faleminderit - kemi pranuar pagesën tuaj.');
                 setActiveStep(activeStep + 1);
                 dispatch(clearBasket());
                 setLoading(false);
@@ -130,8 +130,8 @@ export default function CheckoutPage() {
 
     return (
         <FormProvider {...methods}>
-            <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-                <Typography component="h1" variant="h4" align="center">
+          <Paper className='checkoutborder' sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, border: "none !important" }}>
+                <Typography className='kalografi' align="center">
                     Checkout
                 </Typography>
                 <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
@@ -149,9 +149,7 @@ export default function CheckoutPage() {
                             </Typography>
                             {paymentSucceeded ? (
                                 <Typography variant="subtitle1">
-                                    Your order number is #{orderNumber}. We have not emailed your order
-                                    confirmation, and will not send you an update when your order has
-                                    shipped as this is a fake store!
+                                    Numri i votes te juaj eshte #{orderNumber}. Ju kemi dërguar një email për votimin e suksesshëm! Faleminderit për votën tuaj që ndihmuat banorët tuaj të preferuar të qëndrojnë
                                 </Typography>
                             ) : (
                                 <Button variant='contained' onClick={handleBack}>

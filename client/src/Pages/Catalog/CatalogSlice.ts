@@ -1,5 +1,5 @@
 
-import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import agent from "../../API/agent";
 import { MetaData } from "../../models/pagination";
 import { Banori, BanoriParams } from "../../models/banori";
@@ -12,6 +12,7 @@ interface CatalogState {
     profesionet: string[];
     banoriParams: BanoriParams;
     metaData: MetaData | null;
+    selectedBanoret: Banori[];
 }
 
 const banoretAdapter = createEntityAdapter<Banori>();
@@ -81,8 +82,10 @@ export const catalogSlice = createSlice({
         status: 'idle',
         profesionet: [],
         banoriParams: initParams(),
-        metaData: null
+        metaData: null,
+        selectedBanoret: []
     }),
+    
     reducers: {
         setBanoriParams: (state, action) => {
             state.banoretLoaded = false;
@@ -97,8 +100,18 @@ export const catalogSlice = createSlice({
         },
         resetBanoriParams: (state) => {
             state.banoriParams = initParams();
-        }
+        },
+        addSelectedBanori: (state, action) => {
+            state.selectedBanoret.push(action.payload);
+        },
+        removeSelectedBanori: (state, action) => {
+            state.selectedBanoret = state.selectedBanoret.filter(banori => banori.id !== action.payload.id);
+        },
+         updateBanoretArray: (state, action: PayloadAction<Banori[]>) => {
+            banoretAdapter.setAll(state, action.payload);
+        },
     },
+       
     extraReducers: (builder => {
         builder.addCase(fetchBanoretAsync.pending, (state) => {
             state.status = 'pendingFetchBanoret';
@@ -141,4 +154,4 @@ export const catalogSlice = createSlice({
 
 export const banoriSelectors = banoretAdapter.getSelectors((state: RootState) => state.catalog);
 
-export const { setBanoriParams, resetBanoriParams, setMetaData, setPageNumber } = catalogSlice.actions;
+export const { setBanoriParams, resetBanoriParams, setMetaData, setPageNumber,removeSelectedBanori,addSelectedBanori, updateBanoretArray } = catalogSlice.actions;

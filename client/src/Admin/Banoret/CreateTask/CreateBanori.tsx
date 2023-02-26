@@ -3,6 +3,7 @@ import React, { FormEvent, FormEventHandler, useState } from "react";
 import agent from "../../../API/agent";
 import { FormInput } from "../../../Components/components/formComponents/FormComponents";
 import "../../popup.scss";
+import { CircularProgress } from "@mui/material";
 
 interface Props {
   isOpen: boolean;
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const CreateBanori: React.FC<Props> = ({ setIsOpen, isOpen }) => {
-
+const [loading, setLoading] = useState(false);
   const [banor, setBanor] = useState({
     name: "",
     biografia: "",
@@ -60,13 +61,16 @@ const CreateBanori: React.FC<Props> = ({ setIsOpen, isOpen }) => {
     formData.append("relationshipStatus",  banor.relationshipStatus ? 'true' : 'false');
     formData.append("profesioni", banor.profesioni);
     try {
-      const result = await agent.Banoret.create(formData);
-      console.log(result);
+        setLoading(true);
+        await agent.Banoret.create(formData);
+        setLoading(false);
+        window.location.reload();
+  
     } catch (error) {
-      console.log(error);
+   
     }
   };
-
+ 
   return isOpen ? (
     <div className="popup">
        <div className="popup__inner">
@@ -130,7 +134,7 @@ const CreateBanori: React.FC<Props> = ({ setIsOpen, isOpen }) => {
         onChange={handleChange}
         
       />
-      <button type="submit">Create Banor</button>
+      <button className='ButtonAdmin' type="submit" disabled={loading} >{loading ? <CircularProgress size={24} /> : 'Create Banori'}</button>
     </form>
 
     </div>

@@ -1,0 +1,181 @@
+
+@font-face {
+    font-family: 'HeyBeauty';
+    src: url('../../../public/HeyBeauty.ttf') format('truetype');
+}
+
+.payment-form {
+    padding: 4rem 1.5rem;
+    width: 580px;
+    max-width: 480px;
+    max-height: 400px;
+    margin: 0 auto;
+   
+    border-radius: 1.5rem;
+    background-image: url('./creditcard.png');
+    background-size: cover;
+    /* add this line */
+    background-position: center;
+    /* add this line */
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+}
+
+/* Style for the form fields */
+
+
+/* Style for the form labels */
+.payment-form label {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}  
+
+
+
+
+.wrapperpay {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background: #2b2d2f;
+}
+
+.titlepay {
+    text-align: center;
+    margin-top: 55px;
+    color: #fff;
+    font-size: 25px;
+}
+.cardpay {
+    position: relative;
+    width: 496px;
+    height: 288px;
+    padding: 20px;
+    /* increase the padding */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border-radius: 16px;
+    
+
+    background-image: url("https://products.ls.graphics/mesh-gradients/images/78.-Night-sky.jpg");
+    background-position: center;
+    background-size: cover;
+box-shadow: 0 0.7rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.infos {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    /* increase the padding */
+}
+
+.infos--bottom {
+    display: flex;
+    gap: 40px;
+   
+    /* increase the padding */
+}
+.h1pay {
+    font-size: 30px;
+    margin: -15px 0px 0px 0px;
+}
+
+.h2pay {
+    font-size: 24px;
+}
+
+.h3pay {
+    font-size: 18px;
+    margin: -15px 0px 0px 0px;
+    font-weight: 500;
+}
+
+.paragraphpay {
+    font-size: 18px;
+}
+
+.sectionpay {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.top,
+.bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top img {
+    width: 20px;
+}
+
+.brand {
+    height: 20px;
+    mix-blend-mode: overlay;
+}
+
+
+
+.card-number {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.paymentcontainer {
+    display: flex;
+    align-items: center;
+    margin:0px;
+}
+.AdressForm{
+    max-width: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 0 auto;
+        /* add margin to center horizontally */
+        height: 55vh;
+        /* add height to center vertically */
+
+}
+.checkoutborder{
+    margin-top: 30px !important;
+        margin-bottom: 48px;
+        padding: 15px 200px !important;
+        box-shadow:none !important;
+}
+.kalografi{
+font-family: 'HeyBeauty' !important;
+margin-top: -20px !important;
+margin-bottom: 10px;
+font-size: 60px !important;
+color: var(--blue);
+}
+.muitextfieldwhite .MuiOutlinedInput-root {
+  background-color: transparent;
+}
+
+.muitextfieldwhite .MuiOutlinedInput-notchedOutline {
+  border-color: #fff;
+}
+
+.muitextfieldwhite .MuiInputLabel-root {
+  color: #fff !important;
+}
+
+.muitextfieldwhite .MuiOutlinedInput-input {
+  color: #fff !important;
+}
+.MuiStepIcon-root {
+  color: #14a44d;
+}

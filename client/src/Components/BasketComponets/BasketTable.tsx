@@ -17,14 +17,15 @@ export default function BasketTable({ items, isBasket = true }: Props) {
     const { status } = useAppSelector(state => state.basket);
     const dispatch = useAppDispatch();
     return (
+
         <TableContainer component={Paper} className={Style.table_content}>
             <Table sx={{ minWidth: 650 }}>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Banori</TableCell>
-                        <TableCell align="right">Price</TableCell>
-                        <TableCell align="center">Quantity</TableCell>
-                        <TableCell align="right">Subtotal</TableCell>
+                        <TableCell className={Style.table_title}>Banori</TableCell>
+                        <TableCell  className={Style.table_title}align="right">Çmimi</TableCell>
+                        <TableCell className={Style.table_title}align="center">Sa vota</TableCell>
+                        <TableCell className={Style.table_title} align="right">SubTotal</TableCell>
                         {isBasket &&
                             <TableCell align="right"></TableCell>}
                     </TableRow>
@@ -37,8 +38,8 @@ export default function BasketTable({ items, isBasket = true }: Props) {
                         >
                             <TableCell className={Style.table_content} component="th" scope="row">
                                 <Box display='flex' alignItems='center'>
-                                    <img src={item.pictureUrl} alt={item.name} style={{ height: 80, marginRight: 20 }} />
-                                    <span>{item.name}</span>
+                                    <img src={item.pictureUrl} alt={item.name} style={{ height: 150, marginRight: 20 }} />
+                                    <span className={Style.table_content}>{item.name}</span>
                                 </Box>
                             </TableCell>
                             <TableCell className={Style.table_content} align="right">${(item.price / 100).toFixed(2)}</TableCell>

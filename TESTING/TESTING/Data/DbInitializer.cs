@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using System.Collections.Generic;
 using TESTING.Model;
 
@@ -8,78 +9,53 @@ namespace TESTING.Data
 {
     public class DbInitializer
     {
-        public static void Seed(IApplicationBuilder applicationBuilder)
+        public static async Task Initialize(AppDbContext context, UserManager<User> userManager)
         {
-            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            if (!userManager.Users.Any())
             {
-                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-                context.Database.EnsureCreated();
-
-                // Seed Banoret if there are none in the database
-                if (!context.Banoret.Any())
+                var admin = new User
                 {
-                    context.Banoret.AddRange(new List<Banori>() {
-                new Banori {
-                    Name = "Vedai",
-                    Biografia = "sit amet commodo magna eros quis urna.",
-                    Price = 6000,
-                    PictureUrl = "https://levrosupplements.com/856-large_default/levrone-anabolic-double-impact-2kg.jpg",
-                    Profesioni = "Kevin Levrone Black Series",
-                    CloudanaryPublicId = ""
-                },
-                new Banori {
-                    Name = "Stresi",
-                    Biografia = "Ma e mira ne bote.",
-                    Price = 2000,
-                    PictureUrl = "https://levrosupplements.com/878-large_default/levrone-anabolic-creatine-300g.jpg",
-                    Profesioni = "Bad Ass",
-                    CloudanaryPublicId = ""
-                }
-            });
-                    context.SaveChanges();
-                }
+                    UserName = "Admin",
+                    Email = "admin@gmail.com"
+                };
 
-                if (!context.Roles.Any())
+                await userManager.CreateAsync(admin, "Albin2002@");
+                await userManager.AddToRoleAsync(admin, "Admin");
+
+                var user = new User
                 {
-                    var adminRole = new Role
-                    {
-                        Name = "Admin",
-                        NormalizedName = "ADMIN"
-                    };
+                    UserName = "User",
+                    Email = "user@gmail.com"
+                };
 
-                    context.Roles.Add(adminRole);
-                    context.SaveChanges();
-                }
-
-                if (!context.Users.Any(u => u.UserName == "admin@gmail.com"))
-                {
-                    var user = new User
-                    {
-                        UserName = "admin@gmail.com",
-                        Email = "admin@gmail.com",
-                        EmailConfirmed = true
-                    };
-
-                    var password = new PasswordHasher<User>();
-                    var hashed = password.HashPassword(user, "Albin2002@");
-                    user.PasswordHash = hashed;
-
-                    context.Users.Add(user);
-                    context.SaveChanges();
-
-                    var adminRole = context.Roles.First(r => r.NormalizedName == "ADMIN");
-
-                    var userRole = new IdentityUserRole<int>
-                    {
-                        UserId = user.Id,
-                        RoleId = adminRole.Id
-                    };
-
-                    context.UserRoles.Add(userRole);
-                    context.SaveChanges();
-                }
+                await userManager.CreateAsync(user, "User2002@");
+                await userManager.AddToRolesAsync(user, new[] { "Member"});
             }
-        }
 
+
+            if (context.Banoret.Any()) return;
+
+            var products = new List<Banori>
+            {
+                new Banori
+                {
+                    Name = "Stresi",
+                    Biografia =
+                        "Stresi djali qe po qmend Boten",
+                    Price = 20000,
+                    PictureUrl = "https://static.wikia.nocookie.net/bigbrother/images/9/90/KosovoVIP1_Stresi_Large.jpg/revision/latest?cb=20221206074754",
+                    Profesioni = "KENGTAR",
+                    Age= 30,    
+                },
+             
+            };
+
+            foreach (var product in products)
+            {
+                context.Banoret.Add(product);
+            }
+
+            context.SaveChanges();
+        }
     }
 }

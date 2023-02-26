@@ -17,12 +17,7 @@ export default function BasketPage() {
             <Grid container>
                 <Grid item xs={8} style={{padding: '20px'}}>
                     <BasketTable items={basket.items} />
-                    {/* <BasketTable items={basket.items} />
-                    <BasketTable items={basket.items} />
-                    <BasketTable items={basket.items} />
-                    <BasketTable items={basket.items} />
-                    <BasketTable items={basket.items} />
-                    <BasketTable items={basket.items} /> */}
+               
                 </Grid >
                 <Grid item xs={4} style={{padding: '20px'}}>
                     <div className={Style.sticky}>

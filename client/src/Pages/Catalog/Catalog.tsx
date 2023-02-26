@@ -33,32 +33,13 @@ export default function Catalog() {
     if (!filtersLoaded) return <LoadingComponent message='Loading banoret...' />
 
     return (
-        <Grid container columnSpacing={4}>
-            <Grid item xs={3}>
-                <Paper className={style.form_control_label} sx={{ mb: 2 }}>
-                    <BanoriSearch />
-                </Paper>
-                <Paper className={style.form_control_label} sx={{ mb: 2, p: 2 }}>
-                    <RadioButtonGroup
-                        selectedValue={banoriParams.orderBy}
-                        options={sortOptions}
-                        onChange={(e) => dispatch(setBanoriParams({ orderBy: e.target.value }))}
-                    />
-                </Paper>
-                <Paper className={style.form_control_label} sx={{ mb: 2, p: 2 }}>
-                    <CheckboxButtons
-                        items={profesionet}
-                        checked={banoriParams.profesionet}
-                        onChange={(items: string[]) => dispatch(setBanoriParams({ profesionet: items }))}
-                    />
-                </Paper>
-              
-            </Grid>
-            <Grid item xs={9}>
+        <Grid container >
+           
+            <Grid item >
                 <BanoriList banoret={banoret} />
             </Grid>
-            <Grid item xs={3} />
-            <Grid item xs={9} sx={{mb: 2}}>
+            <Grid item  />
+            <Grid item  >
                 {metaData &&
                 <AppPagination 
                     metaData={metaData}

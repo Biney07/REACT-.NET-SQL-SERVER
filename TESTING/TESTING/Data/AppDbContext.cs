@@ -29,6 +29,7 @@ namespace TESTING.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
         public DbSet<PostComment> PostComments { get; set; }
+   
 
         //to get the seed data
         protected override void OnModelCreating(ModelBuilder builder)

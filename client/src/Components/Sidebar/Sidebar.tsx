@@ -10,6 +10,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import RemoveRedEyeTwoToneIcon from '@mui/icons-material/RemoveRedEyeTwoTone';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import PaidIcon from '@mui/icons-material/Paid';
+import HomeIcon from '@mui/icons-material/Home';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 // import logo from "../../../foto/logo.png";
 
 
@@ -21,9 +23,11 @@ export default function Sidebar() {
             <div className="kanvas">
                 <nav>
 
-                    <div className="side-logo">
-                        <a href="/" style={{color: "white", textDecoration: "none"}}>
-                        <RemoveRedEyeTwoToneIcon className="margin"/>B.B.V.Ks ADMIN</a>
+                    <div className="side-logo" style={{marginTop:'35px'}} >
+                        <a href="/" style={{ color: "white", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Poppins" }}>
+      <SupervisedUserCircleIcon style={{ fontSize: "40px", marginRight: "10px" }} />
+      <h1 style={{ fontSize: "28px", margin: "0" }}>Vëllau i madh</h1>
+    </a>
                     </div>
 
                     <ul className="side-list">
@@ -35,7 +39,7 @@ export default function Sidebar() {
 
                         <hr className="devider"/>
                         <NavLink to="/admin/settings" className="nav-item"><SettingsIcon className="margin"/>  Settings </NavLink>
-                       
+                          <NavLink to="/Home" className="nav-item"><HomeIcon className="margin"/>  Home </NavLink>
                     </ul>
                 </nav>
             </div>
