@@ -26,6 +26,7 @@ namespace TESTING.Controllers
             return moments.Select(moment => new MomentDTO
             {
                Id = moment.Id, 
+               //clicks = moment.clicks,
                Title= moment.Title,
                Description= moment.Description,
                VideoURL= moment.VideoURL,
@@ -49,6 +50,7 @@ namespace TESTING.Controllers
             var newMoment = new Moment
             {
                 Title = moment.Title,
+                //clicks = moment.clicks,
                 Description = moment.Description,
                 VideoURL = moment.VideoURL,
                 Date = moment.Date,

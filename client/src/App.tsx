@@ -43,6 +43,8 @@ import AdminGeneral from './Admin/AdminGeneral';
 import MomentList from './Admin/Moments/MomentList/MomentList';
 import SponzorList from './Admin/Sponzoret/SponzoretList/SponzorList';
 import PaymentForm from './Pages/Checkout/PaymentForm';
+import Primes from './Pages/Primes/Primes';
+import PrimeList from './Admin/Primes/PrimeList/PrimeList';
 
 
 
@@ -107,6 +109,7 @@ export default function App() {
         </Route>
         <Route  path='/PAYMENT' component={PaymentForm} />
         <Route  path='/Momentet' component={Momentet} />
+        <Route  path='/Primes' component={Primes} />
         <Route  path='/CreateMoment' component={CreateMoment} />
         <Route exact path='/CreatePost' component={CreatePost} />
         <Route exact path='/Posts' component={Posts} />
@@ -118,12 +121,7 @@ export default function App() {
         <Route path={"/Order"}>
           <Orders />
         </Route>
-        {/* <Route path={"/banoret"}>
-          <BanoriListt />
-        </Route> */}
-        {/* <Route path={"/postet"}>
-          <PostListt />
-        </Route> */}
+
         <Route path="/create-order" component={CreateOrder} />
 
         <AdminRoute exact path="/admin" component={AdminGeneral} />
@@ -131,6 +129,7 @@ export default function App() {
         <AdminRoute path="/admin/posts" component={PostListt} />
         <AdminRoute path="/admin/banoret" component={BanoriListt} />
         <AdminRoute path="/admin/moments" component={MomentList} />
+        <AdminRoute path="/admin/primes" component={PrimeList} />
         <AdminRoute path="/admin/sponzors" component={SponzorList} />
         <AdminRoute path="/admin/settings" component={AdminGeneral} />
         {/* /admin/posts

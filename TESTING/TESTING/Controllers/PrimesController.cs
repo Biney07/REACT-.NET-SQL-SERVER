@@ -24,9 +24,15 @@ namespace TESTING.Controllers
             var primes = await _context.Primes.ToListAsync();
             return primes.Select(prime => new PrimeDTO
             {
+                Id = prime.Id,
+                //clicks = moment.clicks,
                 Title = prime.Title,
                 week = prime.week,
+                Lojrat= prime.Lojrat,
+                Banoret= prime.Banoret,
+                Description = prime.Description,
                 VideoURL = prime.VideoURL,
+                Date = prime.Date
 
             });
         }
@@ -40,15 +46,18 @@ namespace TESTING.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("addPrime")]
         public async Task<ActionResult<PrimeDTO>> CreatePrime(PrimeDTO prime)
         {
             var newPrime = new Prime
             {
-
                 Title = prime.Title,
                 week = prime.week,
+                Lojrat = prime.Lojrat,
+                Banoret = prime.Banoret,
+                Description = prime.Description,
                 VideoURL = prime.VideoURL,
+                Date = prime.Date
             };
 
             _context.Primes.Add(newPrime);
@@ -57,7 +66,7 @@ namespace TESTING.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut("updatePrime/{id}")]
         public async Task<ActionResult<PrimeDTO>> UpdatePrime(UpdatePrimeDTO prime, int id)
         {
             var originalPrime = await _context.Primes.FindAsync(id);
@@ -68,8 +77,11 @@ namespace TESTING.Controllers
             }
 
             originalPrime.Title = prime.Title;
+            originalPrime.Description = prime.Description;
             originalPrime.week = prime.week;
             originalPrime.VideoURL = prime.VideoURL;
+            originalPrime.Banoret = prime.Banoret;
+            originalPrime.Lojrat = prime.Lojrat;
 
             _context.Primes.Update(originalPrime);
             await _context.SaveChangesAsync();
@@ -78,7 +90,7 @@ namespace TESTING.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpDelete("delPrime/{id}")]
         public async Task<ActionResult> DeletePrime(int id)
         {
             var originalPrime = await _context.Primes.FindAsync(id);

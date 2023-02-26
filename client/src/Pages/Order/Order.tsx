@@ -12,6 +12,7 @@ export default function Orders() {
     const [loading, setLoading] = useState(true);
     const [selectedOrderNumber, setSelectedOrderNumber] = useState(0);
 
+
     useEffect(() => {
         agent.Orders.list()
             .then(orders => setOrders(orders))
@@ -33,10 +34,10 @@ export default function Orders() {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Order number</TableCell>
+                        <TableCell>Numri i votes</TableCell>
                         <TableCell align="right">Total</TableCell>
-                        <TableCell align="right">Order Date</TableCell>
-                        <TableCell align="right">Order Status</TableCell>
+                        <TableCell align="right">Data e votes</TableCell>
+                        <TableCell align="right">numri i votave</TableCell>
                         <TableCell align="right"></TableCell>
                     </TableRow>
                 </TableHead>
@@ -51,9 +52,10 @@ export default function Orders() {
                             </TableCell>
                             <TableCell align="right">{currencyFormat(order.total)}</TableCell>
                             <TableCell align="right">{order.orderDate.split('T')[0]}</TableCell>
-                            <TableCell align="right">{order.orderStatus}</TableCell>
+                            <TableCell align="right">{order?.orderItems.reduce((sum, item) => sum + item.quantity, 0)}</TableCell>
+                            {/* */}
                             <TableCell align="right">
-                                <Button className={style.order_button} onClick={() => setSelectedOrderNumber(order.id)}>
+                                <Button  onClick={() => setSelectedOrderNumber(order.id)}>
                                     View
                                 </Button>
                             </TableCell>

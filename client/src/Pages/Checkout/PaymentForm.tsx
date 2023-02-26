@@ -21,7 +21,7 @@ export default function PaymentForm({cardState, onCardInputChange}: Props) {
   return (
      <div className="paymentcontainer">
       <div className="payment-form">
-      <Typography variant="h6" sx={{color:'white', fontSize:'33px', marginBottom:'10px'}} gutterBottom>
+      <Typography variant="h6" sx={{ fontSize:'33px', marginBottom:'10px'}} gutterBottom>
         Payment method
       </Typography>
       <Grid container spacing={3}>
@@ -31,7 +31,7 @@ export default function PaymentForm({cardState, onCardInputChange}: Props) {
         <Grid item xs={12} md={6}>
           <TextField
           className='muitextfieldwhite'
-        
+
             onChange={onCardInputChange}
             error={!!cardState.elementError.cardNumber}
             helperText={cardState.elementError.cardNumber}
