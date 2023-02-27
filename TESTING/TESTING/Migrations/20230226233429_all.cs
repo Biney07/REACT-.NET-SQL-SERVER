@@ -67,7 +67,9 @@ namespace TESTING.Migrations
                     Age = table.Column<int>(type: "int", nullable: false),
                     RelationshipStatus = table.Column<bool>(type: "bit", nullable: false),
                     Profesioni = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CloudanaryPublicId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CloudanaryPublicId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nominated = table.Column<bool>(type: "bit", nullable: false),
+                    Eleminuar = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -427,8 +429,8 @@ namespace TESTING.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "9e6623f4-c56f-474d-8462-e60505996317", "Member", "MEMBER" },
-                    { 2, "696e9f78-7959-4286-a33e-268c4e066243", "Admin", "ADMIN" }
+                    { 1, "fe863cfa-473c-4b9d-b8e0-28745057a285", "Member", "MEMBER" },
+                    { 2, "f0fb9e46-3b70-48ba-a18a-336013d47a81", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

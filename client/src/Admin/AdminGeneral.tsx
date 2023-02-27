@@ -8,6 +8,7 @@ import { Button, CircularProgress } from '@mui/material';
 function AdminGeneral() {
   const dispatch = useAppDispatch();
   const banoret = useAppSelector(banoriSelectors.selectAll);
+  const banoretFiltered = banoret.filter((Banor) => Banor.eleminuar === false);
   const selectedBanoret = useAppSelector(state => state.catalog.selectedBanoret);
   const [checkedItems, setCheckedItems] = useState(new Set(selectedBanoret.map(banori => banori.id)));
   const [isLoading, setIsLoading] = useState(false);
@@ -51,21 +52,24 @@ const updateBanor = async (ii: number) => {
 
 const handleSaveClick = async () => {
   try {
-      setIsLoading(true);
-  for (const Banor of banoret) {
-       await axios.put(
-      `https://localhost:7226/api/Banoret/api/banori/nominated/`,
-      { id: Banor.id, nominated: false },
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+    setIsLoading(true);
+    for (const Banor of banoret) {
+      if (Banor.eleminuar == false) {
+        await axios.put(
+          `https://localhost:7226/api/Banoret/api/banori/nominated/`,
+          { id: Banor.id, nominated: false },
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        );
       }
-    );
     }
+    
     // Loop through the selected banoris and call the updateBanor function for each of them
     for (const banori of selectedBanoret) {
-        console.log(banori.id);
+      console.log(banori.id);
       await updateBanor(banori.id);
     }
 
@@ -86,20 +90,24 @@ const handleSaveClick = async () => {
 
   return (
     <div className="admin-layout">
-      <h1 style={{ fontFamily: "New Beauty" }}>Admin Dashboard</h1>
+      <h1 className='NewBeauty'> Zgjedh te nominuarit</h1>
       <div className="admin-content">
-        {banoret.map((banori) => (
-          <div style={{backgroundColor: 'var(--blue)', width: "250px", margin:'20px 20px 0px 0px',  borderRadius:'30px'}}>
-            <input
-              type="checkbox"
-              id={`checkbox-${banori.id}`}
-              checked={checkedItems.has(banori.id)}
-                onChange={(event: any) => handleCheckboxChange(banori.id, event)}
-            />
-            <label htmlFor={`checkbox-${banori.id}`}>
-              <img key={banori.id} src={banori.pictureUrl} style={{ width: "250px", borderRadius:'30px'}} />
-            </label>
-          </div>
+        {banoretFiltered.map((banori) => (
+        <div style={{backgroundColor: 'var(--blue)', width: "250px", margin:'20px 20px 0px 0px',  borderRadius:'30px'}}>
+  <input
+    type="checkbox"
+    id={`checkbox-${banori.id}`}
+    checked={checkedItems.has(banori.id)}
+    onChange={(event: any) => handleCheckboxChange(banori.id, event)}
+  />
+  <label htmlFor={`checkbox-${banori.id}`}>
+    <img
+      key={banori.id}
+      src={banori.pictureUrl}
+      style={{ width: "250px", borderRadius:'30px',transition: 'filter 0.5s ease', filter: checkedItems.has(banori.id) ? 'none' : 'grayscale(100%)'}}
+    />
+  </label>
+</div>
         ))}
       </div>
       <Button

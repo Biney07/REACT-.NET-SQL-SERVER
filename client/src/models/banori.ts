@@ -5,10 +5,11 @@ export interface Banori {
     price: number;
     File?: File;
     pictureUrl: string;
-    RelationshipStatus: boolean;
+    relationshipStatus: boolean;
     profesioni: string;
     age: number;
     nominated:boolean;
+    eleminuar:boolean;
 }
 
 export interface BanoriParams {

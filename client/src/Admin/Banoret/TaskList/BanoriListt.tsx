@@ -32,6 +32,7 @@ const BanoriListt: React.FC = () => {
   setLoading(prevLoading => ({...prevLoading, [id]: false}));
   window.location.reload();
 };
+console.log(banoret);
   // useEffect(() => {
   //   agent.Banoret.get().then((response) => {
   //     setBanoriat(response);
@@ -60,10 +61,11 @@ const BanoriListt: React.FC = () => {
           </TableHead>
           <TableBody>
             {React.Children.toArray(
+              
               banoret?.map((banori) => (
                 <TableRow key={banori.id}>
                   <TableCell>{banori.id}</TableCell>
-                  <TableCell>{banori.RelationshipStatus}</TableCell>
+                  <TableCell> {banori.relationshipStatus ? "I Martuar" : "Single"}</TableCell>
                   <TableCell>{banori.age}</TableCell>
                   <TableCell>{banori.name}</TableCell>
                   <TableCell>

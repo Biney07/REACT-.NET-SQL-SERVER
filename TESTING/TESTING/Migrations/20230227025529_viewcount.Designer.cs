@@ -12,8 +12,8 @@ using TESTING.Data;
 namespace TESTING.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230226183329_all")]
-    partial class all
+    [Migration("20230227025529_viewcount")]
+    partial class viewcount
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -147,9 +147,15 @@ namespace TESTING.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Eleminuar")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Nominated")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PictureUrl")
                         .IsRequired()
@@ -258,6 +264,9 @@ namespace TESTING.Migrations
                     b.Property<string>("VideoURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ViewCount")
+                        .HasColumnType("int");
 
                     b.Property<int>("clicks")
                         .HasColumnType("int");
@@ -477,14 +486,14 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "9e6623f4-c56f-474d-8462-e60505996317",
+                            ConcurrencyStamp = "4c2340c0-c3e7-41e6-936a-b48b638e1ff2",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "696e9f78-7959-4286-a33e-268c4e066243",
+                            ConcurrencyStamp = "82a131d7-fb54-4b9b-ad79-9eb0bf795c57",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

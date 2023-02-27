@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TESTING.Data;
 
@@ -12,11 +11,9 @@ using TESTING.Data;
 namespace TESTING.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230226152236_banori")]
-    partial class banori
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,6 +144,9 @@ namespace TESTING.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Eleminuar")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -261,6 +261,9 @@ namespace TESTING.Migrations
                     b.Property<string>("VideoURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ViewCount")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -410,6 +413,21 @@ namespace TESTING.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Banoret")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lojrat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -417,6 +435,9 @@ namespace TESTING.Migrations
                     b.Property<string>("VideoURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("clicks")
+                        .HasColumnType("int");
 
                     b.Property<int>("week")
                         .HasColumnType("int");
@@ -459,14 +480,14 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "82037df9-fb97-4676-b6a0-429597429c6e",
+                            ConcurrencyStamp = "18ee113d-1864-4f17-897a-a1d618c0a3ca",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "503a44e4-9df7-4670-bd00-556368dd8b3f",
+                            ConcurrencyStamp = "d689fbb5-b56e-4d44-8127-e58862328f64",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

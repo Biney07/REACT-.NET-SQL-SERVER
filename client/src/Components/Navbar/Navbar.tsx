@@ -12,10 +12,10 @@ const pages = [
     { name: 'Home', route: '/' },
     { name: 'Votat', route: '/Order' },
     { name: 'Voto', route: '/Catalog' },
-       { name: 'Prime', route: '/Primes' },
-        
-             { name: 'Fan Page', route: '/Posts' },
-              { name: 'Momentet', route: '/Momentet' },
+    { name: 'Prime', route: '/Primes' },
+    { name: 'Fan Page', route: '/Posts' },
+    { name: 'Momentet', route: '/Momentet' },
+    { name: 'Banoret', route: '/Banoret' },
 ];
 
 

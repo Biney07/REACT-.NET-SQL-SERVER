@@ -19,7 +19,7 @@ const BanoriPopup: React.FC<Props> = ({ setIsOpen, isOpen, banori }) => {
     price: banori.price,
     File: new Blob([]),
     age: banori.age,
-    RelationshipStatus: banori.RelationshipStatus ,
+    RelationshipStatus: banori.relationshipStatus ,
     profesioni: banori.profesioni,
     pictureUrl: banori.pictureUrl
   });

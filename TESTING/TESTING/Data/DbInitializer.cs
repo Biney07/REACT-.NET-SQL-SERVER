@@ -33,9 +33,10 @@ namespace TESTING.Data
             }
 
 
-          
+            if (!context.Banoret.Any())
+            {
 
-            var Banoret = new List<Banori>
+                var Banoret = new List<Banori>
             {
   new Banori
     {
@@ -140,12 +141,71 @@ namespace TESTING.Data
 
             };
 
-            foreach (var banori in Banoret)
-            {
-                context.Banoret.Add(banori);
+                await context.Banoret.AddRangeAsync(Banoret);
             }
+            if (context.Moments.Any()) return;
+            var moments = new List<Moment> {
 
-            context.SaveChanges();
+                    new Moment
+                    {
+                        Title="Stresi i bënë një prank Vedatit",
+                        Description="Kanali zyrtar i Big Brother Vip Kosova nga Klan Kosova dhe Artmotion.",
+                        VideoURL="https://www.youtube.com/watch?v=WSd6STrjOVM",
+                        ViewCount=42,
+                        Date = DateTime.Now,
+
+                    },
+                     new Moment
+                    {
+                        Title="Sfida e Buxhetit",
+                        Description="Kanali zyrtar i Big Brother Vip Kosova nga Klan Kosova dhe Artmotion.",
+                        VideoURL="https://www.youtube.com/watch?v=WVbsPeHLhJg",
+                        ViewCount=27,
+                        Date = DateTime.Now,
+
+                    },
+                      new Moment
+                    {
+                        Title="Qe mbrëmë çka boni tipka",
+                        Description="Kanali zyrtar i Big Brother Vip Kosova nga Klan Kosova dhe Artmotion.",
+                        VideoURL="https://www.youtube.com/watch?v=MgVV5seBD6A",
+                        ViewCount=20,
+                        Date = DateTime.Now,
+
+                    },
+                       new Moment
+                    {
+                        Title="Je mësuar me rrejt, Stresi dhe Juliana",
+                        Description="Kanali zyrtar i Big Brother Vip Kosova nga Klan Kosova dhe Artmotion.",
+                        VideoURL="https://www.youtube.com/watch?v=kliAdaMPwOE",
+                        ViewCount=20,
+                        Date = DateTime.Now,
+
+                    },
+                        new Moment
+                    {
+                        Title="A është bërë pishman Gresa",
+                        Description="Kanali zyrtar i Big Brother Vip Kosova nga Klan Kosova dhe Artmotion.",
+                        VideoURL="https://www.youtube.com/watch?v=W-RQc2GgMGY",
+                        ViewCount =50,
+                        Date = DateTime.Now,
+
+                    },
+                           new Moment
+                    {
+                        Title="Tërë ditën vetëm Juli, Juli, Juli",
+                        Description="Kanali zyrtar i Big Brother Vip Kosova nga Klan Kosova dhe Artmotion.",
+                        VideoURL="https://www.youtube.com/watch?v=tGz72wyuUi4",
+                        ViewCount=40
+
+                    }
+                };
+
+            context.Moments.AddRange(moments);
+            await context.SaveChangesAsync();
+
+
         }
+
     }
 }

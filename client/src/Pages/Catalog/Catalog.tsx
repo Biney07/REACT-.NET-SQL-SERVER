@@ -1,5 +1,5 @@
 import { Grid, Paper } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AppPagination from "../../Components/AppPagination";
 import CheckboxButtons from "../../Components/CheckboxButtons";
 import LoadingComponent from "../../Components/LoadingComponent";
@@ -9,6 +9,7 @@ import RadioButtonGroup from "../../Components/RadioButtonGroup";
 import { useAppDispatch, useAppSelector } from "../../Store/hook";
 import { fetchFilters, fetchBanoriAsync, banoriSelectors, setPageNumber, setBanoriParams, fetchBanoretAsync } from "./CatalogSlice";
 import style from "../../Components/BanoriComponets/BanoriCard.module.css"
+import { useHistory } from "react-router-dom";
 
 
 const sortOptions = [
@@ -24,7 +25,25 @@ export default function Catalog() {
     const { banoretLoaded, filtersLoaded, profesionet, banoriParams, metaData } = useAppSelector(state => state.catalog);
     const dispatch = useAppDispatch();
 
-  
+    const history = useHistory();
+const [shouldReload, setShouldReload] = useState(false);
+
+  useEffect(() => {
+    if (shouldReload) {
+      setShouldReload(false);
+      window.location.reload();
+    }
+  }, [shouldReload]);
+
+  useEffect(() => {
+    if (history.location.pathname === '/my/route') {
+      setShouldReload(true);
+    }
+  }, [history.location.key]);
+
+
+
+
     useEffect(() => {
        
         if (!banoretLoaded) dispatch(fetchBanoretAsync());

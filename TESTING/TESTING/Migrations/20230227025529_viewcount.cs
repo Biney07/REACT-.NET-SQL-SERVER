@@ -5,53 +5,53 @@
 namespace TESTING.Migrations
 {
     /// <inheritdoc />
-    public partial class eleminuar : Migration
+    public partial class viewcount : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "Eleminuar",
-                table: "Banoret",
-                type: "bit",
+            migrationBuilder.AddColumn<int>(
+                name: "ViewCount",
+                table: "Moments",
+                type: "int",
                 nullable: false,
-                defaultValue: false);
+                defaultValue: 0);
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "97834b87-df6d-4543-b6b9-d59925e6f46b");
+                value: "4c2340c0-c3e7-41e6-936a-b48b638e1ff2");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "ConcurrencyStamp",
-                value: "78c34db3-6462-4a6d-bb16-db8e212a8a87");
+                value: "82a131d7-fb54-4b9b-ad79-9eb0bf795c57");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Eleminuar",
-                table: "Banoret");
+                name: "ViewCount",
+                table: "Moments");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "82037df9-fb97-4676-b6a0-429597429c6e");
+                value: "fe863cfa-473c-4b9d-b8e0-28745057a285");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "ConcurrencyStamp",
-                value: "503a44e4-9df7-4670-bd00-556368dd8b3f");
+                value: "f0fb9e46-3b70-48ba-a18a-336013d47a81");
         }
     }
 }

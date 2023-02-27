@@ -5,53 +5,53 @@
 namespace TESTING.Migrations
 {
     /// <inheritdoc />
-    public partial class banori : Migration
+    public partial class kk : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "Nominated",
-                table: "Banoret",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
+            migrationBuilder.DropColumn(
+                name: "clicks",
+                table: "Moments");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "82037df9-fb97-4676-b6a0-429597429c6e");
+                value: "18ee113d-1864-4f17-897a-a1d618c0a3ca");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "ConcurrencyStamp",
-                value: "503a44e4-9df7-4670-bd00-556368dd8b3f");
+                value: "d689fbb5-b56e-4d44-8127-e58862328f64");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Nominated",
-                table: "Banoret");
+            migrationBuilder.AddColumn<int>(
+                name: "clicks",
+                table: "Moments",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "60e79146-8da1-4e36-b7ba-418ef4773968");
+                value: "4c2340c0-c3e7-41e6-936a-b48b638e1ff2");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "ConcurrencyStamp",
-                value: "6252be1c-474e-43b8-9a11-e087eff5c333");
+                value: "82a131d7-fb54-4b9b-ad79-9eb0bf795c57");
         }
     }
 }

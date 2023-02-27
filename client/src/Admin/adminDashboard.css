@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'HeyBeauty';
+    src: url('../../public/HeyBeauty.ttf') format('truetype');
+}
+
+
 body{
     overflow-x: hidden;
 }
@@ -100,4 +106,10 @@ body{
     justify-content: center;
     flex-wrap: wrap;
 
+}
+.NewBeauty{
+    font-family: 'HeyBeauty';
+    font-size: 45px;
+    justify-content: center;
+    display: flex;
 }
