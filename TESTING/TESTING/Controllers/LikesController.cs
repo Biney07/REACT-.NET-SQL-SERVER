@@ -76,7 +76,22 @@ namespace TESTING.Controllers
 
             return NoContent();
         }
+        [HttpGet("LikeCount/{postId}")]
+        public async Task<IActionResult> GetLikeCount(int postId)
+        {
+            var post = await _context.Posts.FindAsync(postId);
 
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            int likeCount = await _context.PostLikes
+                .Where(pl => pl.PostId == postId)
+                .CountAsync();
+
+            return Ok(likeCount);
+        }
     }
 }
     

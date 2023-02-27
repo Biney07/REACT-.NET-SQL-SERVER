@@ -79,6 +79,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     };
 
 
+ 
 
     const handleCommentSubmit = () => {
         const user = localStorage.getItem("user");
@@ -111,6 +112,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                 <Typography variant="h5" component="h2">
                     {post.title}
                 </Typography>
+                
                 <Typography variant="body2" component="p">
                     {post.body}
                 </Typography>
@@ -173,6 +175,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                 <div style={{ marginTop: "10px" }}>
                     <input type="text" placeholder="Add a comment..." value={commentText} onChange={handleCommentTextChange} />
                 </div>
+                     <p style={{display:'flex', justifyContent:'flex-end',margin:'0px'}}> {post.likes.length} likes </p>
             </CardContent>
         </Card>
     );

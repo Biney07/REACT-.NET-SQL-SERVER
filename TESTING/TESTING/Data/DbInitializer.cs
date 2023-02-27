@@ -300,7 +300,7 @@ namespace TESTING.Data
 
                 };
 
-            context.Sponzors.AddRange(sponzors);
+             context.Sponzors.AddRange(sponzors);
             await context.SaveChangesAsync();
 
 
