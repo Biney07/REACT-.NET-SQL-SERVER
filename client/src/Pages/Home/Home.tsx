@@ -54,13 +54,19 @@ const Home: React.FC = () => {
             {React.Children.toArray(
               sponzors?.map((sponzor) => (
                 <div className="slide">
-                  <img src={sponzor.pictureUrl} height="60" width="150" alt="" />
+                  <img src={sponzor.pictureUrl} height="60" width="auto" alt="" />
                 </div>
               )))}
             {React.Children.toArray(
               sponzors?.map((sponzor) => (
                 <div className="slide">
-                  <img src={sponzor.pictureUrl} height="60" width="150" alt="" />
+                  <img src={sponzor.pictureUrl} height="60" width="auto" alt="" />
+                </div>
+              )))}
+            {React.Children.toArray(
+              sponzors?.map((sponzor) => (
+                <div className="slide">
+                  <img src={sponzor.pictureUrl} height="60" width="auto" alt="" />
                 </div>
               )))}
           </div>

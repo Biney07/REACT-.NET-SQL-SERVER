@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Stripe;
 using System.Collections.Generic;
 using TESTING.Model;
+using static Azure.Core.HttpHeader;
 
 namespace TESTING.Data
 {
@@ -43,11 +44,11 @@ namespace TESTING.Data
         Name = "Vedati",
         Biografia = "Vedati është një aktor shumë i njohur dhe i dashur në mesin e publikut. Ai ka interpretuar role të ndryshme në shumë filma dhe seriale të suksesshëm. Me një karrierë të gjatë në industrinë e filmit, Vedati është bërë një emër i njohur jo vetëm në Shqipëri, por edhe jashtë saj.",
         Price = 100,
-        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677109033/wkol3nlmcgyhfbxin8rp.png",
+        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677113429/eenkdowecaxehm3dgxpi.png",
         Age = 45,
         RelationshipStatus = true,
         Profesioni = "Aktor",
-        CloudanaryPublicId = "vnazgth62rjkbheosiqa",
+        CloudanaryPublicId = "eenkdowecaxehm3dgxpi",
 
     },
   new Banori
@@ -55,11 +56,11 @@ namespace TESTING.Data
         Name = "Mbresa",
         Biografia = "Mbresa është një vajzë shumë e ëmbël dhe talentuar, me një zë të butë dhe tërheqës. Ajo është një këngëtare e njohur dhe e dashur nga publiku i muzikës shqiptare. Me një karrierë të suksesshme në botën e muzikës, Mbresa ka fituar zemrat e shumë njerëzve me zërin e saj të bukur dhe këngët e saj të ndjeshme.",
         Price = 100,
-        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677113429/eenkdowecaxehm3dgxpi.png",
+        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677109033/wkol3nlmcgyhfbxin8rp.png",
         Age = 25,
         RelationshipStatus = false,
         Profesioni = "Kengtare",
-        CloudanaryPublicId = "eenkdowecaxehm3dgxpi",
+        CloudanaryPublicId = "vnazgth62rjkbheosiqa",
 
     },
   new Banori
@@ -201,7 +202,105 @@ namespace TESTING.Data
                     }
                 };
 
+
             context.Moments.AddRange(moments);
+
+
+            if (context.Sponzors.Any()) return;
+            var sponzors = new List<Sponzor> {
+
+                    new Sponzor
+                    {
+                        Name = "Klan Kosova",
+                        Email = "klan@gmail.com",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(30),
+                        Notes = "notes",
+                        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677501083/Klan_Kosova_zvirng.png",
+                        CloudanaryPublicId = "Klan_Kosova_zvirng"
+
+                    },
+                      new Sponzor
+                    {
+                        Name = "Comodita home",
+                        Email = "comodita@gmail.com",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(30),
+                        Notes = "notes",
+                        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677501083/comodita_ymw9fv.png",
+                        CloudanaryPublicId = "comodita_ymw9fv"
+
+                    },
+                        new Sponzor
+                    {
+                        Name = "solos",
+                        Email = "solos@gmail.com",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(30),
+                        Notes = "notes",
+                        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677501083/solos_nqpc4a.png",
+                        CloudanaryPublicId = "solos_nqpc4a"
+
+                    },
+                          new Sponzor
+                    {
+                        Name = "BW hotel galla",
+                        Email = "BWHG@gmail.com",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(30),
+                        Notes = "notes",
+                        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677501084/BWHG_enlcqp.png",
+                        CloudanaryPublicId = "BWHG_enlcqp"
+
+                    },
+                            new Sponzor
+                    {
+                        Name = "Prince Caffe",
+                        Email = "Prince@gmail.com",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(30),
+                        Notes = "notes",
+                        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677501083/princ_w7ghoi.png",
+                        CloudanaryPublicId = "princ_w7ghoi"
+
+                    },
+                              new Sponzor
+                    {
+                        Name = "Art motion",
+                        Email = "art@gmail.com",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(30),
+                        Notes = "notes",
+                        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677501083/ArtMotion_Logo_cd9dao.png",
+                        CloudanaryPublicId = "ArtMotion_Logo_cd9dao"
+
+                    },
+                     new Sponzor
+                    {
+                        Name = "devolli corp",
+                        Email = "devolli@gmail.com",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(30),
+                        Notes = "notes",
+                        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677501083/devollicorp_o4o7et.png",
+                        CloudanaryPublicId = "devollicorp_o4o7et"
+
+                    },
+                       new Sponzor
+                    {
+                        Name = "birra peja",
+                        Email = "birrapeja@gmail.com",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now.AddDays(30),
+                        Notes = "notes",
+                        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677501083/birraPeja_c2n0hs.png",
+                        CloudanaryPublicId = "birraPeja_c2n0hs"
+
+                    },
+
+                };
+
+            context.Sponzors.AddRange(sponzors);
             await context.SaveChangesAsync();
 
 
