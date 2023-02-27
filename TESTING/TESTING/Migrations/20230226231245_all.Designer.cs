@@ -12,8 +12,8 @@ using TESTING.Data;
 namespace TESTING.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230226214850_eleminuar")]
-    partial class eleminuar
+    [Migration("20230226231245_all")]
+    partial class all
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -265,6 +265,9 @@ namespace TESTING.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("clicks")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Moments");
@@ -413,6 +416,21 @@ namespace TESTING.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Banoret")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lojrat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -420,6 +438,9 @@ namespace TESTING.Migrations
                     b.Property<string>("VideoURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("clicks")
+                        .HasColumnType("int");
 
                     b.Property<int>("week")
                         .HasColumnType("int");
@@ -462,14 +483,14 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "97834b87-df6d-4543-b6b9-d59925e6f46b",
+                            ConcurrencyStamp = "55c0e506-686f-4c43-9a17-ec3a02593c9d",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "78c34db3-6462-4a6d-bb16-db8e212a8a87",
+                            ConcurrencyStamp = "f15d0eb1-568c-4de4-a3ef-955e68111649",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

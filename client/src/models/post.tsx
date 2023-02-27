@@ -1,7 +1,7 @@
 
 export interface Post {
     id: number;
-    userId: number;
+    userId: number; 
     title: string;
     body: string;
     createdDate: string; // ISO 8601 format string

@@ -44,6 +44,29 @@ namespace TESTING.Controllers
             }
             return userDtos;
         }
+
+        [HttpGet("getUserById/{id}")]
+        public async Task<ActionResult<UserDTO>> GetUsers(int id)
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var userDtos = new List<UserDTO>();
+            foreach (var user in users)
+            {
+                if (user.Id == id) {         
+                userDtos.Add(new UserDTO
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    Token = await _tokenService.GenerateToken(user),
+                    Username = user.UserName,
+
+                });
+                }
+            }
+
+            return userDtos[0];
+        }
+
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDto)
         {

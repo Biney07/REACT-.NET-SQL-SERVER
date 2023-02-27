@@ -1,9 +1,11 @@
 
 import { Card, CardContent, Typography, Button } from "@mui/material";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import agent from "../../API/agent";
 
 import { Post } from "../../models/post";
+import { User } from "../../models/user";
 
 interface PostCardProps {
     post: Post;
@@ -12,11 +14,33 @@ interface PostCardProps {
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
     const [showAllComments, setShowAllComments] = useState(false);
     const [commentText, setCommentText] = useState("");
-
+    const [postUser, setPostUser] = useState<User | null>(null)
+    const [commentUsers, setCommentUsers] = useState<User[]>([]);
     const [liked, setLiked] = useState(false);
     const handleCommentTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCommentText(event.target.value);
     };
+
+    useEffect(() => {
+        agent.Account.getUserById(post.userId)
+            .then((response) => {
+                setPostUser(response);
+            });
+    }, []);
+
+    useEffect(() => {
+        Promise.all(
+            post.comments.map((comment) =>
+                agent.Account.getUserById(comment.userId)
+            )
+        )
+            .then((users) => {
+                setCommentUsers(users);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [post.comments]);
 
 
     const handleShowAllCommentsClick = () => {
@@ -24,36 +48,36 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     };
     const handleLikeClick = () => {
         const user = localStorage.getItem("user");
-      
+
         if (user) {
-          const userId = JSON.parse(user).id;
-      
-          if (!liked) {
-            axios
-              .post(`https://localhost:7226/api/Likes/Like/${post.id}?userId=${userId}`)
-              .then((response) => {
-                console.log(`Liking post ${post.id}`);
-                setLiked(true);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          } else {
-            axios
-              .delete(`https://localhost:7226/api/Likes/Unlike/${post.id}/${userId}`)
-              .then((response) => {
-                console.log(`Unliking post ${post.id}`);
-                setLiked(false);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
+            const userId = JSON.parse(user).id;
+
+            if (!liked) {
+                axios
+                    .post(`https://localhost:7226/api/Likes/Like/${post.id}?userId=${userId}`)
+                    .then((response) => {
+                        console.log(`Liking post ${post.id}`);
+                        setLiked(true);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } else {
+                axios
+                    .delete(`https://localhost:7226/api/Likes/Unlike/${post.id}/${userId}`)
+                    .then((response) => {
+                        console.log(`Unliking post ${post.id}`);
+                        setLiked(false);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
         } else {
-          console.log('User is not logged in');
+            console.log('User is not logged in');
         }
-      };
-      
+    };
+
 
 
     const handleCommentSubmit = () => {
@@ -90,6 +114,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                 <Typography variant="body2" component="p">
                     {post.body}
                 </Typography>
+                <Typography variant="body2" component="p">
+                    user id: {postUser?.id} | username: {postUser?.username}
+                </Typography>
                 <Typography variant="caption">{new Date(post.createdDate).toLocaleString()}</Typography>
                 <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
                     <Button
@@ -109,9 +136,13 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                     </div>
                 </div>
                 {showAllComments ? (
+
                     <div style={{ marginTop: "10px" }}>
                         {post.comments.map((comment, index) => (
                             <div key={comment.id} style={{ margin: "10px" }}>
+                                <Typography variant="body2" component="p">
+                                    user id: {commentUsers[index]?.id} | username: {commentUsers[index]?.username}
+                                </Typography>
                                 <Typography variant="body2" component="p">
                                     {comment.content}
                                 </Typography>
@@ -123,6 +154,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                     <div style={{ marginTop: "10px" }}>
                         {post.comments.length > 0 && (
                             <div style={{ margin: "10px" }}>
+                                <Typography variant="body2" component="p">
+                                    user id: {commentUsers[0]?.id} | username: {commentUsers[0]?.username}
+                                </Typography>
                                 <Typography variant="body2" component="p">
                                     {post.comments[0].content}
                                 </Typography>
