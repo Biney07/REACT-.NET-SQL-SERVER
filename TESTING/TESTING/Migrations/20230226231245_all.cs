@@ -429,8 +429,13 @@ namespace TESTING.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
+<<<<<<<< HEAD:TESTING/TESTING/Migrations/20230226231245_all.cs
                     { 1, "55c0e506-686f-4c43-9a17-ec3a02593c9d", "Member", "MEMBER" },
                     { 2, "f15d0eb1-568c-4de4-a3ef-955e68111649", "Admin", "ADMIN" }
+========
+                    { 1, "fe863cfa-473c-4b9d-b8e0-28745057a285", "Member", "MEMBER" },
+                    { 2, "f0fb9e46-3b70-48ba-a18a-336013d47a81", "Admin", "ADMIN" }
+>>>>>>>> 6ff5e3ef9ac4c70ac90752b87a41eb3621736f43:TESTING/TESTING/Migrations/20230226233429_all.cs
                 });
 
             migrationBuilder.CreateIndex(

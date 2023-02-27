@@ -31,6 +31,7 @@ namespace TESTING.Controllers
                Description= moment.Description,
                VideoURL= moment.VideoURL,
                Date= moment.Date,
+               ViewCount = moment.ViewCount,
 
             });
         }
@@ -50,10 +51,11 @@ namespace TESTING.Controllers
             var newMoment = new Moment
             {
                 Title = moment.Title,
-                //clicks = moment.clicks,
                 Description = moment.Description,
                 VideoURL = moment.VideoURL,
                 Date = moment.Date,
+                ViewCount= moment.ViewCount,
+
             };
 
             _context.Moments.Add(newMoment);
@@ -76,6 +78,7 @@ namespace TESTING.Controllers
             originalMoment.Description = moment.Description;
             originalMoment.VideoURL = moment.VideoURL;
             originalMoment.Date = moment.Date;
+            originalMoment.ViewCount = moment.ViewCount;
 
 
 
@@ -87,7 +90,7 @@ namespace TESTING.Controllers
         }
 
 
-        [HttpDelete("delMoment/{id}")]
+        [HttpDelete("delMoment/{id}     ")]
         public async Task<ActionResult> DeleteMoment(int id)
         {
             var originalMoment = await _context.Moments.FindAsync(id);
@@ -102,6 +105,24 @@ namespace TESTING.Controllers
             await _context.SaveChangesAsync();
             return new OkObjectResult("Moment deleted succesfully!");
         }
+       
+                        [HttpPut("moments/viewcount")]
+                        public async Task<IActionResult> IncrementViewCount(int id)
+                        {
+                            var moment = await _context.Moments.FindAsync(id);
 
-    }
+                            if (moment == null)
+                            {
+                                return NotFound();
+                            }
+
+                            moment.ViewCount++;
+
+                            await _context.SaveChangesAsync();
+
+                            return Ok();
+                        }
+
+                    }
+
 }

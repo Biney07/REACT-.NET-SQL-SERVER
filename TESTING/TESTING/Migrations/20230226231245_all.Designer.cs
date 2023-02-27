@@ -12,7 +12,11 @@ using TESTING.Data;
 namespace TESTING.Migrations
 {
     [DbContext(typeof(AppDbContext))]
+<<<<<<<< HEAD:TESTING/TESTING/Migrations/20230226231245_all.Designer.cs
     [Migration("20230226231245_all")]
+========
+    [Migration("20230226233429_all")]
+>>>>>>>> 6ff5e3ef9ac4c70ac90752b87a41eb3621736f43:TESTING/TESTING/Migrations/20230226233429_all.Designer.cs
     partial class all
     {
         /// <inheritdoc />
@@ -483,14 +487,22 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:TESTING/TESTING/Migrations/20230226231245_all.Designer.cs
                             ConcurrencyStamp = "55c0e506-686f-4c43-9a17-ec3a02593c9d",
+========
+                            ConcurrencyStamp = "fe863cfa-473c-4b9d-b8e0-28745057a285",
+>>>>>>>> 6ff5e3ef9ac4c70ac90752b87a41eb3621736f43:TESTING/TESTING/Migrations/20230226233429_all.Designer.cs
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:TESTING/TESTING/Migrations/20230226231245_all.Designer.cs
                             ConcurrencyStamp = "f15d0eb1-568c-4de4-a3ef-955e68111649",
+========
+                            ConcurrencyStamp = "f0fb9e46-3b70-48ba-a18a-336013d47a81",
+>>>>>>>> 6ff5e3ef9ac4c70ac90752b87a41eb3621736f43:TESTING/TESTING/Migrations/20230226233429_all.Designer.cs
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

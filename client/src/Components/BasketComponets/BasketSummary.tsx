@@ -11,7 +11,7 @@ export default function BasketSummary({subtotal}: Props) {
     const {basket} = useAppSelector(state => state.basket);
     if (subtotal === undefined)
     subtotal = basket?.items.reduce((sum, item) => sum + (item.quantity * item.price), 0) ?? 0;
-    const deliveryFee = subtotal > 10000 ? 0 : 500;
+    const deliveryFee = subtotal > 200 ? 0 : 10;
 
     return (
         <>

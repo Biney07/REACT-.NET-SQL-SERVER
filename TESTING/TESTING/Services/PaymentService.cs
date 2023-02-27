@@ -25,14 +25,14 @@ namespace TESTING.Services
             var intent = new PaymentIntent();
 
             var subtotal = basket.Items.Sum(item => item.Quantity * item.Banori.Price);
-            var deliveryFee = subtotal > 10000 ? 0 : 500;
+            var deliveryFee = subtotal > 200 ? 0 : 10;
 
             if (string.IsNullOrEmpty(basket.PaymentIntentId))
             {
                 var options = new PaymentIntentCreateOptions
                 {
                     Amount = subtotal + deliveryFee,
-                    Currency = "usd",
+                    Currency = "eur",
                     PaymentMethodTypes = new List<string> { "card" }
                 };
                 intent = await service.CreateAsync(options);

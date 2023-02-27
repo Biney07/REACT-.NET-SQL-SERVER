@@ -10,7 +10,13 @@
   overflow: auto;
   transition: all 0.2s ease-in-out;
 
-  
+  .view-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;}
 
   &__close-button {
     position: absolute;

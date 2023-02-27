@@ -77,7 +77,7 @@ namespace API.Controllers
             }
 
             var subtotal = items.Sum(item => item.Price * item.Quantity);
-            var deliveryFee = subtotal > 50 ? 0 : 20;
+            var deliveryFee = subtotal > 200 ? 0 : 10;
 
             var order = new Order
             {
@@ -133,7 +133,7 @@ namespace API.Controllers
                         string PRICE_FORMATED = PRICE.ToString("0.00");
                         emailBody += "- " + orderItem.ItemOrdered.Name + ", Numri i votave: " + orderItem.Quantity + ", Qmimi: " + PRICE_FORMATED + "\n";
                     }
-                    decimal Subtotal = order.Subtotal / 100;
+                    decimal Subtotal = order.Subtotal / 10000;
                     string subtotal_formatted = subtotal.ToString("0.00");
                     emailBody += "Nentotali: " + subtotal_formatted + "\n";
                     decimal TAX = order.DeliveryFee / 100;

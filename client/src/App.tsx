@@ -13,7 +13,7 @@ import Home from './Pages/Home/Home';
 import Register from './Pages/Account/Register';
 import { fetchCurrentUser } from './Pages/Account/accountSlice';
 // import Orders from './TEST/Orders';
-import CreateOrder from './TEST/CreateOrder';
+
 import LoggedInCanSee from './Components/OnlyLoggedInCanSee';
 import PrivateRoute from './Components/PrivateRoute';
 import Catalog from './Pages/Catalog/Catalog';
@@ -45,6 +45,7 @@ import SponzorList from './Admin/Sponzoret/SponzoretList/SponzorList';
 import PaymentForm from './Pages/Checkout/PaymentForm';
 import Primes from './Pages/Primes/Primes';
 import PrimeList from './Admin/Primes/PrimeList/PrimeList';
+import Banoret from './Pages/Banoret/Banoret';
 
 
 
@@ -103,6 +104,10 @@ export default function App() {
         <Route path={"/Login"}>
           <LogIn />
         </Route>
+        
+        <Route path={"/Banoret"}>
+          <Banoret />
+        </Route>
         <Route path='/basket' component={BasketPage} />
         <Route path={"/Register"}>
           <Register />
@@ -122,7 +127,7 @@ export default function App() {
           <Orders />
         </Route>
 
-        <Route path="/create-order" component={CreateOrder} />
+       
 
         <AdminRoute exact path="/admin" component={AdminGeneral} />
         <AdminRoute path="/admin/onlyLoggedin" component={OnlyLoggedInCanSeeAdmin} />

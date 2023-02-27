@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TESTING.Data;
 
@@ -11,9 +12,11 @@ using TESTING.Data;
 namespace TESTING.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230227025529_viewcount")]
+    partial class viewcount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,6 +268,9 @@ namespace TESTING.Migrations
                     b.Property<int>("ViewCount")
                         .HasColumnType("int");
 
+                    b.Property<int>("clicks")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Moments");
@@ -480,14 +486,14 @@ namespace TESTING.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "18ee113d-1864-4f17-897a-a1d618c0a3ca",
+                            ConcurrencyStamp = "4c2340c0-c3e7-41e6-936a-b48b638e1ff2",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "d689fbb5-b56e-4d44-8127-e58862328f64",
+                            ConcurrencyStamp = "82a131d7-fb54-4b9b-ad79-9eb0bf795c57",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

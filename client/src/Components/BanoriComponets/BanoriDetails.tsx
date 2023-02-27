@@ -44,63 +44,42 @@ export default function BanoriDetails() {
     if (!banori) return <NotFound />
 
     return (
-        <Grid container spacing={6} sx={{ justifyContent: 'center', paddingTop: '60px' }}>
+        <Grid container spacing={5} sx={{ justifyContent: 'center', paddingTop: '60px' }}>
             <Grid item xs={5}>
                 <img src={banori.pictureUrl} alt={banori.name} style={{ width: '80%' }} />
             </Grid>
             <Grid item xs={4}>
-                <Typography variant='h3'>{banori.name}</Typography>
+                <Typography style={{padding:'20px'}}variant='h3'>{banori.name}</Typography>
                 <Divider />
-                <Typography variant='h4' color='secondary'>${(banori.price / 100).toFixed(2)}</Typography>
+              
                 <TableContainer>
                     <Table>
                         <TableBody>
                             <TableRow>
-                                <TableCell>Name</TableCell>
+                                <TableCell>Emri</TableCell>
                                 <TableCell>{banori.name}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>Description</TableCell>
+                                <TableCell>Biografia</TableCell>
                                 <TableCell>{banori.biografia}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>Age</TableCell>
-                                <TableCell>{banori.age}</TableCell>
+                                <TableCell>Mosha</TableCell>
+                                <TableCell>{banori.age} vjet</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>Profesioni</TableCell>
                                 <TableCell>{banori.profesioni}</TableCell>
                             </TableRow>
+                             <TableRow>
+                                <TableCell>Statusi martesor</TableCell>
+                                <TableCell>  {banori.relationshipStatus ? "I Martuar" : "Single"}</TableCell>
+                            </TableRow>
                            
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <TextField 
-                            variant='outlined'
-                            type='number'
-                            label='Quantity in Cart'
-                            fullWidth
-                            value={quantity}
-                            onChange={handleInputChange}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <LoadingButton
-                            disabled={item?.quantity === quantity}
-                            loading={status.includes('pending')}
-                            onClick={handleUpdateCart}
-                            sx={{height: '55px'}}
-                            color='primary'
-                            size='large'
-                            variant='contained'
-                            fullWidth
-                        >
-                            {item ? 'Update Quantity' : 'Add to Cart'}
-                        </LoadingButton>
-                    </Grid>
-                </Grid>
+               
             </Grid>
         </Grid>
     )
