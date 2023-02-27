@@ -1,4 +1,4 @@
-import { Delete } from "@mui/icons-material";
+import { ArrowDropDownCircleOutlined, Delete } from "@mui/icons-material";
 import { Table, TableBody, TableContainer, TableHead, TableCell, TableRow, Button, Paper, CircularProgress} from "@mui/material";
 import React, { useState, useEffect } from "react";
 import agent from "../../../API/agent";
@@ -7,24 +7,32 @@ import { banoriSelectors, fetchBanoretAsync } from "../../../Pages/Catalog/Catal
 import { useAppDispatch, useAppSelector } from "../../../Store/hook";
 import CreateBanori from "../CreateTask/CreateBanori";
 import BanoriPopup from "../ViewTask/BanoriPopup";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import "./task-list.scss";
 
 const BanoriListt: React.FC = () => {
   const banoret = useAppSelector(banoriSelectors.selectAll);
   const { banoretLoaded} = useAppSelector(state => state.catalog);
   const dispatch = useAppDispatch();
-  const [banoriat, setBanoriat] = useState();
+  const [banoriat, setBanoriat] = useState<Banori[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpenpop, setIsOpenpop] = useState<boolean>(false);
   const [selectedBanori, setSelectedBanori] = useState<Banori | null>(null);
   const [loading, setLoading] = useState<{[id: number]: boolean}>({});
+  const [sortBy, setSortBy] = useState<"name-asc" | "name-desc">("name-asc");
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
   };
 
-  useEffect(() => {
-    if (!banoretLoaded) dispatch(fetchBanoretAsync());
-}, [banoretLoaded, dispatch])
+useEffect(() => {
+  if (!banoretLoaded) {
+    dispatch(fetchBanoretAsync());
+  } else {
+    // set banoriat state with the data fetched from the API
+    setBanoriat(banoret);
+  }
+}, [banoretLoaded, dispatch, banoret]);
 
  const handleDelete = async (id: number) => {
   setLoading(prevLoading => ({...prevLoading, [id]: true}));
@@ -33,11 +41,16 @@ const BanoriListt: React.FC = () => {
   window.location.reload();
 };
 
-  // useEffect(() => {
-  //   agent.Banoret.get().then((response) => {
-  //     setBanoriat(response);
-  //   });
-  // }, []);
+const sortByName = () => {
+  if (sortBy === "name-asc") {
+    setBanoriat([...banoret].sort((a, b) => b.name.localeCompare(a.name)));
+    setSortBy("name-desc");
+  } else {
+    setBanoriat([...banoret].sort((a, b) => a.name.localeCompare(b.name)));
+    setSortBy("name-asc");
+  }
+};
+
 
   return (
     <>
@@ -52,7 +65,10 @@ const BanoriListt: React.FC = () => {
               <TableCell>ID</TableCell>
               <TableCell>Relationship</TableCell>
               <TableCell>Age</TableCell>
-              <TableCell>Name</TableCell>
+              <TableCell onClick={sortByName}>
+                <Button color="inherit">Name</Button>
+                {sortBy === "name-asc" ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
+              </TableCell>
               <TableCell>Image</TableCell>
               <TableCell>Price</TableCell>
               <TableCell>Profession</TableCell>
@@ -60,9 +76,8 @@ const BanoriListt: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {React.Children.toArray(
-              
-              banoret?.map((banori) => (
+            {React.Children.toArray(             
+              banoriat?.map((banori) => (
                 <TableRow key={banori.id}>
                   <TableCell>{banori.id}</TableCell>
                   <TableCell> {banori.relationshipStatus ? "I Martuar" : "Single"}</TableCell>

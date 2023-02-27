@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const AllPosts: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<Post[]>([]);
-
+  
     useEffect(() => {
       const fetchPosts = async () => {
         try {

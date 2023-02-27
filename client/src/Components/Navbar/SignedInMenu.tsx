@@ -10,6 +10,12 @@ export default function SignedInMenu(props: any) {
     const dispatch = useAppDispatch();
     const { user } = useAppSelector(state => state.account);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const userString = localStorage.getItem('user');
+    let isAdmin = false;
+    if (userString !== null) {
+    const user = JSON.parse(userString);
+    isAdmin = user.role === 'Admin';
+}
     const open = Boolean(anchorEl);
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
@@ -17,6 +23,8 @@ export default function SignedInMenu(props: any) {
     const handleClose = () => {
           history.push("/admin");
     };
+
+    
 
     return (
         <>
@@ -33,8 +41,8 @@ export default function SignedInMenu(props: any) {
                 onClose={handleClose}
                 TransitionComponent={Fade}
             >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem component={Link} to='/orders'>My orders</MenuItem>
+                {isAdmin ?<MenuItem onClick={handleClose}>Admin panel</MenuItem>:<></>}
+                <MenuItem component={Link} to='/orders'>Votat e mija</MenuItem>
                 <MenuItem onClick={() => {
                     dispatch(signOut());
                     dispatch(clearBasket());

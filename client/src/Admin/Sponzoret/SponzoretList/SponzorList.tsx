@@ -1,5 +1,5 @@
 import { Delete } from "@mui/icons-material";
-import { Table, TableBody, TableContainer, TableHead, TableCell, TableRow, Button, Paper} from "@mui/material";
+import { Table, TableBody, TableContainer, TableHead, TableCell, TableRow, Button, Paper, CircularProgress} from "@mui/material";
 import React, { useState, useEffect } from "react";
 import agent from "../../../API/agent";
 import { Sponzor } from "../../../models/sponzor";
@@ -12,13 +12,18 @@ const SponzorList: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpenpop, setIsOpenpop] = useState<boolean>(false);
   const [selectedSponzor, setSelectedSponzor] = useState<Sponzor | null>(null);
+  const [loading, setLoading] = useState<{[id: number]: boolean}>({});
+
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const handleDelete = (id: number) => {
-    agent.Sponzors.delete(id)
+  const handleDelete = async (id: number) => {
+    setLoading(prevLoading => ({...prevLoading, [id]: true}));
+    await agent.Banoret.delete(id);
+    setLoading(prevLoading => ({...prevLoading, [id]: false}));
+    window.location.reload();
     };
 
   useEffect(() => {
@@ -61,8 +66,8 @@ const SponzorList: React.FC = () => {
                     <img src={sponzor.pictureUrl} alt={sponzor.name} height="50" />
                   </TableCell>
                   <TableCell>
-                    <Button onClick={() => handleDelete(sponzor.id)} variant="contained" startIcon={<Delete />}>Delete</Button>
-                    <Button onClick={() => {
+                  <Button className='ButtonAdmin' onClick={() => handleDelete(sponzor.id)} variant="contained" startIcon={<Delete />}  disabled={loading[sponzor.id]}>  {loading[sponzor.id] ? <CircularProgress size={24} /> : 'Delete'}</Button>
+                    <Button className='ButtonAdmin' onClick={() => {
                       setSelectedSponzor(sponzor);
                       setIsOpenpop(true);
                     }} variant="contained">Edit</Button>

@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import React, { FormEvent, useState } from "react";
 import agent from "../../../API/agent";
 import { FormInput } from "../../../Components/components/formComponents/FormComponents";
@@ -18,6 +19,7 @@ const CreateSponzor: React.FC<Props> = ({ setIsOpen, isOpen }) => {
     notes: "",
     File: new Blob([]),
   });
+  const [loading, setLoading] = useState(false);
 
   const handleClose = () => {
     setIsOpen((prev) => !prev);
@@ -59,6 +61,7 @@ const CreateSponzor: React.FC<Props> = ({ setIsOpen, isOpen }) => {
     try {
       const result = await agent.Sponzors.create(formData);
       console.log(result);
+      window.location.reload()
     } catch (error) {
       console.log(error);
     }
@@ -70,15 +73,14 @@ const CreateSponzor: React.FC<Props> = ({ setIsOpen, isOpen }) => {
          <button className="popup__close-button" onClick={handleClose}>
            X
          </button>
-     <h1>Shto banoriun</h1>
+     <h1>Shto Sponzorin</h1>
     <form onSubmit={handleSubmit} className="popup__form" asp-action="Create" encType="multipart/form-data">
       <FormInput
         label="Name"
         name="name"
         type="text"
         placeholder=""
-        onChange={handleChange}
-        
+        onChange={handleChange}    
       />
       <FormInput
         label="email"
@@ -119,7 +121,7 @@ const CreateSponzor: React.FC<Props> = ({ setIsOpen, isOpen }) => {
         onChange={handleFileInputChange}
         
       />
-      <button type="submit">Create Banor</button>
+      <button className='ButtonAdmin' type="submit" disabled={loading} >{loading ? <CircularProgress size={24} /> : 'Create Sponzori'}</button>
     </form>
 
     </div>

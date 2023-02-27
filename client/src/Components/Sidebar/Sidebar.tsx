@@ -44,7 +44,7 @@ export default function Sidebar() {
                         
 
                         <hr className="devider"/>
-                        <NavLink to="/admin/settings" className="nav-item"><SettingsIcon className="margin"/>  Settings </NavLink>
+                        {/* <NavLink to="/admin/settings" className="nav-item"><SettingsIcon className="margin"/>  Settings </NavLink> */}
                           <NavLink to="/Home" className="nav-item"><HomeIcon className="margin"/>  Home </NavLink>
                     </ul>
                 </nav>

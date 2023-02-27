@@ -63,6 +63,8 @@ const SponzorEdit: React.FC<Props> = ({ sponzor, setIsOpen, isOpen }) => {
     try {
       const result = await agent.Sponzors.update(formData, sponzor.id);
       console.log(result);
+      window.location.reload();
+
     } catch (error) {
       console.log(error);
     }
@@ -125,8 +127,8 @@ const SponzorEdit: React.FC<Props> = ({ sponzor, setIsOpen, isOpen }) => {
 
           />
           <div className="popup__buttons">
-            <button type="submit">Save</button>
-            <button onClick={handleClose}>Cancel</button>
+            <button className="ButtonAdmin" type="submit">Save</button>
+            <button className="ButtonAdmin" onClick={handleClose}>Cancel</button>
           </div>
         </form>
       </div>
