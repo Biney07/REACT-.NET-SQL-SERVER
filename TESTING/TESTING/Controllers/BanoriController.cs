@@ -160,6 +160,28 @@ namespace TESTING.Controllers
             // Return a 204 No Content response to indicate that the update was successful
             return Ok();
         }
+        [HttpPut]
+        [Route("api/banori/Eleminated/")]
+        public async Task<ActionResult> updateEleminated([FromBody] UpdateEleminated request)
+        {
+            // First, find the Banori object with the specified ID in your data store
+            Banori banoriToUpdate = await _context.Banoret.FindAsync(request.Id);
+
+            // If the object doesn't exist, return a 404 Not Found response
+            if (banoriToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            // Otherwise, update the Nominated property of the Banori object
+            banoriToUpdate.Eleminuar = request.Eleminated;
+
+            // Save the changes to your data store
+            await _context.SaveChangesAsync();
+
+            // Return a 204 No Content response to indicate that the update was successful
+            return Ok();
+        }
 
         [HttpGet("filters")]
         public async Task<IActionResult> GetFilters()

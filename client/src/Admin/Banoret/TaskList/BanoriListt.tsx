@@ -32,7 +32,7 @@ const BanoriListt: React.FC = () => {
   setLoading(prevLoading => ({...prevLoading, [id]: false}));
   window.location.reload();
 };
-console.log(banoret);
+
   // useEffect(() => {
   //   agent.Banoret.get().then((response) => {
   //     setBanoriat(response);

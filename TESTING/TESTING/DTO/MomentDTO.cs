@@ -19,7 +19,7 @@
         public string Description { get; set; }
         public string VideoURL { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
-        public int ViewCount { get; set; }
+        public int ViewCount { get; set; } = 0;
 
     }
 }

@@ -20,7 +20,7 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
             const user = await agent.Account.login(data);
            
             localStorage.setItem("user", JSON.stringify(user));
-            console.log(localStorage.getItem("user"));
+            
             window.addEventListener('beforeunload', () => {
                 localStorage.setItem('user', JSON.stringify(user));
             });
@@ -34,7 +34,7 @@ export const fetchCurrentUser = createAsyncThunk<User>(
     'account/fetchCurrentUser',
     async (_, thunkAPI) => {
         try {
-            console.log("fetch");
+            
             const userDto = await agent.Account.currentUser();
             const user = userDto;
             localStorage.setItem('user', JSON.stringify(user));
@@ -69,7 +69,7 @@ export const accountSlice = createSlice({
         builder.addCase(fetchCurrentUser.rejected, (state) => {
             state.user = null;
             localStorage.removeItem('user');
-            console.log("bab");
+           
             history.push('/');
         });
         builder.addMatcher(isAnyOf(signInUser.fulfilled, fetchCurrentUser.fulfilled), (state, action) => {

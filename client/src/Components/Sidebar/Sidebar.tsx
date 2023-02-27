@@ -14,6 +14,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 // import logo from "../../../foto/logo.png";
 
 
@@ -34,6 +35,7 @@ export default function Sidebar() {
 
                     <ul className="side-list">
                         <NavLink exact to="/admin" className="nav-item"><VerifiedOutlinedIcon className="margin"/> Nominimet</NavLink>
+                        <NavLink exact to="/admin/eleminimet" className="nav-item"><CloseIcon className="margin"/> Eleminimet</NavLink>
                         <NavLink to="/admin/posts" className="nav-item"><NewspaperIcon className="margin"/>  Postet</NavLink>
                         <NavLink to="/admin/banoret" className="nav-item"><InsertEmoticonIcon className="margin"/>  Banoret</NavLink>
                         <NavLink to="/admin/moments" className="nav-item"><OndemandVideoIcon className="margin"/>  Momentet</NavLink>

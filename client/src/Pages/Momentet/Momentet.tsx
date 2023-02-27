@@ -40,7 +40,7 @@ function Momentet() {
 
     const handlePlayVideo = (videoURL: string) => {
         setVideoUrl(videoURL);
-        console.log(videoURL);
+       
         setShowControls(true); // add this line to show the controls
     };
 

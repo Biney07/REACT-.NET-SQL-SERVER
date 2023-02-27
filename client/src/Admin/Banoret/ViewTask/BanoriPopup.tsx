@@ -66,7 +66,7 @@ const BanoriPopup: React.FC<Props> = ({ setIsOpen, isOpen, banori }) => {
     formData.append("profesioni", banor.profesioni);
     try {
       const result = await agent.Banoret.update(formData, banori.id);
-      console.log(result);
+    
       window.location.reload();
     } catch (error) {
       console.log(error);

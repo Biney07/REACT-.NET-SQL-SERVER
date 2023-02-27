@@ -46,6 +46,7 @@ import PaymentForm from './Pages/Checkout/PaymentForm';
 import Primes from './Pages/Primes/Primes';
 import PrimeList from './Admin/Primes/PrimeList/PrimeList';
 import Banoret from './Pages/Banoret/Banoret';
+import AdminEleminuar from './Admin/AdminEleminuar';
 
 
 
@@ -130,6 +131,7 @@ export default function App() {
        
 
         <AdminRoute exact path="/admin" component={AdminGeneral} />
+        <AdminRoute exact path="/admin/eleminimet" component={AdminEleminuar} />
         <AdminRoute path="/admin/onlyLoggedin" component={OnlyLoggedInCanSeeAdmin} />
         <AdminRoute path="/admin/posts" component={PostListt} />
         <AdminRoute path="/admin/banoret" component={BanoriListt} />

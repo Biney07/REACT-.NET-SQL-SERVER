@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../Store/hook";
-import { banoriSelectors } from "../Catalog/CatalogSlice";
+import { useAppDispatch, useAppSelector } from "../../Store/hook";
+import { banoriSelectors, fetchBanoretAsync } from "../Catalog/CatalogSlice";
 import cross from './cross.png'
+import { useEffect } from "react";
 
 export default function Banoret(){
      const banoret = useAppSelector(banoriSelectors.selectAll);
     const eleminuarBanoret = banoret.filter(banori => banori.eleminuar);
+    const { banoretLoaded, } = useAppSelector(state => state.catalog);
+      const dispatch = useAppDispatch();
+      useEffect(() => {
+       
+        if (!banoretLoaded) dispatch(fetchBanoretAsync());
+    }, [banoretLoaded, dispatch])
 const aktivBanoret = banoret.filter(banori => !banori.eleminuar);
 return (
   <div className="admin-layout">

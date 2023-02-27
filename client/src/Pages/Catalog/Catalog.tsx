@@ -25,21 +25,7 @@ export default function Catalog() {
     const { banoretLoaded, filtersLoaded, profesionet, banoriParams, metaData } = useAppSelector(state => state.catalog);
     const dispatch = useAppDispatch();
 
-    const history = useHistory();
-const [shouldReload, setShouldReload] = useState(false);
 
-  useEffect(() => {
-    if (shouldReload) {
-      setShouldReload(false);
-      window.location.reload();
-    }
-  }, [shouldReload]);
-
-  useEffect(() => {
-    if (history.location.pathname === '/my/route') {
-      setShouldReload(true);
-    }
-  }, [history.location.key]);
 
 
 

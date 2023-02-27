@@ -5,7 +5,7 @@ import LoadingComponent from '../Components/LoadingComponent';
 import axios from 'axios';
 import { Button, CircularProgress } from '@mui/material';
 
-function AdminGeneral() {
+function AdminEleminuar() {
   const dispatch = useAppDispatch();
   const banoret = useAppSelector(banoriSelectors.selectAll);
   const banoretFiltered = banoret.filter((Banor) => Banor.eleminuar === false);
@@ -35,15 +35,15 @@ const updateBanor = async (ii: number) => {
   try {
    
     const response = await axios.put(
-      `https://localhost:7226/api/Banoret/api/banori/nominated/`,
-      { id: ii, nominated: true },
+      `https://localhost:7226/api/Banoret/api/banori/Eleminated`,
+      { id: ii, eleminated: true },
       {
         headers: {
           'Content-Type': 'application/json'
         }
       }
     );
-    console.log(response);
+   
   } catch (error) {
     console.log(error);
   }
@@ -53,23 +53,11 @@ const updateBanor = async (ii: number) => {
 const handleSaveClick = async () => {
   try {
     setIsLoading(true);
-    for (const Banor of banoret) {
-      if (Banor.eleminuar == false) {
-        await axios.put(
-          `https://localhost:7226/api/Banoret/api/banori/nominated/`,
-          { id: Banor.id, nominated: false },
-          {
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }
-        );
-      }
-    }
+   
     
     // Loop through the selected banoris and call the updateBanor function for each of them
     for (const banori of selectedBanoret) {
-     
+      console.log(banori.id);
       await updateBanor(banori.id);
     }
 
@@ -90,7 +78,7 @@ const handleSaveClick = async () => {
 
   return (
     <div className="admin-layout">
-      <h1 className='NewBeauty'> Zgjedh te nominuarit</h1>
+      <h1 className='NewBeauty'> Elemino Banorin</h1>
       <div className="admin-content">
         {banoretFiltered.map((banori) => (
         <div style={{backgroundColor: 'var(--blue)', width: "250px", margin:'20px 20px 0px 0px',  borderRadius:'30px'}}>
@@ -124,4 +112,4 @@ const handleSaveClick = async () => {
   );
 }
 
-export default AdminGeneral;
+export default AdminEleminuar;

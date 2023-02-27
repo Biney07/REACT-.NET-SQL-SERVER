@@ -7,7 +7,7 @@ interface Props {
 }
 const Card: React.FunctionComponent<Props> = ({ name, description, url }) => {
     const clickHandler = () => {
-        console.log("clicked");
+       
     }
     return (
 
