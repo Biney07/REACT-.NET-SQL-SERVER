@@ -44,11 +44,11 @@ namespace TESTING.Data
         Name = "Vedati",
         Biografia = "Vedati është një aktor shumë i njohur dhe i dashur në mesin e publikut. Ai ka interpretuar role të ndryshme në shumë filma dhe seriale të suksesshëm. Me një karrierë të gjatë në industrinë e filmit, Vedati është bërë një emër i njohur jo vetëm në Shqipëri, por edhe jashtë saj.",
         Price = 100,
-        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677113429/eenkdowecaxehm3dgxpi.png",
+        PictureUrl = "https://res.cloudinary.com/martesa-jone/image/upload/v1677464669/wkq3jypi4trcsmrqtflu.png",
         Age = 45,
         RelationshipStatus = true,
         Profesioni = "Aktor",
-        CloudanaryPublicId = "eenkdowecaxehm3dgxpi",
+        CloudanaryPublicId = "wkq3jypi4trcsmrqtflu",
 
     },
   new Banori
